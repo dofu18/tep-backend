@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class TimeshareExchangePlatformBackendApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TimeshareExchangePlatformBackendApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(TimeshareExchangePlatformBackendApplication.class, args);
+    }
 
 }

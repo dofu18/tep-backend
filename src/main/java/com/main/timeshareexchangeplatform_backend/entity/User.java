@@ -1,2 +1,58 @@
-package com.main.timeshareexchangeplatform_backend.entity;public class User {
+package com.main.timeshareexchangeplatform_backend.entity;
+
+import java.time.LocalDate;
+import java.util.Collection;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "Users")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int user_id;
+
+    @Column(unique = true, columnDefinition = "varchar(50)")
+    private String user_name;
+
+    @Column(unique = true, columnDefinition = "varchar(50)")
+    private String email;
+
+    @Column
+    private String password;
+
+    @Column(columnDefinition = "nvarchar(50)")
+    private String fullname;
+
+    @Column(unique = true, columnDefinition = "varchar(50)")
+    private String phone;
+
+    @Column
+    private LocalDate dob;
+
+    @Column
+    private Boolean gender;
+
+    @Column
+    private boolean status;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
+
 }

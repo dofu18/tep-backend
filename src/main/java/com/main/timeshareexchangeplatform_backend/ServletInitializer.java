@@ -1,4 +1,4 @@
-package com.main.drawingcourse;
+package com.main.timeshareexchangeplatform_backend;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -7,7 +7,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(DrawingCoursesSellingPlatformApplication.class);
+		return application.sources(TimeshareExchangePlatformBackendApplication.class);
 	}
 
 }
