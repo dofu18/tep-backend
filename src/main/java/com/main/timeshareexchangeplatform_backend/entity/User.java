@@ -50,9 +50,9 @@ public class User {
     @Column
     private boolean status;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
+//    @ManyToOne
+//    @JoinColumn(name = "role_id")
+//    private Role role;
 
 
 }
