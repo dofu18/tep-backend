@@ -15,9 +15,10 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.aspectj.weaver.ast.Or;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -50,9 +51,16 @@ public class User {
     @Column
     private boolean status;
 
-//    @ManyToOne
-//    @JoinColumn(name = "role_id")
-//    private Role role;
+    @OneToMany(mappedBy = "user")
+    private Collection<Order> orders;
 
+    @OneToMany(mappedBy = "user")
+    private Collection<Timeshare> timeshares;
+
+    @OneToMany(mappedBy = "user")
+    private Collection<Transaction_history> transactionHistories;
+
+    @OneToMany(mappedBy = "user")
+    private Collection<Request> requests;
 
 }
