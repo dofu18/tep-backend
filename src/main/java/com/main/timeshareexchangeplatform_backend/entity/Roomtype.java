@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Time;
 import java.util.Collection;
 
 @Entity
@@ -24,8 +25,8 @@ public class Roomtype {
     @Column
     private Integer sleeps;
 
-    @Column(columnDefinition = "nvarchar(max) not null")
-    private String view;
+    @Column(columnDefinition = "nvarchar(max)")
+    private String room_view;
 
     @Column
     private Integer bed;
@@ -45,7 +46,8 @@ public class Roomtype {
     @Column(columnDefinition = "nvarchar(max) not null")
     private String policies;
 
-    @ManyToOne
-    @JoinColumn(name = "timeshare_id")
-    private Timeshare timeshare;
+    @ManyToMany(mappedBy = "roomtypes", fetch = FetchType.LAZY)
+//    @JoinColumn(name = "timeshare_id")
+    private Collection<Timeshare> timeshares;
+
 }

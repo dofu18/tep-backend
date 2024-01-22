@@ -63,4 +63,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Collection<Request> requests;
 
+    @OneToMany(mappedBy = "user")
+    private Collection<Exchange_information> exchangeInformations;
+
 }
