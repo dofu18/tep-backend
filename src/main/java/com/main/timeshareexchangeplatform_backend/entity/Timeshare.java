@@ -42,7 +42,10 @@ public class Timeshare {
     @OneToMany(mappedBy = "timeshare")
     private Collection<Request> requests;
 
-    @OneToMany(mappedBy = "timeshare")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "timeshare_roomtype",
+                joinColumns = @JoinColumn(name = "timshare_id"),
+                inverseJoinColumns = @JoinColumn(name = "roomtype_id"))
     private Collection<Roomtype> roomtypes;
 
     @ManyToOne
@@ -53,4 +56,6 @@ public class Timeshare {
     @JoinColumn(name = "destination_id")
     private Destination destination;
 
+    @OneToOne (mappedBy = "timeshare")
+    private Exchange_information exchangeInformation;
 }
