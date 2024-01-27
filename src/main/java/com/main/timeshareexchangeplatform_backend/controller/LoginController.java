@@ -27,7 +27,7 @@ public class LoginController {
     @PostMapping("/login")
     public String Login(@ModelAttribute("user") User user){
         if(!userService.checkUserByUsername(user.getUser_name())){
-            return "redirect:/login?emailwrong";
+            return "redirect:/login?usernamelwrong";
         }
 
         if(user.getRole().equals("ADMIN")){
