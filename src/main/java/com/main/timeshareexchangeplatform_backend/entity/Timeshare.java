@@ -36,17 +36,21 @@ public class Timeshare {
     @Column(columnDefinition = "varchar(100) not null")
     private String address;
 
+    @Column
+    private Boolean exchange;
+
+    @Column (columnDefinition = "varchar(max)")
+    private String description;
+
     @OneToOne(mappedBy = "timeshare")
-    private Order_Detail order_detail;
+    private Booking booking;
 
     @OneToMany(mappedBy = "timeshare")
     private Collection<Request> requests;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "timeshare_roomtype",
-                joinColumns = @JoinColumn(name = "timshare_id"),
-                inverseJoinColumns = @JoinColumn(name = "roomtype_id"))
-    private Collection<Roomtype> roomtypes;
+    @OneToOne(mappedBy = "timeshare")
+//    @JoinColumn(name = "")
+    private Roomtype roomtype;
 
     @ManyToOne
     @JoinColumn(name = "post_by")
@@ -56,6 +60,9 @@ public class Timeshare {
     @JoinColumn(name = "destination_id")
     private Destination destination;
 
-    @OneToOne (mappedBy = "timeshare")
-    private Exchange_information exchangeInformation;
+//    @OneToOne (mappedBy = "timeshare")
+//    private Exchange_information exchangeInformation;
+
+//    @OneToOne(mappedBy = "response")
+//    private Request request;
 }
