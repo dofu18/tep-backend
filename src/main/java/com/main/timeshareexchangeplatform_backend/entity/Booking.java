@@ -8,32 +8,35 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "exchange_information")
+@Table(name = "booking")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Exchange_information {
+public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int exchange_id;
+    private int booking_id;
+
+    @Column(unique = true, columnDefinition = "varchar(50)")
+    private String booking_number;
 
     @Column
-    private Boolean exchange_status;
+    private float total;
 
-    @Column(columnDefinition = "nvarchar(max) not null")
-    private String description;
-
-    @Column(columnDefinition = "DATE")
-    private LocalDate date_start;
+    @Column
+    private boolean payment_status;
 
     @Column(columnDefinition = "DATE")
-    private LocalDate date_end;
+    private LocalDate create_date;
 
-    @OneToOne
-    @JoinColumn (name = "timeshare_id")
-    private Timeshare timeshare;
+    @Column(columnDefinition = "DATE")
+    private LocalDate success_date;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToOne
+    @JoinColumn(name = "timeshare_id")
+    private Timeshare timeshare;
 }

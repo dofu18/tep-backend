@@ -5,9 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Time;
-import java.util.Collection;
-
 @Entity
 @Table(name = "roomtype")
 @Data
@@ -46,8 +43,8 @@ public class Roomtype {
     @Column(columnDefinition = "nvarchar(max) not null")
     private String policies;
 
-    @ManyToMany(mappedBy = "roomtypes", fetch = FetchType.LAZY)
-//    @JoinColumn(name = "timeshare_id")
-    private Collection<Timeshare> timeshares;
+    @OneToOne
+    @JoinColumn(name = "timeshare_id")
+    private Timeshare timeshare;
 
 }
