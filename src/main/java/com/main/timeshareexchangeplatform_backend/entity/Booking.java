@@ -32,6 +32,9 @@ public class Booking {
     @Column(columnDefinition = "DATE")
     private LocalDate success_date;
 
+    @Column
+    private Boolean status;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
