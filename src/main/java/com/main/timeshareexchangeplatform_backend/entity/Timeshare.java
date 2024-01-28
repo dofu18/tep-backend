@@ -58,4 +58,7 @@ public class Timeshare {
 
     @OneToOne (mappedBy = "timeshare")
     private Exchange_information exchangeInformation;
+
+    
+
 }
