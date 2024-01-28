@@ -2,7 +2,7 @@ package com.main.timeshareexchangeplatform_backend.converter;
 
 import com.main.timeshareexchangeplatform_backend.dto.BookingModel;
 import com.main.timeshareexchangeplatform_backend.entity.Booking;
-import com.main.timeshareexchangeplatform_backend.repository.TimeshareRepository;
+import com.main.timeshareexchangeplatform_backend.repository.MyTimeShareRepository;
 import com.main.timeshareexchangeplatform_backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,7 +12,7 @@ public class BookingConverter {
     @Autowired
     UserRepository userRepository;
     @Autowired
-    TimeshareRepository timeshareRepository;
+    MyTimeShareRepository timeshareRepository;
 
     public Booking toEntity(BookingModel bookingModel) {
 
