@@ -1,6 +1,7 @@
 package com.main.timeshareexchangeplatform_backend.controller;
 
 import com.main.timeshareexchangeplatform_backend.DTO.TimeshareDTO;
+import com.main.timeshareexchangeplatform_backend.respone.TimeshareRespone;
 import com.main.timeshareexchangeplatform_backend.service.TimeShareService;
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-@CrossOrigin
-@RequestMapping({"/api"})
+@RequestMapping({"/api/timeshare"})
 @RestController
 public class TimeShareController {
     @Autowired TimeShareService timeShareService;
@@ -25,5 +26,15 @@ public class TimeShareController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No timeshares found.");
         }
 
+    }
+    @GetMapping("/details/{timeshareId}")
+    public ResponseEntity<?> getTimeshareDetails(@PathVariable int timeshareId) {
+        TimeshareRespone timeshareRespone = timeShareService.getTimeshareDetails(timeshareId);
+
+        if (timeshareRespone != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(timeshareRespone);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No details found for timeshareId: " + timeshareId);
+        }
     }
 }
