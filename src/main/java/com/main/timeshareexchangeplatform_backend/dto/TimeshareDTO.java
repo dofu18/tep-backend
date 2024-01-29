@@ -1,4 +1,4 @@
-package com.main.timeshareexchangeplatform_backend.DTO;
+package com.main.timeshareexchangeplatform_backend.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,4 +18,5 @@ public class TimeshareDTO {
     private String address;
     private int post_by;
     private int destination_id;
+    private String description;
 }
