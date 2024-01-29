@@ -1,14 +1,12 @@
 package com.main.timeshareexchangeplatform_backend.repository;
 
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
-import com.main.timeshareexchangeplatform_backend.respone.TimeshareRespone;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public interface MyTimeShareRepository extends JpaRepository<Timeshare, Integer> {

@@ -42,6 +42,9 @@ public class Timeshare {
     @Column (columnDefinition = "varchar(max)")
     private String description;
 
+
+
+
     @OneToOne(mappedBy = "timeshare")
     private Booking booking;
 

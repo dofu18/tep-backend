@@ -1,6 +1,6 @@
 package com.main.timeshareexchangeplatform_backend.converter;
 
-import com.main.timeshareexchangeplatform_backend.DTO.TimeshareDTO;
+import com.main.timeshareexchangeplatform_backend.dto.TimeshareDTO;
 import com.main.timeshareexchangeplatform_backend.entity.Destination;
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
 import com.main.timeshareexchangeplatform_backend.entity.User;
@@ -24,7 +24,7 @@ public class TimeshareConverter {
         dto.setAddress(timeshare.getAddress());
         dto.setPost_by(timeshare.getUser().getUser_id());  // Assuming there is a User entity in Timeshare
         dto.setDestination_id(timeshare.getDestination().getDestination_id());  // Assuming there is a Destination entity in Timeshare
-
+        dto.setDescription(timeshare.getDescription());
         return dto;
     }
 
@@ -43,7 +43,7 @@ public class TimeshareConverter {
         timeshare.setAddress(dto.getAddress());
         timeshare.setUser(postedBy);
         timeshare.setDestination(destination);
-
+        timeshare.setDescription(dto.getDescription());
         return timeshare;
     }
     public List<TimeshareDTO> convertToAccountPlaylistDTOList(List<Timeshare> StudentList) {

@@ -1,10 +1,8 @@
 package com.main.timeshareexchangeplatform_backend.converter;
 
-import com.main.timeshareexchangeplatform_backend.DTO.RoomtypeDTO;
-import com.main.timeshareexchangeplatform_backend.DTO.TimeshareDTO;
+import com.main.timeshareexchangeplatform_backend.dto.RoomtypeDTO;
 import com.main.timeshareexchangeplatform_backend.entity.Roomtype;
-import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
-import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 public class RoomtypeConverter {

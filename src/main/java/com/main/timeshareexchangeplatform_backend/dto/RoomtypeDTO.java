@@ -1,4 +1,4 @@
-package com.main.timeshareexchangeplatform_backend.DTO;
+package com.main.timeshareexchangeplatform_backend.dto;
 
 import lombok.*;
 

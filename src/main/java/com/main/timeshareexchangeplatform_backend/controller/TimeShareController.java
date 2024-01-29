@@ -1,17 +1,14 @@
 package com.main.timeshareexchangeplatform_backend.controller;
 
-import com.main.timeshareexchangeplatform_backend.DTO.TimeshareDTO;
-import com.main.timeshareexchangeplatform_backend.respone.TimeshareRespone;
+import com.main.timeshareexchangeplatform_backend.dto.TimeshareDTO;
+import com.main.timeshareexchangeplatform_backend.dto.TimeshareRespone;
 import com.main.timeshareexchangeplatform_backend.service.TimeShareService;
-import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @RequestMapping({"/api/timeshare"})
 @RestController
