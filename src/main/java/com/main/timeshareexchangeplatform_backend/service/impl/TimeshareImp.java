@@ -1,6 +1,6 @@
 package com.main.timeshareexchangeplatform_backend.service.impl;
 
-import com.main.timeshareexchangeplatform_backend.DTO.TimeshareDTO;
+import com.main.timeshareexchangeplatform_backend.dto.TimeshareDTO;
 import com.main.timeshareexchangeplatform_backend.converter.TimeshareConverter;
 import com.main.timeshareexchangeplatform_backend.repository.MyTimeShareRepository;
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;

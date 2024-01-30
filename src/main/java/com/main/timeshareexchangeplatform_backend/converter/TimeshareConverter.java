@@ -1,6 +1,6 @@
 package com.main.timeshareexchangeplatform_backend.converter;
 
-import com.main.timeshareexchangeplatform_backend.DTO.TimeshareDTO;
+import com.main.timeshareexchangeplatform_backend.dto.TimeshareDTO;
 import com.main.timeshareexchangeplatform_backend.dto.ResponseTimeshare;
 import com.main.timeshareexchangeplatform_backend.entity.Destination;
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;

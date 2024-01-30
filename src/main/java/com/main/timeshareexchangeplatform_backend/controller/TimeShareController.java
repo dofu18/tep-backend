@@ -1,6 +1,6 @@
 package com.main.timeshareexchangeplatform_backend.controller;
 
-import com.main.timeshareexchangeplatform_backend.DTO.TimeshareDTO;
+import com.main.timeshareexchangeplatform_backend.dto.TimeshareDTO;
 import com.main.timeshareexchangeplatform_backend.dto.TimeshareRespone;
 import com.main.timeshareexchangeplatform_backend.service.ITimeshareService;
 import org.springframework.beans.factory.annotation.Autowired;
