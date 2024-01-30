@@ -17,11 +17,11 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int booking_id;
 
-    @Column(unique = true, columnDefinition = "varchar(50)")
-    private String booking_number;
+    @Column(unique = true, columnDefinition = "varchar(50)", name = "booking_code")
+    private String bookingCode;
 
     @Column
-    private float total;
+    private long total;
 
     @Column
     private boolean payment_status;

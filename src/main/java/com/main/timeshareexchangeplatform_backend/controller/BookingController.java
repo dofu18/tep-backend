@@ -28,13 +28,14 @@ public class BookingController {
         BookingModel addedBooking = bookingService.addBooking(bookingModel);
 
         if (addedBooking != null) {
-            long price = Math.round(addedBooking.getTotal());
-            String paymentUrl = vnPayService.makePayment(price, null, addedBooking.getBooking_id());
+            long price = addedBooking.getTotal();
+            String paymentUrl = vnPayService.makePayment(price, null, addedBooking.getBookingCode());
             String code = "00";
             String message = "Success";
-            return new PaymentResponse(code,message,paymentUrl);
+            return new PaymentResponse(code, message, paymentUrl);
         } else {
             return new PaymentResponse("01", "Fail", null);
         }
     }
+
 }

@@ -1,7 +1,6 @@
 package com.main.timeshareexchangeplatform_backend.service.impl;
 
-import com.main.timeshareexchangeplatform_backend.repository.RoomtypeRepository;
-import com.main.timeshareexchangeplatform_backend.service.RoomtypeService;
+import com.main.timeshareexchangeplatform_backend.service.IRoomtypeService;
 
-public class RoomtypeImp implements RoomtypeService {
+public class RoomtypeImp implements IRoomtypeService {
 }

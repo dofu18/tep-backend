@@ -18,6 +18,9 @@ public class Timeshare {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int timeshare_id;
 
+    @Column(columnDefinition = "varchar(50)")
+    private String name;
+
     @Column(columnDefinition = "DATE")
     private LocalDate date_start;
 
@@ -28,19 +31,19 @@ public class Timeshare {
     private int nights;
 
     @Column
-    private Double price;
+    private long price;
 
     @Column
     private boolean status;
-
-    @Column(columnDefinition = "varchar(100) not null")
-    private String address;
 
     @Column
     private Boolean exchange;
 
     @Column (columnDefinition = "varchar(max)")
     private String description;
+
+    @Column(columnDefinition = "varchar(max) not null")
+    private String image_url;
 
     @OneToOne(mappedBy = "timeshare")
     private Booking booking;

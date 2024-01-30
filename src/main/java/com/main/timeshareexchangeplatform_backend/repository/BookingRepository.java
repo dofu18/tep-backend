@@ -11,4 +11,6 @@ public interface BookingRepository extends JpaRepository<Booking,Integer> {
 //    boolean isTimeshareBooked(int timeshareId);
 //boolean existsByTimeshareId(Integer timeshareId);
     Booking getReferenceById(Integer integer);
+
+    Booking findByBookingCode(String bookingCode);
 }

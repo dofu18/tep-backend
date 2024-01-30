@@ -4,22 +4,23 @@ import com.main.timeshareexchangeplatform_backend.DTO.TimeshareDTO;
 import com.main.timeshareexchangeplatform_backend.converter.TimeshareConverter;
 import com.main.timeshareexchangeplatform_backend.repository.MyTimeShareRepository;
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
-import com.main.timeshareexchangeplatform_backend.respone.TimeshareRespone;
-import com.main.timeshareexchangeplatform_backend.service.TimeShareService;
+import com.main.timeshareexchangeplatform_backend.dto.TimeshareRespone;
+import com.main.timeshareexchangeplatform_backend.repository.TimeshareRepository;
+import com.main.timeshareexchangeplatform_backend.service.ITimeshareService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Service
-    public class TimeShareServiceImp implements TimeShareService {
+    public class TimeshareImp implements ITimeshareService {
         @Autowired
         private MyTimeShareRepository myTimeShareRepository;
         @Autowired
-    TimeshareConverter timeshareConverter;
+        TimeshareConverter timeshareConverter;
+        @Autowired
+        TimeshareRepository timeshareRepository;
         public List<TimeshareDTO> showListTimeShare(){
              List<Timeshare> timeshares = myTimeShareRepository.showListTimeShare();
             return timeshareConverter.convertToAccountPlaylistDTOList(timeshares);
@@ -35,6 +36,12 @@ import java.util.Map;
 
         return timeshareRespone;
     }
+
+    @Override
+    public Timeshare getReferenceById(Integer id) {
+        return timeshareRepository.getReferenceById(id);
+    }
+
     private TimeshareRespone convertToObject(Object result) {
         if (result == null) {
             return null;

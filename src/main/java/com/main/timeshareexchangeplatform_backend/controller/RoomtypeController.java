@@ -1,7 +1,7 @@
 package com.main.timeshareexchangeplatform_backend.controller;
 
 import com.main.timeshareexchangeplatform_backend.DTO.TimeshareDTO;
-import com.main.timeshareexchangeplatform_backend.service.TimeShareService;
+import com.main.timeshareexchangeplatform_backend.service.ITimeshareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 public class RoomtypeController {
     @Autowired
-    TimeShareService timeShareService;
+    ITimeshareService timeShareService;
     @GetMapping({"/home"})
     public ResponseEntity<?> showAllTimeShare() {
         List<TimeshareDTO> t = timeShareService.showListTimeShare();

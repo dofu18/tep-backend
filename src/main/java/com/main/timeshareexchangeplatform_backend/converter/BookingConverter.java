@@ -18,13 +18,14 @@ public class BookingConverter {
 
         Booking entity = new Booking();
         entity.setBooking_id(bookingModel.getBooking_id());
-        entity.setBooking_number(bookingModel.getBooking_number());
+        entity.setBookingCode(bookingModel.getBookingCode());
         entity.setTotal(bookingModel.getTotal());
         entity.setCreate_date(bookingModel.getCreate_date());
         entity.setSuccess_date(bookingModel.getSuccess_date());
         entity.setStatus(bookingModel.isStatus());
         entity.setUser(userRepository.getReferenceById(bookingModel.getUser_id()));
         entity.setTimeshare(timeshareRepository.getReferenceById(bookingModel.getTimeshare_id()));
+
 
         return entity;
     }
@@ -33,7 +34,7 @@ public class BookingConverter {
 
         BookingModel dto = new BookingModel();
         dto.setBooking_id(bookingEntity.getBooking_id());
-        dto.setBooking_number(bookingEntity.getBooking_number());
+        dto.setBookingCode(bookingEntity.getBookingCode());
         dto.setTotal(bookingEntity.getTotal());
         dto.setCreate_date(bookingEntity.getCreate_date());
         dto.setSuccess_date(bookingEntity.getSuccess_date());

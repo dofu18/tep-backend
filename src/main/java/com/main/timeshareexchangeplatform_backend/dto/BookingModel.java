@@ -11,8 +11,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class BookingModel {
     private int booking_id;
-    private String booking_number;
-    private float total;
+    private String bookingCode;
+    private long total;
     private LocalDate create_date;
     private LocalDate success_date;
     private boolean status;

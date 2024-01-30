@@ -1,4 +1,4 @@
-package com.main.timeshareexchangeplatform_backend.respone;
+package com.main.timeshareexchangeplatform_backend.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

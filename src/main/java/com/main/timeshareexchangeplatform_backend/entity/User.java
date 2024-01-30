@@ -42,6 +42,9 @@ public class User {
     @Column
     private boolean status;
 
+    @Column (columnDefinition = "varchar(10)")
+    private String role;
+
     @OneToMany(mappedBy = "user")
     private Collection<Booking> bookings;
 

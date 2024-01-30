@@ -13,9 +13,9 @@ public class TimeshareDTO {
     private LocalDate date_start;
     private LocalDate date_end;
     private int nights;
-    private Double price;
+    private long price;
     private boolean status;
-    private String address;
+    private String name;
     private int post_by;
     private int destination_id;
 }
