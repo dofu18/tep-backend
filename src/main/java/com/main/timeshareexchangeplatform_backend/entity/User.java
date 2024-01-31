@@ -1,22 +1,26 @@
 package com.main.timeshareexchangeplatform_backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int user_id;
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private UUID user_id;
 
     @Column(unique = true, columnDefinition = "varchar(50)")
     private String user_name;
@@ -25,6 +29,7 @@ public class User {
     private String email;
 
     @Column
+    @JsonIgnore
     private String password;
 
     @Column(columnDefinition = "nvarchar(50)")
