@@ -17,7 +17,7 @@ public class Request {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int request_id;
 
-    @Column(columnDefinition = "DATE")
+    @Column(columnDefinition = "DATE", nullable = false)
     private LocalDate create_date;
 
     @Column(columnDefinition = "nvarchar(max) not null")

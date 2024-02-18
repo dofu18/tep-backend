@@ -30,7 +30,7 @@ public class Timeshare {
     @Column
     private int nights;
 
-    @Column
+    @Column(nullable = false)
     private long price;
 
     @Column

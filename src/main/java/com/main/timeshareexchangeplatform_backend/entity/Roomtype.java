@@ -31,16 +31,16 @@ public class Roomtype {
     @Column
     private Integer bath;
 
-    @Column(columnDefinition = "nvarchar(max) not null")
+    @Column(columnDefinition = "nvarchar(max)")
     private String kitchen;
 
-    @Column(columnDefinition = "nvarchar(max) not null")
+    @Column(columnDefinition = "nvarchar(max)")
     private String entertainment;
 
-    @Column(columnDefinition = "nvarchar(max) not null")
+    @Column(columnDefinition = "nvarchar(max)")
     private String features;
 
-    @Column(columnDefinition = "nvarchar(max) not null")
+    @Column(columnDefinition = "nvarchar(max)")
     private String policies;
 
     @OneToOne
