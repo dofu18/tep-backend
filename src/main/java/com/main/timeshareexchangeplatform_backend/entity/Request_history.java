@@ -17,7 +17,7 @@ public class Request_history {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int requestHistory_id;
 
-    @Column (columnDefinition = "DATETIME")
+    @Column (columnDefinition = "DATETIME", nullable = false)
     private LocalDateTime update_datetime;
 
     @Column(columnDefinition = "varchar(max) not null")

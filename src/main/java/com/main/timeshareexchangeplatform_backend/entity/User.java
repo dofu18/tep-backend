@@ -22,20 +22,19 @@ public class User {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private UUID user_id;
 
-    @Column(unique = true, columnDefinition = "varchar(50)")
+    @Column(unique = true, columnDefinition = "varchar(50) not null")
     private String user_name;
 
-    @Column(unique = true, columnDefinition = "varchar(50)")
+    @Column(unique = true, columnDefinition = "varchar(50)", nullable = false)
     private String email;
 
-    @Column
-    @JsonIgnore
+    @Column(columnDefinition = "varchar(50)", nullable = false)
     private String password;
 
-    @Column(columnDefinition = "nvarchar(50)")
+    @Column(columnDefinition = "nvarchar(50)", nullable = false)
     private String fullname;
 
-    @Column(unique = true, columnDefinition = "varchar(50)")
+    @Column(unique = true, columnDefinition = "varchar(12)")
     private String phone;
 
     @Column
@@ -47,7 +46,7 @@ public class User {
     @Column
     private boolean status;
 
-    @Column (columnDefinition = "varchar(10)")
+    @Column (columnDefinition = "varchar(10)", nullable = false)
     private String role;
 
     @OneToMany(mappedBy = "user")
