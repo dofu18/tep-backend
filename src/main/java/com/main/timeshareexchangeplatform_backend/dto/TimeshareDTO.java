@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.UUID;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,6 +18,7 @@ public class TimeshareDTO {
     private long price;
     private boolean status;
     private String name;
-    private int post_by;
+    private UUID post_by;
     private int destination_id;
+    private String description;
 }

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -27,5 +28,6 @@ public class BookingModel {
     private String postal_code;
     private String payment_method;
     private int user_id;
+    private UUID user_id;
     private int timeshare_id;
 }

@@ -1,5 +1,6 @@
 package com.main.timeshareexchangeplatform_backend.converter;
 
+
 import com.main.timeshareexchangeplatform_backend.dto.TimeshareDTO;
 import com.main.timeshareexchangeplatform_backend.dto.ResponseTimeshare;
 import com.main.timeshareexchangeplatform_backend.entity.Destination;
@@ -35,7 +36,7 @@ public class TimeshareConverter {
 //        dto.setAddress(timeshare.getAddress());
         dto.setPost_by(timeshare.getUser().getUser_id());  // Assuming there is a User entity in Timeshare
         dto.setDestination_id(timeshare.getDestination().getDestination_id());  // Assuming there is a Destination entity in Timeshare
-
+        dto.setDescription(timeshare.getDescription());
         return dto;
     }
 
@@ -55,7 +56,7 @@ public class TimeshareConverter {
 //        timeshare.setAddress(dto.getAddress());
         timeshare.setUser(postedBy);
         timeshare.setDestination(destination);
-
+        timeshare.setDescription(dto.getDescription());
         return timeshare;
     }
 
