@@ -12,6 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO {
+    private UUID user_id;
     private String user_name;
     private String password;
     private String fullname;
@@ -20,5 +21,6 @@ public class UserDTO {
     private String dob;
     private Boolean gender;
     private boolean status;
-    private String user_id;
+    private String role;
+
 }

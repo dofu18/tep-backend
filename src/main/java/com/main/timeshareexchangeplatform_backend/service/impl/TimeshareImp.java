@@ -1,7 +1,11 @@
 package com.main.timeshareexchangeplatform_backend.service.impl;
 
+
+import com.main.timeshareexchangeplatform_backend.dto.ResponseTimeshare;
+
 import com.main.timeshareexchangeplatform_backend.dto.DestinationDTO;
 import com.main.timeshareexchangeplatform_backend.dto.RoomtypeDTO;
+
 import com.main.timeshareexchangeplatform_backend.dto.TimeshareDTO;
 import com.main.timeshareexchangeplatform_backend.converter.TimeshareConverter;
 import com.main.timeshareexchangeplatform_backend.repository.MyTimeShareRepository;
@@ -15,6 +19,8 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 
 @Service
     public class TimeshareImp implements ITimeshareService {
@@ -31,7 +37,7 @@ import java.util.UUID;
         }
 
     @Override
-    public TimeshareRespone getTimeshareDetails(int timeshareId) {
+    public TimeshareRespone getTimeshareDetails(UUID timeshareId) {
         Object result = myTimeShareRepository.findTimeshareDetails(timeshareId);
 
         // Chuyển đổi Object thành TimeshareRespone
@@ -41,8 +47,16 @@ import java.util.UUID;
     }
 
     @Override
-    public Timeshare getReferenceById(Integer id) {
+    public Timeshare getReferenceById(UUID id) {
         return timeshareRepository.getReferenceById(id);
+    }
+
+    @Override
+    public List<ResponseTimeshare> findTimeshareByName(String name) {
+        List<ResponseTimeshare> timeshares = timeshareRepository.findTimeshareByName(name).stream()
+                .map(timeshareConverter::toRespone).collect(Collectors.toList());
+
+        return timeshares;
     }
 
     private TimeshareRespone convertToObject(Object result) {
@@ -53,17 +67,32 @@ import java.util.UUID;
         Object[] row = (Object[]) result;
 
         // Extract các giá trị từ mảng row
-        int timeshare_id = (int) row[0];
-        Date date_end = (Date) row[1];
-        Date date_start = (Date) row[2];
-        String description = (String) row[3];
-        boolean exchance = (boolean) row[4];
-        String image_url= (String) row[5];
-        String name=(String) row[6];
-        int nights = (int) row[7];
-        long price = (long) row[8];
-        boolean status = (boolean) row[9];
-        String post_by = (String) row[11];
+
+        UUID timeshare_id = (UUID) row[0];
+        String address = (String) row[1];
+        Date date_end = (Date) row[2];
+        Date date_start = (Date) row[3];
+        String description = (String) row[4];
+        boolean exchance = (boolean) row[5];
+        int nights = (int) row[6];
+        double price = (double) row[7];
+        boolean status = (boolean) row[8];
+        UUID destination_id = (UUID) row[9];
+        UUID post_by = (UUID) row[10];
+        String address1 = (String) row[11];
+        String branch = (String) row[12];
+        String city = (String) row[13];
+        String country = (String) row[14];
+        String description1 = (String) row[15];
+        String name = (String) row[16];
+        int bath = (int) row[17];
+        String entertainment = (String) row[18];
+        String features = (String) row[19];
+        String kitchen = (String) row[20];
+        String name2 = (String) row[21];
+        String policies = (String) row[22];
+        String room_view = (String) row[23];
+        int sleeps = (int) row[24];
 
 //        int bath = (int) row[18];
 //        String entertainment = (String) row[19];
@@ -93,6 +122,7 @@ import java.util.UUID;
         roomtypeDTO.setPolicies((String) row[24]);
         roomtypeDTO.setRoomview((String) row[25]);
         roomtypeDTO.setSleeps((int) row[26]);
+
 
         // Tạo đối tượng TimeshareRespone và set giá trị
         TimeshareRespone timeshareRespone = new TimeshareRespone();

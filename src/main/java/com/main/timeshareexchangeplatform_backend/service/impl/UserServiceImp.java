@@ -1,5 +1,6 @@
 package com.main.timeshareexchangeplatform_backend.service.impl;
 
+import com.main.timeshareexchangeplatform_backend.converter.UserConverter;
 import com.main.timeshareexchangeplatform_backend.dto.LoginDTO;
 import com.main.timeshareexchangeplatform_backend.dto.UserDTO;
 import com.main.timeshareexchangeplatform_backend.entity.User;
@@ -11,11 +12,16 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImp implements UserService {
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    UserConverter userConverter;
+
     @Override
     public User addUser(UserDTO userDTO) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -30,6 +36,7 @@ public class UserServiceImp implements UserService {
                 .phone(userDTO.getPhone())
                 .gender(userDTO.getGender())
                 .status(userDTO.isStatus())
+                .role(userDTO.getRole())
                 .build());
     }
 
@@ -37,5 +44,13 @@ public class UserServiceImp implements UserService {
     public User login(LoginDTO userDTO) {
         return userRepository.findUserByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword())
                 .orElseThrow(()-> new ResourceNotFoundException("User not found"));
+    }
+
+    @Override
+    public List<UserDTO> findAll() {
+        List<UserDTO> userDTO = userRepository.findAll().stream().map(userConverter::toDTO)
+                .collect(Collectors.toList());
+
+        return userDTO;
     }
 }

@@ -11,15 +11,15 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TimeshareDTO {
-    private int timeshare_id;
+    private UUID timeshare_id;
     private LocalDate date_start;
     private LocalDate date_end;
     private int nights;
     private long price;
     private boolean status;
     private String name;
-    private String post_by;
-    private int destination_id;
+    private UUID post_by;
+    private UUID destination_id;
     private String description;
     private String image_url;
 }

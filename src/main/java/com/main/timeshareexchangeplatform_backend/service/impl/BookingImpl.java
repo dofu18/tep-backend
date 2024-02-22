@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 @Service
 public class BookingImpl implements IBookingService {
@@ -38,7 +39,7 @@ public class BookingImpl implements IBookingService {
     @Override
     public BookingModel addBooking(BookingModel bookingModel) {
 
-        Integer timeshareId = bookingModel.getTimeshare_id();
+        UUID timeshareId = bookingModel.getTimeshare_id();
 //        ResponseTimeshare responseTimeshare = new ResponseTimeshare();
 //        ResponseTimeshare result = timeshareConverter.toRespone(timeshareService.getReferenceById(timeshareId));
 

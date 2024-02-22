@@ -7,9 +7,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
-public interface MyTimeShareRepository extends JpaRepository<Timeshare, Integer> {
+public interface MyTimeShareRepository extends JpaRepository<Timeshare, UUID> {
     @Query(value = " select * from timeshare", nativeQuery = true )
     List<Timeshare> showListTimeShare();
 
@@ -39,6 +40,6 @@ public interface MyTimeShareRepository extends JpaRepository<Timeshare, Integer>
             "    roomtype AS r ON t.timeshare_id = r.timeshare_id\n" +
             "WHERE \n" +
             "    t.timeshare_id = :timeshareId", nativeQuery = true)
-    Object findTimeshareDetails(@Param("timeshareId") int timeshareId);
+    Object findTimeshareDetails(@Param("timeshareId") UUID timeshareId);
 
 }

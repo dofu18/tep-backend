@@ -1,6 +1,5 @@
 package com.main.timeshareexchangeplatform_backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,15 +17,30 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class User {
+//    @Id
+//    @GeneratedValue(generator = "UUID", strategy = GenerationType.AUTO)
+//    @GenericGenerator(
+//            name = "UUID",
+//            strategy = "org.hibernate.id.UUIDGenerator"
+//    )
+//    private UUID user_id;
+//    @PrePersist
+//    public void generateUUID() {
+//        if (user_id == null) {
+//            user_id = UUID.randomUUID();
+//        }
+//    }
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID user_id;
 
     @Column(unique = true, columnDefinition = "varchar(50) not null")
     private String user_name;
 
+
     @Column(unique = true, columnDefinition = "varchar(50)", nullable = false)
     private String email;
+
 
     @Column(columnDefinition = "varchar(50)", nullable = false)
     private String password;
