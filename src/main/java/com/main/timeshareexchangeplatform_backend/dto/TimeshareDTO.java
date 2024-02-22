@@ -18,7 +18,8 @@ public class TimeshareDTO {
     private long price;
     private boolean status;
     private String name;
-    private UUID post_by;
+    private String post_by;
     private int destination_id;
     private String description;
+    private String image_url;
 }

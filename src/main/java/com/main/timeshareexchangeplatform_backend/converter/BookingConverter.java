@@ -32,7 +32,7 @@ public class BookingConverter {
         entity.setState(bookingModel.getState());
         entity.setPostal_code(bookingModel.getPostal_code());
         entity.setPayment_method(bookingModel.getPayment_method());
-        entity.setUser(userRepository.getReferenceById(bookingModel.getUser_id()));
+        //entity.setUser(userRepository.getReferenceById(bookingModel.getUser_id()));
         entity.setTimeshare(timeshareRepository.getReferenceById(bookingModel.getTimeshare_id()));
 
 
@@ -58,7 +58,7 @@ public class BookingConverter {
         dto.setState(bookingEntity.getState());
         dto.setPostal_code(bookingEntity.getPostal_code());
         dto.setPayment_method(bookingEntity.getPayment_method());
-        dto.setUser_id(bookingEntity.getUser().getUser_id());
+        //dto.setUser_id(bookingEntity.getUser().getUser_id());
         dto.setTimeshare_id(bookingEntity.getTimeshare().getTimeshare_id());
 
         return dto;

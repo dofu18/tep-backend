@@ -27,7 +27,8 @@ public class TimeShareController {
     }
     @GetMapping("/details/{timeshareId}")
     public ResponseEntity<?> getTimeshareDetails(@PathVariable int timeshareId) {
-        TimeshareRespone timeshareRespone = timeShareService.getTimeshareDetails(timeshareId);
+        TimeshareRespone timeshareRespone;
+        timeshareRespone = timeShareService.getTimeshareDetails(timeshareId);
 
         if (timeshareRespone != null) {
             return ResponseEntity.status(HttpStatus.OK).body(timeshareRespone);

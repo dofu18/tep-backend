@@ -34,9 +34,10 @@ public class TimeshareConverter {
         dto.setStatus(timeshare.isStatus());
         dto.setName(timeshare.getName());
 //        dto.setAddress(timeshare.getAddress());
-        dto.setPost_by(timeshare.getUser().getUser_id());  // Assuming there is a User entity in Timeshare
+        dto.setPost_by(String.valueOf(timeshare.getUser().getUser_id()));  // Assuming there is a User entity in Timeshare
         dto.setDestination_id(timeshare.getDestination().getDestination_id());  // Assuming there is a Destination entity in Timeshare
         dto.setDescription(timeshare.getDescription());
+        dto.setImage_url(timeshare.getImage_url());
         return dto;
     }
 
@@ -57,6 +58,7 @@ public class TimeshareConverter {
         timeshare.setUser(postedBy);
         timeshare.setDestination(destination);
         timeshare.setDescription(dto.getDescription());
+        timeshare.setImage_url(dto.getImage_url());
         return timeshare;
     }
 
