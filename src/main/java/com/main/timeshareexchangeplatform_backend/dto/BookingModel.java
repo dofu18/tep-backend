@@ -27,7 +27,6 @@ public class BookingModel {
     private String state;
     private String postal_code;
     private String payment_method;
-//    private int user_id;
     private UUID user_id;
     private UUID timeshare_id;
 }

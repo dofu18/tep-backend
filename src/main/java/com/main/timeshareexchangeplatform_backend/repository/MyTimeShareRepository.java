@@ -24,6 +24,7 @@ public interface MyTimeShareRepository extends JpaRepository<Timeshare, UUID> {
             "    d.description,\n" +
             "    d.name,\n" +
             "    r.bath,\n" +
+            "    r.bed,\n" +
             "    r.entertainment,\n" +
             "    r.features,\n" +
             "    r.kitchen,\n" +
