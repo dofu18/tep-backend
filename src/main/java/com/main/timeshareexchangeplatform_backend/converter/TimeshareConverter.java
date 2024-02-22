@@ -68,7 +68,7 @@ public class TimeshareConverter {
         dto.setDateStart(timeshareEntity.getDate_start());
         dto.setDateEnd(timeshareEntity.getDate_end());
         dto.setExchange(timeshareEntity.getExchange());
-        dto.setPrice(timeshareEntity.getTimeshare_id());
+        dto.setPrice(timeshareEntity.getPrice());
         dto.setStatus(timeshareEntity.isStatus());
         dto.setNights(timeshareEntity.getNights());
         dto.setPostBy(userConverter.toResponse(timeshareEntity.getUser()));

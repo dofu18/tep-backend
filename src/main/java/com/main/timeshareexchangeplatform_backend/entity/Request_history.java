@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "request_history")
@@ -14,8 +15,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Request_history {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int requestHistory_id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID requestHistory_id;
 
     @Column (columnDefinition = "DATETIME", nullable = false)
     private LocalDateTime update_datetime;

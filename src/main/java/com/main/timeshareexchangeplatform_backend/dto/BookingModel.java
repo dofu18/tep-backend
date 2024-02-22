@@ -11,7 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookingModel {
-    private int booking_id;
+    private UUID booking_id;
     private String bookingCode;
     private long total;
     private LocalDate success_date;
@@ -27,7 +27,7 @@ public class BookingModel {
     private String state;
     private String postal_code;
     private String payment_method;
-    private int user_id;
+//    private int user_id;
     private UUID user_id;
-    private int timeshare_id;
+    private UUID timeshare_id;
 }

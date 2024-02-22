@@ -6,12 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.UUID;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class TimeshareRespone {
-    int timeshare_id;
+    UUID timeshare_id;
     String address;
     Date date_end;
     Date date_start;
@@ -20,8 +22,8 @@ public class TimeshareRespone {
     int nights;
     double price;
     boolean status;
-    int destination_id;
-    int post_by;
+    UUID destination_id;
+    UUID post_by;
     String address1;
     String branch;
     String city;

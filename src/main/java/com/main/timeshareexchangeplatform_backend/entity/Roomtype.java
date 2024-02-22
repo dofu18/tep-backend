@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "roomtype")
 @Data
@@ -13,8 +15,8 @@ import lombok.NoArgsConstructor;
 public class Roomtype {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int roomtype_id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID roomtype_id;
 
     @Column(columnDefinition = "nvarchar(50) not null")
     private String name;

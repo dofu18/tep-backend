@@ -1,5 +1,6 @@
 package com.main.timeshareexchangeplatform_backend.service.impl;
 
+import com.main.timeshareexchangeplatform_backend.dto.ResponseTimeshare;
 import com.main.timeshareexchangeplatform_backend.dto.TimeshareDTO;
 import com.main.timeshareexchangeplatform_backend.converter.TimeshareConverter;
 import com.main.timeshareexchangeplatform_backend.repository.MyTimeShareRepository;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
     public class TimeshareImp implements ITimeshareService {
@@ -28,7 +31,7 @@ import java.util.List;
         }
 
     @Override
-    public TimeshareRespone getTimeshareDetails(int timeshareId) {
+    public TimeshareRespone getTimeshareDetails(UUID timeshareId) {
         Object result = myTimeShareRepository.findTimeshareDetails(timeshareId);
 
         // Chuyển đổi Object thành TimeshareRespone, bạn có thể thực hiện phần này theo cách bạn muốn
@@ -38,8 +41,16 @@ import java.util.List;
     }
 
     @Override
-    public Timeshare getReferenceById(Integer id) {
+    public Timeshare getReferenceById(UUID id) {
         return timeshareRepository.getReferenceById(id);
+    }
+
+    @Override
+    public List<ResponseTimeshare> findTimeshareByName(String name) {
+        List<ResponseTimeshare> timeshares = timeshareRepository.findTimeshareByName(name).stream()
+                .map(timeshareConverter::toRespone).collect(Collectors.toList());
+
+        return timeshares;
     }
 
     private TimeshareRespone convertToObject(Object result) {
@@ -50,7 +61,7 @@ import java.util.List;
         Object[] row = (Object[]) result;
 
         // Extract các giá trị từ mảng row
-        int timeshare_id = (int) row[0];
+        UUID timeshare_id = (UUID) row[0];
         String address = (String) row[1];
         Date date_end = (Date) row[2];
         Date date_start = (Date) row[3];
@@ -59,8 +70,8 @@ import java.util.List;
         int nights = (int) row[6];
         double price = (double) row[7];
         boolean status = (boolean) row[8];
-        int destination_id = (int) row[9];
-        int post_by = (int) row[10];
+        UUID destination_id = (UUID) row[9];
+        UUID post_by = (UUID) row[10];
         String address1 = (String) row[11];
         String branch = (String) row[12];
         String city = (String) row[13];

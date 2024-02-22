@@ -5,11 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO {
+    private UUID user_id;
     private String user_name;
     private String password;
     private String fullname;
@@ -18,4 +21,5 @@ public class UserDTO {
     private String dob;
     private Boolean gender;
     private boolean status;
+    private String role;
 }

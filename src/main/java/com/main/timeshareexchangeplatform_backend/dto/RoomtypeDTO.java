@@ -2,12 +2,14 @@ package com.main.timeshareexchangeplatform_backend.dto;
 
 import lombok.*;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class RoomtypeDTO {
-    private int RoomtypeId;
+    private UUID RoomtypeId;
     private int bath;
     private int bed;
     private int sleeps;

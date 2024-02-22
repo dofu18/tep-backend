@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 @Table(name = "booking")
@@ -14,8 +15,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Booking {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int booking_id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID booking_id;
 
     @Column(unique = true, columnDefinition = "varchar(50)", name = "booking_code", nullable = false)
     private String bookingCode;

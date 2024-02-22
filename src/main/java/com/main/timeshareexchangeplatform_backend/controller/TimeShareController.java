@@ -1,5 +1,6 @@
 package com.main.timeshareexchangeplatform_backend.controller;
 
+import com.main.timeshareexchangeplatform_backend.dto.ResponseTimeshare;
 import com.main.timeshareexchangeplatform_backend.dto.TimeshareDTO;
 import com.main.timeshareexchangeplatform_backend.dto.TimeshareRespone;
 import com.main.timeshareexchangeplatform_backend.service.ITimeshareService;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequestMapping({"/api/timeshare"})
 @RestController
@@ -26,7 +28,7 @@ public class TimeShareController {
 
     }
     @GetMapping("/details/{timeshareId}")
-    public ResponseEntity<?> getTimeshareDetails(@PathVariable int timeshareId) {
+    public ResponseEntity<?> getTimeshareDetails(@PathVariable UUID timeshareId) {
         TimeshareRespone timeshareRespone = timeShareService.getTimeshareDetails(timeshareId);
 
         if (timeshareRespone != null) {
@@ -34,5 +36,10 @@ public class TimeShareController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No details found for timeshareId: " + timeshareId);
         }
+    }
+
+    @GetMapping(value = "/find-by-title")
+    public List<ResponseTimeshare> findTimeshareByName(@RequestParam("name") String name) {
+        return timeShareService.findTimeshareByName(name);
     }
 }

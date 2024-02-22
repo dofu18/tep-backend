@@ -11,7 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TimeshareDTO {
-    private int timeshare_id;
+    private UUID timeshare_id;
     private LocalDate date_start;
     private LocalDate date_end;
     private int nights;
@@ -19,6 +19,6 @@ public class TimeshareDTO {
     private boolean status;
     private String name;
     private UUID post_by;
-    private int destination_id;
+    private UUID destination_id;
     private String description;
 }
