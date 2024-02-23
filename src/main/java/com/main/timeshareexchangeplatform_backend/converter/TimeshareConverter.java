@@ -22,6 +22,7 @@ public class TimeshareConverter {
 
 
 
+
     public static TimeshareDTO toDTO(Timeshare timeshare) {
         if (timeshare == null) {
             return null;

@@ -31,7 +31,7 @@ public class TimeShareController {
 
     public ResponseEntity<?> getTimeshareDetails(@PathVariable UUID timeshareId) {
         TimeshareRespone timeshareRespone;
-        timeshareRespone = timeShareService.getTimeshareByUserId(timeshareId);
+        timeshareRespone = timeShareService.getTimeshareDetails(timeshareId);
 
         if (timeshareRespone != null) {
             return ResponseEntity.status(HttpStatus.OK).body(timeshareRespone);
@@ -44,7 +44,7 @@ public class TimeShareController {
 
     public ResponseEntity<?> getTimeshareByUserId(@PathVariable UUID userId) {
         TimeshareRespone timeshareRespone;
-        timeshareRespone = timeShareService.getTimeshareDetails(userId);
+        timeshareRespone = timeShareService.getTimeshareByUserId(userId);
 
         if (timeshareRespone != null) {
             return ResponseEntity.status(HttpStatus.OK).body(timeshareRespone);
