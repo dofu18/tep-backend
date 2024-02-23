@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 @Component
 public class TimeshareConverter {
     @Autowired
@@ -34,7 +36,7 @@ public class TimeshareConverter {
         dto.setStatus(timeshare.isStatus());
         dto.setName(timeshare.getName());
 //        dto.setAddress(timeshare.getAddress());
-        dto.setPost_by(String.valueOf(timeshare.getUser().getUser_id()));  // Assuming there is a User entity in Timeshare
+        dto.setPost_by(UUID.fromString(String.valueOf(timeshare.getUser().getUser_id())));  // Assuming there is a User entity in Timeshare
         dto.setDestination_id(timeshare.getDestination().getDestination_id());  // Assuming there is a Destination entity in Timeshare
         dto.setDescription(timeshare.getDescription());
         dto.setImage_url(timeshare.getImage_url());

@@ -29,7 +29,7 @@ public class TimeShareController {
     }
     @GetMapping("/details/{timeshareId}")
 
-    public ResponseEntity<?> getTimeshareDetails(@PathVariable int timeshareId) {
+    public ResponseEntity<?> getTimeshareDetails(@PathVariable UUID timeshareId) {
         TimeshareRespone timeshareRespone;
         timeshareRespone = timeShareService.getTimeshareDetails(timeshareId);
 

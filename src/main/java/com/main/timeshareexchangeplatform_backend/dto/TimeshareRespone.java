@@ -28,20 +28,7 @@ public class TimeshareRespone {
     boolean status;
     UUID destination_id;
     UUID post_by;
-    String address1;
-    String branch;
-    String city;
-    String country;
-    String description1;
-    String name;
-    int bath;
-    String entertainment;
-    String features;
-    String kitchen;
-    String name2;
-    String policies;
-    String room_view;
-    int sleeps;
+    DestinationDTO des;
 
     RoomtypeDTO room;
 }
