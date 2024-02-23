@@ -10,7 +10,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class RoomtypeDTO {
 
-    private UUID RoomtypeId;
+    private String RoomtypeId;
     private int bath;
     private int bed;
     private int sleeps;

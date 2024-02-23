@@ -42,4 +42,7 @@ public interface MyTimeShareRepository extends JpaRepository<Timeshare, UUID> {
             "    t.timeshare_id = :timeshareId", nativeQuery = true)
     Object findTimeshareDetails(@Param("timeshareId") UUID timeshareId);
 
+    @Query(value ="select * from timeshare " +
+            "where post_by= :userId ", nativeQuery = true)
+    Object findTimeshareDetailbyUserId(@Param("userId") String userId);
 }

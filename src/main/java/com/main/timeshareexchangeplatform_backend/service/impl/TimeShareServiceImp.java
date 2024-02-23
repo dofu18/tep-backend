@@ -34,6 +34,16 @@ import java.util.UUID;
 
         return timeshareRespone;
     }
+    @Override
+    public TimeshareRespone getTimeshareByUserId(UUID userId) {
+        Object result = myTimeShareRepository.findTimeshareDetails(userId);
+
+        // Chuyển đổi Object thành TimeshareRespone, bạn có thể thực hiện phần này theo cách bạn muốn
+        TimeshareRespone timeshareRespone = convertToObject(result);
+
+        return timeshareRespone;
+    }
+
     private TimeshareRespone convertToObject(Object result) {
         if (result == null) {
             return null;
@@ -42,7 +52,7 @@ import java.util.UUID;
         Object[] row = (Object[]) result;
 
         // Extract các giá trị từ mảng row
-        UUID timeshare_id = (UUID) row[0];
+        String timeshare_id = (String) row[0];
         String address = (String) row[1];
         Date date_end = (Date) row[2];
         Date date_start = (Date) row[3];
@@ -52,7 +62,7 @@ import java.util.UUID;
         long price = (long) row[7];
         boolean status = (boolean) row[8];
         int destination_id = (int) row[9];
-        UUID post_by = (UUID) row[10];
+        String post_by = (String) row[10];
         String address1 = (String) row[11];
         String branch = (String) row[12];
         String city = (String) row[13];

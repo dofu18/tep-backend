@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DestinationDTO {
-    private UUID destinationId;
+    private String destinationId;
     private String address;
     private String branch;
     private String city;

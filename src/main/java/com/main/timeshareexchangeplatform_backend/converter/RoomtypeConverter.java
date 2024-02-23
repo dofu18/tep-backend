@@ -5,6 +5,8 @@ import com.main.timeshareexchangeplatform_backend.entity.Roomtype;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 public class RoomtypeConverter {
     public static RoomtypeDTO toDTO(Roomtype roomType) {
         if (roomType == null) {
@@ -12,7 +14,7 @@ public class RoomtypeConverter {
         }
 
         RoomtypeDTO dto = new RoomtypeDTO();
-        dto.setRoomtypeId(roomType.getRoomtype_id());
+        dto.setRoomtypeId(String.valueOf(roomType.getRoomtype_id()));
         dto.setBath(roomType.getBath());
         dto.setBed(roomType.getBed());
         dto.setSleeps(roomType.getSleeps());
@@ -32,7 +34,7 @@ public class RoomtypeConverter {
         }
 
         Roomtype roomType = new Roomtype();
-        roomType.setRoomtype_id(dto.getRoomtypeId());
+        roomType.setRoomtype_id(UUID.fromString(dto.getRoomtypeId()));
         roomType.setBath(dto.getBath());
         roomType.setBed(dto.getBed());
         roomType.setSleeps(dto.getSleeps());

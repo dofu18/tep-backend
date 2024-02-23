@@ -8,5 +8,6 @@ import java.util.UUID;
 
 public interface TimeShareService {
    public List<TimeshareDTO> showListTimeShare();
+   TimeshareRespone getTimeshareByUserId(UUID userId);
    TimeshareRespone getTimeshareDetails(UUID timeshareId);
 }

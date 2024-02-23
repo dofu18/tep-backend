@@ -15,7 +15,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class TimeshareRespone {
 
-    UUID timeshare_id;
+    String timeshare_id;
     String address;
     Date date_end;
     Date date_start;
@@ -26,9 +26,8 @@ public class TimeshareRespone {
     int nights;
     long price;
     boolean status;
-    UUID destination_id;
-    UUID post_by;
+    String destination_id;
+    String post_by;
     DestinationDTO des;
-
     RoomtypeDTO room;
 }
