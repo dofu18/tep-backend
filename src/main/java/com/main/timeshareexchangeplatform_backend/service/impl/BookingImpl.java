@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 @Service
 public class BookingImpl implements IBookingService {
@@ -38,7 +39,7 @@ public class BookingImpl implements IBookingService {
     @Override
     public BookingModel addBooking(BookingModel bookingModel) {
 
-        Integer timeshareId = bookingModel.getTimeshare_id();
+        UUID timeshareId = bookingModel.getTimeshare_id();
 //        ResponseTimeshare responseTimeshare = new ResponseTimeshare();
 //        ResponseTimeshare result = timeshareConverter.toRespone(timeshareService.getReferenceById(timeshareId));
 
@@ -50,7 +51,18 @@ public class BookingImpl implements IBookingService {
             //luu đơn hàng vào db
             booking.setBookingCode(generateUniqueBookingCode());
             booking.setTotal(booking.getTotal());
-            booking.setCreate_date(LocalDate.now());
+            booking.setSuccess_date(LocalDate.now());
+            booking.setFullname(booking.getFullname());
+            booking.setAdults(booking.getAdults());
+            booking.setChildren(booking.getChildren());
+            booking.setCity(booking.getCity());
+            booking.setCountry(booking.getCountry());
+            booking.setPayment_method(booking.getPayment_method());
+            booking.setPostal_code(booking.getPostal_code());
+            booking.setState(booking.getState());
+            booking.setStreet(booking.getStreet());
+            booking.setTelephone(booking.getTelephone());
+
             booking.setStatus(false);// Mặc định là đã book
 
             booking = bookingRepository.save(booking);

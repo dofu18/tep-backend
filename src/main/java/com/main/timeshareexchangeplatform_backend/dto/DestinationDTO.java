@@ -11,9 +11,12 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TimeshareRoomtypeDTO {
-
-    private UUID RoomtypeId;
-
-    private UUID TimeshareId;
+public class DestinationDTO {
+    private String destinationId;
+    private String address;
+    private String branch;
+    private String city;
+    private String Country;
+    private String description;
+    private String name;
 }

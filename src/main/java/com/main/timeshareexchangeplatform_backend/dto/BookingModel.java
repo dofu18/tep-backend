@@ -11,12 +11,22 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookingModel {
-    private int booking_id;
+    private UUID booking_id;
     private String bookingCode;
     private long total;
-    private LocalDate create_date;
     private LocalDate success_date;
     private boolean status;
+    private boolean payment_status;
+    private int adults;
+    private int children;
+    private String telephone;
+    private String fullname;
+    private String country;
+    private String street;
+    private String city;
+    private String state;
+    private String postal_code;
+    private String payment_method;
     private UUID user_id;
-    private int timeshare_id;
+    private UUID timeshare_id;
 }

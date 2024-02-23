@@ -1,5 +1,6 @@
 package com.main.timeshareexchangeplatform_backend.controller;
 
+import com.main.timeshareexchangeplatform_backend.dto.ResponseTimeshare;
 import com.main.timeshareexchangeplatform_backend.dto.TimeshareDTO;
 import com.main.timeshareexchangeplatform_backend.dto.TimeshareRespone;
 import com.main.timeshareexchangeplatform_backend.service.ITimeshareService;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequestMapping({"/api/timeshare"})
 @RestController
@@ -26,13 +28,33 @@ public class TimeShareController {
 
     }
     @GetMapping("/details/{timeshareId}")
-    public ResponseEntity<?> getTimeshareDetails(@PathVariable int timeshareId) {
-        TimeshareRespone timeshareRespone = timeShareService.getTimeshareDetails(timeshareId);
+
+    public ResponseEntity<?> getTimeshareDetails(@PathVariable UUID timeshareId) {
+        TimeshareRespone timeshareRespone;
+        timeshareRespone = timeShareService.getTimeshareDetails(timeshareId);
 
         if (timeshareRespone != null) {
             return ResponseEntity.status(HttpStatus.OK).body(timeshareRespone);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No details found for timeshareId: " + timeshareId);
         }
+    }
+
+    @GetMapping("/details/user/{userId}")
+
+    public ResponseEntity<?> getTimeshareByUserId(@PathVariable UUID userId) {
+        TimeshareRespone timeshareRespone;
+        timeshareRespone = timeShareService.getTimeshareByUserId(userId);
+
+        if (timeshareRespone != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(timeshareRespone);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No details found for timeshareId: " + userId);
+        }
+    }
+
+    @GetMapping(value = "/find-by-title")
+    public List<ResponseTimeshare> findTimeshareByName(@RequestParam("name") String name) {
+        return timeShareService.findTimeshareByName(name);
     }
 }

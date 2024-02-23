@@ -1,23 +1,21 @@
 package com.main.timeshareexchangeplatform_backend.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RoomtypeDTO {
-
+public class RoomtypeModel {
     private String RoomtypeId;
     private int bath;
     private int bed;
-    private int sleeps;
     private String entertaiment;
-    private String feature;
-    private String kitchen;
+    private String features;
+    private int kitchen;
     private String name;
     private String policies;
-    private String roomview;
+    private String room_view;
+    private int sleeps;
 }

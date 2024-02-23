@@ -11,12 +11,15 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 @Component
 public class TimeshareConverter {
     @Autowired
     UserConverter userConverter;
     @Autowired
     DestinationConverter destinationConverter;
+
 
 
 
@@ -34,9 +37,10 @@ public class TimeshareConverter {
         dto.setStatus(timeshare.isStatus());
         dto.setName(timeshare.getName());
 //        dto.setAddress(timeshare.getAddress());
-        dto.setPost_by(timeshare.getUser().getUser_id());  // Assuming there is a User entity in Timeshare
+        dto.setPost_by(UUID.fromString(String.valueOf(timeshare.getUser().getUser_id())));  // Assuming there is a User entity in Timeshare
         dto.setDestination_id(timeshare.getDestination().getDestination_id());  // Assuming there is a Destination entity in Timeshare
         dto.setDescription(timeshare.getDescription());
+        dto.setImage_url(timeshare.getImage_url());
         return dto;
     }
 
@@ -57,6 +61,7 @@ public class TimeshareConverter {
         timeshare.setUser(postedBy);
         timeshare.setDestination(destination);
         timeshare.setDescription(dto.getDescription());
+        timeshare.setImage_url(dto.getImage_url());
         return timeshare;
     }
 
@@ -68,7 +73,7 @@ public class TimeshareConverter {
         dto.setDateStart(timeshareEntity.getDate_start());
         dto.setDateEnd(timeshareEntity.getDate_end());
         dto.setExchange(timeshareEntity.getExchange());
-        dto.setPrice(timeshareEntity.getTimeshare_id());
+        dto.setPrice(timeshareEntity.getPrice());
         dto.setStatus(timeshareEntity.isStatus());
         dto.setNights(timeshareEntity.getNights());
         dto.setPostBy(userConverter.toResponse(timeshareEntity.getUser()));

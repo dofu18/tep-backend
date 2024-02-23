@@ -1,6 +1,5 @@
 package com.main.timeshareexchangeplatform_backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,24 +17,38 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class User {
+//    @Id
+//    @GeneratedValue(generator = "UUID", strategy = GenerationType.AUTO)
+//    @GenericGenerator(
+//            name = "UUID",
+//            strategy = "org.hibernate.id.UUIDGenerator"
+//    )
+//    private UUID user_id;
+//    @PrePersist
+//    public void generateUUID() {
+//        if (user_id == null) {
+//            user_id = UUID.randomUUID();
+//        }
+//    }
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID user_id;
 
-    @Column(unique = true, columnDefinition = "varchar(50)")
+    @Column(unique = true, columnDefinition = "varchar(50) not null")
     private String user_name;
 
-    @Column(unique = true, columnDefinition = "varchar(50)")
+
+    @Column(unique = true, columnDefinition = "varchar(50)", nullable = false)
     private String email;
 
-    @Column
-    @JsonIgnore
+
+    @Column(columnDefinition = "varchar(50)", nullable = false)
     private String password;
 
-    @Column(columnDefinition = "nvarchar(50)")
+    @Column(columnDefinition = "nvarchar(50)", nullable = false)
     private String fullname;
 
-    @Column(unique = true, columnDefinition = "varchar(50)")
+    @Column(unique = true, columnDefinition = "varchar(12)")
     private String phone;
 
     @Column
@@ -47,7 +60,7 @@ public class User {
     @Column
     private boolean status;
 
-    @Column (columnDefinition = "varchar(10)")
+    @Column (columnDefinition = "varchar(10)", nullable = false)
     private String role;
 
     @OneToMany(mappedBy = "user")

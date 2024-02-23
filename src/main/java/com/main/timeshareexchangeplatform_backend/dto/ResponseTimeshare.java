@@ -5,12 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResponseTimeshare {
-    private int timeshareId;
+    private UUID timeshareId;
     private String timeshareName;
     private String description;
     private boolean status;

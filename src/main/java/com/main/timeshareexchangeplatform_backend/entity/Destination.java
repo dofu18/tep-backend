@@ -4,10 +4,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.relational.core.sql.In;
 
-import java.awt.*;
 import java.util.Collection;
+import java.util.UUID;
 
 @Entity
 @Table(name = "destination")
@@ -17,8 +16,8 @@ import java.util.Collection;
 public class Destination {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int destination_id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID destination_id;
 
     @Column(columnDefinition = "nvarchar(max) not null")
     private String name;

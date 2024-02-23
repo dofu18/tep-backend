@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 @Table(name = "request")
@@ -14,10 +15,10 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Request {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int request_id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID request_id;
 
-    @Column(columnDefinition = "DATE")
+    @Column(columnDefinition = "DATE", nullable = false)
     private LocalDate create_date;
 
     @Column(columnDefinition = "nvarchar(max) not null")
