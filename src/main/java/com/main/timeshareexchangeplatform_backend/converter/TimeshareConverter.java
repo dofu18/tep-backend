@@ -9,6 +9,7 @@ import com.main.timeshareexchangeplatform_backend.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -37,7 +38,7 @@ public class TimeshareConverter {
         dto.setStatus(timeshare.isStatus());
         dto.setName(timeshare.getName());
 //        dto.setAddress(timeshare.getAddress());
-        dto.setPost_by(UUID.fromString(String.valueOf(timeshare.getUser().getUser_id())));  // Assuming there is a User entity in Timeshare
+        dto.setPost_by(UUID.fromString(String.valueOf(timeshare.getPostBy().getUser_id())));  // Assuming there is a User entity in Timeshare
         dto.setDestination_id(timeshare.getDestination().getDestination_id());  // Assuming there is a Destination entity in Timeshare
         dto.setDescription(timeshare.getDescription());
         dto.setImage_url(timeshare.getImage_url());
@@ -58,7 +59,7 @@ public class TimeshareConverter {
         timeshare.setStatus(dto.isStatus());
         timeshare.setName(timeshare.getName());
 //        timeshare.setAddress(dto.getAddress());
-        timeshare.setUser(postedBy);
+        timeshare.setPostBy(postedBy);
         timeshare.setDestination(destination);
         timeshare.setDescription(dto.getDescription());
         timeshare.setImage_url(dto.getImage_url());
@@ -76,10 +77,28 @@ public class TimeshareConverter {
         dto.setPrice(timeshareEntity.getPrice());
         dto.setStatus(timeshareEntity.isStatus());
         dto.setNights(timeshareEntity.getNights());
-        dto.setPostBy(userConverter.toResponse(timeshareEntity.getUser()));
+        dto.setPostBy(userConverter.toDTO(timeshareEntity.getPostBy()));
         dto.setDestinationModel(destinationConverter.toDTO(timeshareEntity.getDestination()));
 
         return dto;
+    }
+
+    public Timeshare toResEntity(ResponseTimeshare model) {
+        Timeshare entity = new Timeshare();
+
+        entity.setTimeshare_id(model.getTimeshareId());
+        entity.setName(model.getTimeshareName());
+        entity.setDescription(model.getDescription());
+        entity.setDate_start(model.getDateStart());
+        entity.setDate_end(model.getDateEnd());
+        entity.setExchange(model.isExchange());
+        entity.setPrice(model.getPrice());
+        entity.setStatus(model.isStatus());
+        entity.setNights(model.getNights());
+        entity.setPostBy(userConverter.toEntity(model.getPostBy()));
+        entity.setDestination(destinationConverter.toEntity(model.getDestinationModel()));
+
+        return entity;
     }
 
 

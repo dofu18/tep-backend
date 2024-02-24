@@ -58,7 +58,7 @@ public class Timeshare {
 
     @ManyToOne
     @JoinColumn(name = "post_by")
-    private User user;
+    private User postBy;
 
     @ManyToOne
     @JoinColumn(name = "destination_id")
