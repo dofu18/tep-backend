@@ -6,6 +6,9 @@ import com.main.timeshareexchangeplatform_backend.dto.ResponseTimeshare;
 import com.main.timeshareexchangeplatform_backend.entity.Destination;
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
 import com.main.timeshareexchangeplatform_backend.entity.User;
+import com.main.timeshareexchangeplatform_backend.repository.DestinationRepository;
+import com.main.timeshareexchangeplatform_backend.repository.TimeshareRepository;
+import com.main.timeshareexchangeplatform_backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,8 +23,12 @@ public class TimeshareConverter {
     UserConverter userConverter;
     @Autowired
     DestinationConverter destinationConverter;
-
-
+    @Autowired
+    TimeshareRepository timeshareRepository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    DestinationRepository destinationRepository;
 
 
     public static TimeshareDTO toDTO(Timeshare timeshare) {
@@ -37,7 +44,7 @@ public class TimeshareConverter {
         dto.setPrice(timeshare.getPrice());
         dto.setStatus(timeshare.isStatus());
         dto.setName(timeshare.getName());
-//        dto.setAddress(timeshare.getAddress());
+        dto.setCity(timeshare.getCity());
         dto.setPost_by(UUID.fromString(String.valueOf(timeshare.getPostBy().getUser_id())));  // Assuming there is a User entity in Timeshare
         dto.setDestination_id(timeshare.getDestination().getDestination_id());  // Assuming there is a Destination entity in Timeshare
         dto.setDescription(timeshare.getDescription());
@@ -45,7 +52,7 @@ public class TimeshareConverter {
         return dto;
     }
 
-    public static Timeshare toEntity(TimeshareDTO dto, User postedBy, Destination destination) {
+    public Timeshare toEntity(TimeshareDTO dto) {
         if (dto == null) {
             return null;
         }
@@ -58,9 +65,9 @@ public class TimeshareConverter {
         timeshare.setPrice(dto.getPrice());
         timeshare.setStatus(dto.isStatus());
         timeshare.setName(timeshare.getName());
-//        timeshare.setAddress(dto.getAddress());
-        timeshare.setPostBy(postedBy);
-        timeshare.setDestination(destination);
+        timeshare.setCity(dto.getCity());
+        timeshare.setPostBy(userRepository.getReferenceById(dto.getPost_by()));
+        timeshare.setDestination(destinationRepository.getReferenceById(dto.getDestination_id()));
         timeshare.setDescription(dto.getDescription());
         timeshare.setImage_url(dto.getImage_url());
         return timeshare;
@@ -110,4 +117,6 @@ public class TimeshareConverter {
         }
         return StudentDTOList;
     }
+
+
 }

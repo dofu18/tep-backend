@@ -22,4 +22,5 @@ public class TimeshareDTO {
     private UUID destination_id;
     private String description;
     private String image_url;
+    private String city;
 }

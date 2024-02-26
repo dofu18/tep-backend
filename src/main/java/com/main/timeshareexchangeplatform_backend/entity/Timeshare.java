@@ -43,6 +43,9 @@ public class Timeshare {
     @Column (columnDefinition = "varchar(max)")
     private String description;
 
+    @Column (columnDefinition = "varchar(max)")
+    private String city;
+
     @Column(columnDefinition = "varchar(max) not null")
     private String image_url;
 
