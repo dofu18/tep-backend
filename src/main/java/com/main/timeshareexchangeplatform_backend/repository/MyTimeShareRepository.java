@@ -23,6 +23,7 @@ public interface MyTimeShareRepository extends JpaRepository<Timeshare, UUID> {
             "    d.country,\n" +
             "    d.description,\n" +
             "    d.name,\n" +
+            "    r.roomtype_id,\n"+
             "    r.bath,\n" +
             "    r.bed,\n" +
             "    r.entertainment,\n" +
@@ -49,7 +50,9 @@ public interface MyTimeShareRepository extends JpaRepository<Timeshare, UUID> {
             "    d.city,\n" +
             "    d.country,\n" +
             "    d.description,\n" +
+
             "    d.name,\n" +
+            "    r.roomtype_id,\n"+
             "    r.bath,\n" +
             "    r.bed,\n" +
             "    r.entertainment,\n" +

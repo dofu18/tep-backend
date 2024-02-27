@@ -128,15 +128,16 @@ import java.util.stream.Collectors;
         destinationDTO.setName((String) row[18]);
 
         RoomtypeDTO roomtypeDTO= new RoomtypeDTO();
-        roomtypeDTO.setBath((int) row[19]);
-        roomtypeDTO.setBed((int) row[20]);
-        roomtypeDTO.setEntertaiment((String) row[21]);
-        roomtypeDTO.setFeature((String) row[22]);
-        roomtypeDTO.setKitchen((String) row[23]);
-        roomtypeDTO.setName((String) row[24]);
-        roomtypeDTO.setPolicies((String) row[25]);
-        roomtypeDTO.setRoomview((String) row[26]);
-        roomtypeDTO.setSleeps((int) row[27]);
+        roomtypeDTO.setRoomtypeId((String) row[19]);
+        roomtypeDTO.setBath((int) row[20]);
+        roomtypeDTO.setBed((int) row[21]);
+        roomtypeDTO.setEntertaiment((String) row[22]);
+        roomtypeDTO.setFeature((String) row[23]);
+        roomtypeDTO.setKitchen((String) row[24]);
+        roomtypeDTO.setName((String) row[25]);
+        roomtypeDTO.setPolicies((String) row[26]);
+        roomtypeDTO.setRoomview((String) row[27]);
+        roomtypeDTO.setSleeps((int) row[28]);
 
         // Tạo đối tượng TimeshareRespone và set giá trị
         TimeshareRespone timeshareRespone = new TimeshareRespone();
