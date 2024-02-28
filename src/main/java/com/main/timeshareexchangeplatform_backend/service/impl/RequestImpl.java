@@ -4,6 +4,8 @@ import com.main.timeshareexchangeplatform_backend.converter.RequestConverter;
 import com.main.timeshareexchangeplatform_backend.converter.TimeshareConverter;
 import com.main.timeshareexchangeplatform_backend.converter.UserConverter;
 import com.main.timeshareexchangeplatform_backend.dto.RequestModel;
+import com.main.timeshareexchangeplatform_backend.dto.RequestModelResponse;
+import com.main.timeshareexchangeplatform_backend.dto.ResponseTimeshare;
 import com.main.timeshareexchangeplatform_backend.entity.Booking;
 import com.main.timeshareexchangeplatform_backend.entity.Request;
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
@@ -20,7 +22,9 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class RequestImpl implements IRequest {
@@ -82,6 +86,14 @@ public class RequestImpl implements IRequest {
         }
 
         return "No request found";
+    }
+
+    @Override
+    public List<RequestModelResponse> getAllRequestByResponseId(UUID response_by) {
+        List<Request> requestEntity = requestRepository.getAllRequestByResponseId(response_by);
+        List<RequestModelResponse> requestRespones = requestEntity.stream().map(requestConverter::toDTOResponse).collect(Collectors.toList());
+
+        return requestRespones;
     }
 
     private String generateUniqueRequestCode() {

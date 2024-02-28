@@ -2,6 +2,8 @@ package com.main.timeshareexchangeplatform_backend.controller;
 
 import com.main.timeshareexchangeplatform_backend.dto.BookingModel;
 import com.main.timeshareexchangeplatform_backend.dto.RequestModel;
+import com.main.timeshareexchangeplatform_backend.dto.RequestModelResponse;
+import com.main.timeshareexchangeplatform_backend.dto.ResponseTimeshare;
 import com.main.timeshareexchangeplatform_backend.repository.BookingRepository;
 import com.main.timeshareexchangeplatform_backend.repository.RequestRepository;
 import com.main.timeshareexchangeplatform_backend.service.IBookingService;
@@ -12,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -40,5 +43,11 @@ public class RequestController {
             return ResponseEntity.ok(result);
         }
         return null;
+    }
+
+    @GetMapping(value = "/getRequestByReceiver")
+    public List<RequestModelResponse> getAllTimeshareByUserId(@RequestParam UUID response_by) {
+        return requestService.getAllRequestByResponseId(response_by);
+
     }
 }
