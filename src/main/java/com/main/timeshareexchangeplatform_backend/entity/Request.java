@@ -18,6 +18,9 @@ public class Request {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID request_id;
 
+    @Column(columnDefinition = "nvarchar(max) not null")
+    private String requestCode;
+
     @Column(columnDefinition = "DATE", nullable = false)
     private LocalDate create_date;
 
@@ -34,16 +37,16 @@ public class Request {
 
     @ManyToOne
     @JoinColumn(name = "resquest_by")
-    private User user;
+    private User resquestby;
 
     @ManyToOne
-    @JoinColumn(name = "timeshare_id")
+    @JoinColumn(name = "timeshare_id", nullable = true)
     private Timeshare timeshare;
 
     @OneToOne(mappedBy = "request")
     private Request_history requestHistory;
 
     @OneToOne
-    @JoinColumn(name = "response_by")
-    private Timeshare responseby;
+    @JoinColumn(name = "response_by", nullable = true)
+    private User responseby;
 }

@@ -26,7 +26,7 @@ public class TimeshareRespone {
     int nights;
     long price;
     boolean status;
-
+    String city;
     String post_by;
     DestinationDTO des;
     RoomtypeDTO room;

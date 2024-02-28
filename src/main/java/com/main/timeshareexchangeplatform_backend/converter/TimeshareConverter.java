@@ -6,9 +6,13 @@ import com.main.timeshareexchangeplatform_backend.dto.ResponseTimeshare;
 import com.main.timeshareexchangeplatform_backend.entity.Destination;
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
 import com.main.timeshareexchangeplatform_backend.entity.User;
+import com.main.timeshareexchangeplatform_backend.repository.DestinationRepository;
+import com.main.timeshareexchangeplatform_backend.repository.TimeshareRepository;
+import com.main.timeshareexchangeplatform_backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -19,8 +23,12 @@ public class TimeshareConverter {
     UserConverter userConverter;
     @Autowired
     DestinationConverter destinationConverter;
-
-
+    @Autowired
+    TimeshareRepository timeshareRepository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    DestinationRepository destinationRepository;
 
 
     public static TimeshareDTO toDTO(Timeshare timeshare) {
@@ -36,15 +44,15 @@ public class TimeshareConverter {
         dto.setPrice(timeshare.getPrice());
         dto.setStatus(timeshare.isStatus());
         dto.setName(timeshare.getName());
-//        dto.setAddress(timeshare.getAddress());
-        dto.setPost_by(UUID.fromString(String.valueOf(timeshare.getUser().getUser_id())));  // Assuming there is a User entity in Timeshare
+        dto.setCity(timeshare.getCity());
+        dto.setPost_by(UUID.fromString(String.valueOf(timeshare.getPostBy().getUser_id())));  // Assuming there is a User entity in Timeshare
         dto.setDestination_id(timeshare.getDestination().getDestination_id());  // Assuming there is a Destination entity in Timeshare
         dto.setDescription(timeshare.getDescription());
         dto.setImage_url(timeshare.getImage_url());
         return dto;
     }
 
-    public static Timeshare toEntity(TimeshareDTO dto, User postedBy, Destination destination) {
+    public Timeshare toEntity(TimeshareDTO dto) {
         if (dto == null) {
             return null;
         }
@@ -57,9 +65,9 @@ public class TimeshareConverter {
         timeshare.setPrice(dto.getPrice());
         timeshare.setStatus(dto.isStatus());
         timeshare.setName(timeshare.getName());
-//        timeshare.setAddress(dto.getAddress());
-        timeshare.setUser(postedBy);
-        timeshare.setDestination(destination);
+        timeshare.setCity(dto.getCity());
+        timeshare.setPostBy(userRepository.getReferenceById(dto.getPost_by()));
+        timeshare.setDestination(destinationRepository.getReferenceById(dto.getDestination_id()));
         timeshare.setDescription(dto.getDescription());
         timeshare.setImage_url(dto.getImage_url());
         return timeshare;
@@ -76,10 +84,28 @@ public class TimeshareConverter {
         dto.setPrice(timeshareEntity.getPrice());
         dto.setStatus(timeshareEntity.isStatus());
         dto.setNights(timeshareEntity.getNights());
-        dto.setPostBy(userConverter.toResponse(timeshareEntity.getUser()));
+        dto.setPostBy(userConverter.toDTO(timeshareEntity.getPostBy()));
         dto.setDestinationModel(destinationConverter.toDTO(timeshareEntity.getDestination()));
 
         return dto;
+    }
+
+    public Timeshare toResEntity(ResponseTimeshare model) {
+        Timeshare entity = new Timeshare();
+
+        entity.setTimeshare_id(model.getTimeshareId());
+        entity.setName(model.getTimeshareName());
+        entity.setDescription(model.getDescription());
+        entity.setDate_start(model.getDateStart());
+        entity.setDate_end(model.getDateEnd());
+        entity.setExchange(model.isExchange());
+        entity.setPrice(model.getPrice());
+        entity.setStatus(model.isStatus());
+        entity.setNights(model.getNights());
+        entity.setPostBy(userConverter.toEntity(model.getPostBy()));
+        entity.setDestination(destinationConverter.toEntity(model.getDestinationModel()));
+
+        return entity;
     }
 
 
@@ -91,4 +117,6 @@ public class TimeshareConverter {
         }
         return StudentDTOList;
     }
+
+
 }
