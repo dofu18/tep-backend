@@ -36,6 +36,9 @@ public class Service_pack {
     @Column
     private boolean priority;
 
+    @Column
+    private long service_price;
+
     @OneToMany(mappedBy = "servicePack")
     private Collection<Transaction_history> transactionHistories;
 }
