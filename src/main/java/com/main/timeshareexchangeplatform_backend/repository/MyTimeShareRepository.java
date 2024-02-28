@@ -69,6 +69,6 @@ public interface MyTimeShareRepository extends JpaRepository<Timeshare, UUID> {
             "JOIN \n" +
             "    roomtype AS r ON t.timeshare_id = r.timeshare_id\n" +
 
-            "where t.post_by = :userId ", nativeQuery = true)
+            "where t.owner = :userId ", nativeQuery = true)
     Object findTimeshareDetailbyUserId(@Param("userId") UUID userId);
 }

@@ -66,8 +66,8 @@ public class RequestImpl implements IRequest {
     }
 
     @Override
-    public String reponseTimeshareExchange(int status, String request_code) {
-        Request request = requestRepository.findByRequestCode(request_code);
+    public String reponseTimeshareExchange(int status, UUID request_id) {
+        Request request = requestRepository.getReferenceById(request_id);
 
         if (request != null) {
             request.setStatus(status);
