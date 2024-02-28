@@ -36,7 +36,7 @@ public class Request {
 
 
     @ManyToOne
-    @JoinColumn(name = "resquest_by")
+    @JoinColumn(name = "resquest_by", unique = false)
     private User resquestby;
 
     @ManyToOne
@@ -46,7 +46,7 @@ public class Request {
 //    @OneToOne(mappedBy = "request")
 //    private Request_history requestHistory;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "response_by", nullable = true)
     private User responseby;
 }
