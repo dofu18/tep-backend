@@ -45,7 +45,7 @@ public class TimeshareConverter {
         dto.setStatus(timeshare.isStatus());
         dto.setName(timeshare.getName());
         dto.setCity(timeshare.getCity());
-        dto.setPost_by(UUID.fromString(String.valueOf(timeshare.getPostBy().getUser_id())));  // Assuming there is a User entity in Timeshare
+        dto.setOwner(UUID.fromString(String.valueOf(timeshare.getPostBy().getUser_id())));  // Assuming there is a User entity in Timeshare
         dto.setDestination_id(timeshare.getDestination().getDestination_id());  // Assuming there is a Destination entity in Timeshare
         dto.setDescription(timeshare.getDescription());
         dto.setImage_url(timeshare.getImage_url());
@@ -66,7 +66,7 @@ public class TimeshareConverter {
         timeshare.setStatus(dto.isStatus());
         timeshare.setName(timeshare.getName());
         timeshare.setCity(dto.getCity());
-        timeshare.setPostBy(userRepository.getReferenceById(dto.getPost_by()));
+        timeshare.setPostBy(userRepository.getReferenceById(dto.getOwner()));
         timeshare.setDestination(destinationRepository.getReferenceById(dto.getDestination_id()));
         timeshare.setDescription(dto.getDescription());
         timeshare.setImage_url(dto.getImage_url());

@@ -18,4 +18,6 @@ public interface ITimeshareService {
 
    List<ResponseTimeshare> findTimeshareByName(String name);
 
+   List<ResponseTimeshare> getAllTimeshareByUserId(UUID userid);
+
 }
