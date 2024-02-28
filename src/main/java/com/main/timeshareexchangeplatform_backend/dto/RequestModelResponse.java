@@ -12,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class RequestModelResponse {
     private LocalDate create_date;
-    private boolean status;
+    private int status;
     private UUID request_id;
     private UserDTO response_by;
     private UserDTO request_by;

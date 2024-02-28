@@ -60,7 +60,7 @@ public class Timeshare {
     private Roomtype roomtype;
 
     @ManyToOne
-    @JoinColumn(name = "post_by")
+    @JoinColumn(name = "owner")
     private User postBy;
 
     @ManyToOne
