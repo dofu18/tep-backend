@@ -57,4 +57,11 @@ public class TimeShareController {
     public List<ResponseTimeshare> findTimeshareByName(@RequestParam("name") String name) {
         return timeShareService.findTimeshareByName(name);
     }
+
+    //Get all timeshare by user id
+    @GetMapping(value = "/getTimeshareByOwner")
+    public List<ResponseTimeshare> getAllTimeshareByUserId(@RequestParam UUID owner) {
+        return timeShareService.getAllTimeshareByUserId(owner);
+
+    }
 }

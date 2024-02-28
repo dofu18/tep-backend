@@ -98,7 +98,7 @@ import java.util.UUID;
         timeshareRespone.setNights(nights);
         timeshareRespone.setPrice(price);
         timeshareRespone.setStatus(status);
-        timeshareRespone.setPost_by(post_by);
+        timeshareRespone.setOwner(post_by);
 
         timeshareRespone.setDes(destinationDTO);
         timeshareRespone.setRoom(roomtypeDTO);
