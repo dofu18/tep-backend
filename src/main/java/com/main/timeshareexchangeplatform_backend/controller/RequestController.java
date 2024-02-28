@@ -46,8 +46,14 @@ public class RequestController {
     }
 
     @GetMapping(value = "/getRequestByReceiver")
-    public List<RequestModelResponse> getAllTimeshareByUserId(@RequestParam UUID response_by) {
+    public List<RequestModelResponse> getAllRequestByReceiverId(@RequestParam UUID response_by) {
         return requestService.getAllRequestByResponseId(response_by);
+
+    }
+
+    @GetMapping(value = "/getRequestByRequestUser")
+    public List<RequestModelResponse> getAllRequestByRequestUser(@RequestParam UUID resquest_by) {
+        return requestService.getAllRequestByRequestUser(resquest_by);
 
     }
 }

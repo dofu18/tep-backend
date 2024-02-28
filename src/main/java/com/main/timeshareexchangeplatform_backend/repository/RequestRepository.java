@@ -16,5 +16,8 @@ import java.util.UUID;
 public interface RequestRepository extends JpaRepository<Request, UUID> {
     @Query(value = "SELECT * FROM REQUEST r WHERE r.response_by = :response_by", nativeQuery = true)
     List<Request> getAllRequestByResponseId(@Param("response_by") UUID response_by);
+
+    @Query(value = "SELECT * FROM REQUEST r WHERE r.resquest_by = :resquest_by", nativeQuery = true)
+    List<Request> getAllRequestByRequestUser(@Param("resquest_by") UUID resquest_by);
 }
 
