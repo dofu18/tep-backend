@@ -48,7 +48,7 @@ public class RequestImpl implements IRequest {
 //        Request existingRequest = requestRepository.findByRequestCode(requestModel.getRequestCode());
             request.setRequestCode(generateUniqueRequestCode());
             request.setMessage(request.getMessage());
-            request.setStatus(false);
+            request.setStatus(0);
             request.setCreate_date(LocalDate.now());
             request.setTimeshare(timeshareService.getReferenceById(requestModel.getTimeshare_id()));
             request.setResponseby(request.getTimeshare().getPostBy());
@@ -64,6 +64,26 @@ public class RequestImpl implements IRequest {
             return result;
 
     }
+
+    @Override
+    public String reponseTimeshareExchange(int status, String request_code) {
+        Request request = requestRepository.findByRequestCode(request_code);
+
+        if (request != null) {
+            request.setStatus(status);
+            requestRepository.save(request);
+            if (request.getStatus() == 1) {
+                return "Exchange timeshare successfully";
+            } else if (request.getStatus() == 2){
+                return "You have rejected to exchange timeshare";
+            } else {
+                return "This exchange is waiting to response";
+            }
+        }
+
+        return "No request found";
+    }
+
     private String generateUniqueRequestCode() {
         // Get current date and time
         LocalDateTime now = LocalDateTime.now();

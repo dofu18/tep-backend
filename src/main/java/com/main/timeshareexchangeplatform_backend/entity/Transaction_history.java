@@ -32,4 +32,8 @@ public class Transaction_history {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "service")
+    private Service_pack servicePack;
+
 }

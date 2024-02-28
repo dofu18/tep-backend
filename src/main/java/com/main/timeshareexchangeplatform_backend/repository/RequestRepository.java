@@ -10,6 +10,6 @@ import java.util.UUID;
 
 @Repository
 public interface RequestRepository extends JpaRepository<Request, UUID> {
-    Request findByRequestCode(String request_id);
+    Request findByRequestCode(String request_code);
 }
 

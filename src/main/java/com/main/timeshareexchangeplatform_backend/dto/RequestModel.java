@@ -12,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class RequestModel {
     private LocalDate create_date;
-    private boolean status;
+    private int status;
     private UUID request_id;
     private UUID response_by;
     private UUID request_by;

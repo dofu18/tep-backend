@@ -8,4 +8,5 @@ public interface IRequest {
 
     RequestModel createRequest(RequestModel requestModel);
 
+    String reponseTimeshareExchange(int status, String request_code);
 }
