@@ -96,6 +96,14 @@ public class RequestImpl implements IRequest {
         return requestRespones;
     }
 
+    @Override
+    public List<RequestModelResponse> getAllRequestByRequestUser(UUID resquest_by) {
+        List<Request> requestEntity = requestRepository.getAllRequestByRequestUser(resquest_by);
+        List<RequestModelResponse> requestRespones = requestEntity.stream().map(requestConverter::toDTOResponse).collect(Collectors.toList());
+
+        return requestRespones;
+    }
+
     private String generateUniqueRequestCode() {
         // Get current date and time
         LocalDateTime now = LocalDateTime.now();

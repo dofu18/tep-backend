@@ -15,4 +15,6 @@ public interface IRequest {
     String reponseTimeshareExchange(int status, UUID request_id);
 
     List<RequestModelResponse> getAllRequestByResponseId(UUID response_by);
+
+    List<RequestModelResponse> getAllRequestByRequestUser(UUID resquest_by);
 }
