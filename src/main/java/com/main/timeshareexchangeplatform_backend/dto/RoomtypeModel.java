@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RoomtypeModel {
-    private int RoomtypeId;
+    private String RoomtypeId;
     private int bath;
     private int bed;
     private String entertaiment;

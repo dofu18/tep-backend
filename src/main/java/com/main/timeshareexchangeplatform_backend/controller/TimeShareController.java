@@ -29,7 +29,7 @@ public class TimeShareController {
     }
     @GetMapping("/details/{timeshareId}")
 
-    public ResponseEntity<?> getTimeshareDetails(@PathVariable int timeshareId) {
+    public ResponseEntity<?> getTimeshareDetails(@PathVariable UUID timeshareId) {
         TimeshareRespone timeshareRespone;
         timeshareRespone = timeShareService.getTimeshareDetails(timeshareId);
 
@@ -37,6 +37,19 @@ public class TimeShareController {
             return ResponseEntity.status(HttpStatus.OK).body(timeshareRespone);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No details found for timeshareId: " + timeshareId);
+        }
+    }
+
+    @GetMapping("/details/user/{userId}")
+
+    public ResponseEntity<?> getTimeshareByUserId(@PathVariable UUID userId) {
+        TimeshareRespone timeshareRespone;
+        timeshareRespone = timeShareService.getTimeshareByUserId(userId);
+
+        if (timeshareRespone != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(timeshareRespone);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No details found for timeshareId: " + userId);
         }
     }
 

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.UnsupportedEncodingException;
 
 @RestController
-@RequestMapping("booking")
+@RequestMapping("api/booking")
 public class BookingController {
     @Autowired
     private IBookingService bookingService;

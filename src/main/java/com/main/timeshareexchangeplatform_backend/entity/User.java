@@ -66,13 +66,13 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Collection<Booking> bookings;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "postBy")
     private Collection<Timeshare> timeshares;
 
     @OneToMany(mappedBy = "user")
     private Collection<Transaction_history> transactionHistories;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "resquestby")
     private Collection<Request> requests;
 
 //    @OneToMany(mappedBy = "user")

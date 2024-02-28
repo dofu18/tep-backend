@@ -11,7 +11,9 @@ import java.util.UUID;
 public interface ITimeshareService {
    public List<TimeshareDTO> showListTimeShare();
    TimeshareRespone getTimeshareDetails(UUID timeshareId);
+   TimeshareRespone getTimeshareByUserId(UUID userId);
 
+   TimeshareDTO addTimeshare(TimeshareDTO timeshareDTO);
    Timeshare getReferenceById(UUID id);
 
    List<ResponseTimeshare> findTimeshareByName(String name);

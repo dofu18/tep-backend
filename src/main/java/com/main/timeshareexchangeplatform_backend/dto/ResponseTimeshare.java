@@ -15,9 +15,9 @@ public class ResponseTimeshare {
     private String timeshareName;
     private String description;
     private boolean status;
-    private float price;
+    private long price;
     private int nights;
-    private UserModel postBy;
+    private UserDTO postBy;
     private DestinationModel destinationModel;
     private LocalDate dateStart;
     private LocalDate dateEnd;
