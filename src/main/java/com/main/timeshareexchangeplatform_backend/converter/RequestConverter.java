@@ -26,7 +26,7 @@ public class RequestConverter {
 
         entity. setRequest_id(model.getRequest_id());
         entity.setCreate_date(model.getCreate_date());
-        entity.setStatus(model.isStatus());
+        entity.setStatus(model.getStatus());
         entity.setResponseby(userConverter.toEntity(model.getResponse_by()));
         entity.setResquestby(userConverter.toEntity(model.getRequest_by()));
         entity.setTimeshare(timeshareConverter.toResEntity(model.getTimeshare_id()));
@@ -55,7 +55,7 @@ public class RequestConverter {
 
         entity. setRequest_id(model.getRequest_id());
         entity.setCreate_date(model.getCreate_date());
-        entity.setStatus(model.isStatus());
+        entity.setStatus(model.getStatus());
         entity.setResquestby(userRepository.getReferenceById(model.getRequest_by()));
         entity.setTimeshare(timeshareRepository.getReferenceById(model.getTimeshare_id()));
         entity.setResponseby(userRepository.getReferenceById(model.getResponse_by()));

@@ -8,10 +8,8 @@ import com.main.timeshareexchangeplatform_backend.service.IBookingService;
 import com.main.timeshareexchangeplatform_backend.service.IRequest;
 import com.main.timeshareexchangeplatform_backend.vnpay.PaymentResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
 
@@ -26,5 +24,20 @@ public class RequestController {
     @PostMapping("/create-request")
     public RequestModel createRequest(@RequestBody RequestModel requestModel) throws UnsupportedEncodingException {
         return requestService.createRequest(requestModel);
+    }
+
+    @PutMapping("/response/{status}/{request_code}")
+    public ResponseEntity<String> responseTimeshareExchange(@PathVariable int status,@PathVariable String request_code) {
+        String result = requestService.reponseTimeshareExchange(status,request_code);
+        if (result.equals("Exchange timeshare successfully")) {
+            return ResponseEntity.ok(result);
+        } else if (result.equals("You have rejected to exchange timeshare")) {
+            return ResponseEntity.ok(result);
+        } else if (result.equals("No course found")) {
+            return ResponseEntity.badRequest().body(result);
+        } else if (result.equals("This exchange is waiting to response")) {
+            return ResponseEntity.ok(result);
+        }
+        return null;
     }
 }
