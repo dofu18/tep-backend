@@ -5,7 +5,9 @@ import com.main.timeshareexchangeplatform_backend.converter.ServicePackConverter
 import com.main.timeshareexchangeplatform_backend.converter.TimeshareConverter;
 import com.main.timeshareexchangeplatform_backend.converter.TransactionConverter;
 import com.main.timeshareexchangeplatform_backend.dto.BookingModel;
+import com.main.timeshareexchangeplatform_backend.dto.BookingResponse;
 import com.main.timeshareexchangeplatform_backend.dto.TransactionDTO;
+import com.main.timeshareexchangeplatform_backend.dto.TransactionResponse;
 import com.main.timeshareexchangeplatform_backend.entity.Booking;
 import com.main.timeshareexchangeplatform_backend.entity.Service_pack;
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
@@ -25,7 +27,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class TransactionIml implements ITransactionSevice {
@@ -71,6 +75,14 @@ public class TransactionIml implements ITransactionSevice {
         }
 
         return null;
+    }
+
+    @Override
+    public List<TransactionResponse> getAllTransactionByUserId(UUID userid) {
+        List<Transaction_history> transactionsEntity = transactionRepository.findAllTransactionByUserId(userid);
+        List<TransactionResponse> bookingRespones = transactionsEntity.stream().map(transactionConverter::toRespone).collect(Collectors.toList());
+
+        return bookingRespones;
     }
 
     private String generateUniqueTransactionCode() {
