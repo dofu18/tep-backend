@@ -52,6 +52,16 @@ public class TimeShareController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No details found for timeshareId: " + userId);
         }
     }
+    @GetMapping({"/details/user/showall/{userId}"})
+    public ResponseEntity<?> showAllTimeShareUser(@PathVariable UUID userId) {
+        List<TimeshareDTO> t = timeShareService.getAllTimeshareUser(userId);
+        if (t != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(t);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No timeshares found.");
+        }
+
+    }
 
     @GetMapping(value = "/find-by-title")
     public List<ResponseTimeshare> findTimeshareByName(@RequestParam("name") String name) {

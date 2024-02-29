@@ -11,5 +11,5 @@ public interface TimeShareService {
    TimeshareRespone getTimeshareByUserId(UUID userId);
    TimeshareRespone getTimeshareDetails(UUID timeshareId);
 
-
+   public List<TimeshareDTO> getAllTimeshareUser(UUID userID);
 }

@@ -1,8 +1,7 @@
 package com.main.timeshareexchangeplatform_backend.service.impl;
 
 import com.main.timeshareexchangeplatform_backend.converter.UserConverter;
-import com.main.timeshareexchangeplatform_backend.dto.LoginDTO;
-import com.main.timeshareexchangeplatform_backend.dto.UserDTO;
+import com.main.timeshareexchangeplatform_backend.dto.*;
 import com.main.timeshareexchangeplatform_backend.entity.User;
 import com.main.timeshareexchangeplatform_backend.exception.ResourceNotFoundException;
 import com.main.timeshareexchangeplatform_backend.repository.UserRepository;
@@ -12,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -51,6 +52,49 @@ public class UserServiceImp implements UserService {
         List<UserDTO> userDTO = userRepository.findAll().stream().map(userConverter::toDTO)
                 .collect(Collectors.toList());
 
+        return userDTO;
+    }
+    @Override
+    public UserDTO getById(UUID userId){
+        Object result = userRepository.getUserById(userId);
+
+        // Chuyển đổi Object thành TimeshareRespone, bạn có thể thực hiện phần này theo cách bạn muốn
+        UserDTO userDTO = convertToObject(result);
+
+        return userDTO;
+    }
+    private UserDTO convertToObject(Object result) {
+        if (result == null) {
+            return null;
+        }
+
+        Object[] row = (Object[]) result;
+
+        // Extract các giá trị từ mảng row
+        String user_id = (String) row[0];
+        String user_name = (String) row[1];
+        String password= (String) row[2];
+        String fullname=(String) row[3];
+        String email=(String) row[4];
+        String phone=(String) row[5];
+        String dob=(String) row[6];
+        boolean gender = (boolean) row[7];
+        boolean status = (boolean) row[8];
+        String role=(String) row[9];
+
+
+        // Tạo đối tượng TimeshareRespone và set giá trị
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUser_id(UUID.fromString(user_id));
+        userDTO.setUser_name(user_name);
+        userDTO.setFullname(fullname);
+        userDTO.setPassword(password);
+        userDTO.setEmail(email);
+        userDTO.setPhone(phone);
+        userDTO.setDob(dob);
+        userDTO.setRole(role);
+        userDTO.setGender(gender);
+        userDTO.setStatus(status);
         return userDTO;
     }
 }

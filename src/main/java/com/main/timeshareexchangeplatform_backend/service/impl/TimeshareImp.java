@@ -4,7 +4,6 @@ package com.main.timeshareexchangeplatform_backend.service.impl;
 import com.main.timeshareexchangeplatform_backend.dto.*;
 
 import com.main.timeshareexchangeplatform_backend.converter.TimeshareConverter;
-import com.main.timeshareexchangeplatform_backend.entity.Request;
 import com.main.timeshareexchangeplatform_backend.repository.MyTimeShareRepository;
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
 import com.main.timeshareexchangeplatform_backend.repository.TimeshareRepository;
@@ -12,10 +11,8 @@ import com.main.timeshareexchangeplatform_backend.service.ITimeshareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -55,6 +52,13 @@ import java.util.stream.Collectors;
 
         return timeshareRespone;
     }
+    @Override
+    public List<TimeshareDTO> getAllTimeshareUser(UUID userId) {
+        List<Timeshare> timeshares = myTimeShareRepository.showAllTimeshareUser(userId);
+        return timeshareConverter.convertToAccountPlaylistDTOList(timeshares);
+
+    }
+
 
     @Override
     public Timeshare getReferenceById(UUID id) {

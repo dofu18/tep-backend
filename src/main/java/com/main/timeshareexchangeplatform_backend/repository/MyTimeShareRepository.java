@@ -14,7 +14,9 @@ public interface MyTimeShareRepository extends JpaRepository<Timeshare, UUID> {
     @Query(value = " select * from timeshare", nativeQuery = true )
     List<Timeshare> showListTimeShare();
 
-
+    @Query(value = " select * from timeshare \n"+
+            "where post_by = :userId ", nativeQuery = true)
+     List<Timeshare> showAllTimeshareUser(@Param("userId") UUID userId);
     @Query(value = "SELECT \n" +
             "    t.*,\n" +
             "    d.address,\n" +
@@ -71,4 +73,5 @@ public interface MyTimeShareRepository extends JpaRepository<Timeshare, UUID> {
 
             "where t.post_by = :userId ", nativeQuery = true)
     Object findTimeshareDetailbyUserId(@Param("userId") UUID userId);
+
 }

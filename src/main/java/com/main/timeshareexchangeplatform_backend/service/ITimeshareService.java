@@ -14,7 +14,10 @@ public interface ITimeshareService {
    TimeshareRespone getTimeshareByUserId(UUID userId);
 
    TimeshareDTO addTimeshare(TimeshareDTO timeshareDTO);
-   Timeshare getReferenceById(UUID id);
+
+    List<TimeshareDTO> getAllTimeshareUser(UUID userId);
+
+    Timeshare getReferenceById(UUID id);
 
    List<ResponseTimeshare> findTimeshareByName(String name);
 
