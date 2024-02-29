@@ -28,7 +28,7 @@ public class Request {
     private String message;
 
     @Column
-    private Boolean status;
+    private int status;
 
 //    @Column(columnDefinition = "nvarchar(max) not null")
 //    private String request_to;
@@ -36,17 +36,17 @@ public class Request {
 
 
     @ManyToOne
-    @JoinColumn(name = "resquest_by")
+    @JoinColumn(name = "resquest_by", unique = false)
     private User resquestby;
 
     @ManyToOne
     @JoinColumn(name = "timeshare_id", nullable = true)
     private Timeshare timeshare;
 
-    @OneToOne(mappedBy = "request")
-    private Request_history requestHistory;
+//    @OneToOne(mappedBy = "request")
+//    private Request_history requestHistory;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "response_by", nullable = true)
     private User responseby;
 }

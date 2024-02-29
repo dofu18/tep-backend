@@ -2,11 +2,12 @@ package com.main.timeshareexchangeplatform_backend.converter;
 
 import com.main.timeshareexchangeplatform_backend.dto.RoomtypeDTO;
 import com.main.timeshareexchangeplatform_backend.entity.Roomtype;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
+@Component
 public class RoomtypeConverter {
     public static RoomtypeDTO toDTO(Roomtype roomType) {
         if (roomType == null) {

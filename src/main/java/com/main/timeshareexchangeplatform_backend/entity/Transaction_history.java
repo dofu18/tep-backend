@@ -19,17 +19,21 @@ public class Transaction_history {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID transaction_id;
 
-    @Column(unique = true, columnDefinition = "varchar(50)")
-    private String transaction_type;
+    @Column(columnDefinition = "varchar(50)", name = "transaction_code")
+    private String transactionCode;
 
     @Column(columnDefinition = "DATETIME", nullable = false)
     private LocalDateTime transaction_time;
 
     @Column(nullable = false)
-    private float transaction_fee;
+    private long transaction_fee;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "service")
+    private Service_pack servicePack;
 
 }

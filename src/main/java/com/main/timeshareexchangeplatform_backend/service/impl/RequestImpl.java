@@ -4,6 +4,8 @@ import com.main.timeshareexchangeplatform_backend.converter.RequestConverter;
 import com.main.timeshareexchangeplatform_backend.converter.TimeshareConverter;
 import com.main.timeshareexchangeplatform_backend.converter.UserConverter;
 import com.main.timeshareexchangeplatform_backend.dto.RequestModel;
+import com.main.timeshareexchangeplatform_backend.dto.RequestModelResponse;
+import com.main.timeshareexchangeplatform_backend.dto.ResponseTimeshare;
 import com.main.timeshareexchangeplatform_backend.entity.Booking;
 import com.main.timeshareexchangeplatform_backend.entity.Request;
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
@@ -20,7 +22,9 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class RequestImpl implements IRequest {
@@ -48,7 +52,7 @@ public class RequestImpl implements IRequest {
 //        Request existingRequest = requestRepository.findByRequestCode(requestModel.getRequestCode());
             request.setRequestCode(generateUniqueRequestCode());
             request.setMessage(request.getMessage());
-            request.setStatus(false);
+            request.setStatus(0);
             request.setCreate_date(LocalDate.now());
             request.setTimeshare(timeshareService.getReferenceById(requestModel.getTimeshare_id()));
             request.setResponseby(request.getTimeshare().getPostBy());
@@ -64,6 +68,42 @@ public class RequestImpl implements IRequest {
             return result;
 
     }
+
+    @Override
+    public String reponseTimeshareExchange(int status, UUID request_id) {
+        Request request = requestRepository.getReferenceById(request_id);
+
+        if (request != null) {
+            request.setStatus(status);
+            requestRepository.save(request);
+            if (request.getStatus() == 1) {
+                return "Exchange timeshare successfully";
+            } else if (request.getStatus() == 2){
+                return "You have rejected to exchange timeshare";
+            } else {
+                return "This exchange is waiting to response";
+            }
+        }
+
+        return "No request found";
+    }
+
+    @Override
+    public List<RequestModelResponse> getAllRequestByResponseId(UUID response_by) {
+        List<Request> requestEntity = requestRepository.getAllRequestByResponseId(response_by);
+        List<RequestModelResponse> requestRespones = requestEntity.stream().map(requestConverter::toDTOResponse).collect(Collectors.toList());
+
+        return requestRespones;
+    }
+
+    @Override
+    public List<RequestModelResponse> getAllRequestByRequestUser(UUID resquest_by) {
+        List<Request> requestEntity = requestRepository.getAllRequestByRequestUser(resquest_by);
+        List<RequestModelResponse> requestRespones = requestEntity.stream().map(requestConverter::toDTOResponse).collect(Collectors.toList());
+
+        return requestRespones;
+    }
+
     private String generateUniqueRequestCode() {
         // Get current date and time
         LocalDateTime now = LocalDateTime.now();

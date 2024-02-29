@@ -11,6 +11,10 @@ import com.main.timeshareexchangeplatform_backend.service.ITimeshareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import java.sql.Time;
+import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -71,6 +75,14 @@ import java.util.stream.Collectors;
                 .map(timeshareConverter::toRespone).collect(Collectors.toList());
 
         return timeshares;
+    }
+
+    @Override
+    public List<ResponseTimeshare> getAllTimeshareByUserId(UUID userid) {
+        List<Timeshare> timeshareEntity = timeshareRepository.findAllTimshareByUserId(userid);
+        List<ResponseTimeshare> timeshareRespones = timeshareEntity.stream().map(timeshareConverter::toRespone).collect(Collectors.toList());
+
+        return timeshareRespones;
     }
 
     @Override
@@ -155,7 +167,7 @@ import java.util.stream.Collectors;
         timeshareRespone.setNights(nights);
         timeshareRespone.setPrice(price);
         timeshareRespone.setStatus(status);
-        timeshareRespone.setPost_by(post_by);
+        timeshareRespone.setOwner(post_by);
         timeshareRespone.setCity(city);
         timeshareRespone.setDes(destinationDTO);
         timeshareRespone.setRoom(roomtypeDTO);
