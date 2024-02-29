@@ -34,8 +34,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID user_id;
 
-    @Column(unique = true, columnDefinition = "varchar(50) not null")
-    private String user_name;
+    @Column(unique = true, columnDefinition = "varchar(50) not null",name = "user_name")
+    private String username;
 
 
     @Column(unique = true, columnDefinition = "varchar(50)", nullable = false)
@@ -60,7 +60,7 @@ public class User {
     @Column
     private boolean status;
 
-    @Column (columnDefinition = "varchar(10)", nullable = false)
+    @Column (columnDefinition = "nvarchar(10)", nullable = false)
     private String role;
 
     @OneToMany(mappedBy = "user")
@@ -74,6 +74,9 @@ public class User {
 
     @OneToMany(mappedBy = "resquestby")
     private Collection<Request> requests;
+
+    @OneToMany(mappedBy = "responseby")
+    private Collection<Request> response;
 
 //    @OneToMany(mappedBy = "user")
 //    private Collection<Exchange_information> exchangeInformations;

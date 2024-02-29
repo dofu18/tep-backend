@@ -17,7 +17,7 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID image_id;
 
-    @Column(columnDefinition = "varchar(max) not null")
+    @Column(columnDefinition = "nvarchar(max) not null")
     private String image_url;
 
     @ManyToOne

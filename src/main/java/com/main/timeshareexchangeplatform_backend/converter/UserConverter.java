@@ -12,7 +12,7 @@ public class UserConverter {
     public UserModel toResponse(User entity) {
         UserModel dto = new UserModel();
         dto.setUser_id(entity.getUser_id());
-        dto.setUser_name(entity.getUser_name());
+        dto.setUser_name(entity.getUsername());
 
         return dto;
     }
@@ -29,7 +29,7 @@ public class UserConverter {
         dto.setPassword(user.getPassword());
         dto.setPhone(user.getPhone());
         dto.setRole(user.getRole());
-        dto.setUser_name(user.getUser_name());
+        dto.setUser_name(user.getUsername());
 
         return dto;
     }
@@ -46,7 +46,7 @@ public class UserConverter {
         entity.setPassword(userDTO.getPassword());
         entity.setPhone(userDTO.getPhone());
         entity.setRole(userDTO.getRole());
-        entity.setUser_name(userDTO.getUser_name());
+        entity.setUsername(userDTO.getUser_name());
 
         return entity;
     }

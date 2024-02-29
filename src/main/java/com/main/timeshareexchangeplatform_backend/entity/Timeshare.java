@@ -19,7 +19,7 @@ public class Timeshare {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID timeshare_id;
 
-    @Column(columnDefinition = "varchar(50)")
+    @Column(columnDefinition = "nvarchar(50)")
     private String name;
 
     @Column(columnDefinition = "DATE")
@@ -40,13 +40,13 @@ public class Timeshare {
     @Column
     private Boolean exchange;
 
-    @Column (columnDefinition = "varchar(max)")
+    @Column (columnDefinition = "nvarchar(max)")
     private String description;
 
-    @Column (columnDefinition = "varchar(max)")
+    @Column (columnDefinition = "nvarchar(max)")
     private String city;
 
-    @Column(columnDefinition = "varchar(max) not null")
+    @Column(columnDefinition = "nvarchar(max) not null")
     private String image_url;
 
     @OneToOne(mappedBy = "timeshare")
