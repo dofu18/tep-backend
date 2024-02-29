@@ -11,4 +11,7 @@ public interface UserService {
     User login(LoginDTO userDTO);
 
     List<UserDTO> findAll();
+
+//    UserDTO addUser(UserDTO userInfo);
+
 }
