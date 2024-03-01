@@ -1,6 +1,5 @@
 package com.main.timeshareexchangeplatform_backend.repository;
 
-import com.main.timeshareexchangeplatform_backend.dto.UserDTO;
 import com.main.timeshareexchangeplatform_backend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -8,23 +7,21 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 @Transactional
 public interface UserRepository extends JpaRepository<User, UUID> {
-<<<<<<< HEAD
-    Optional<User> findUserByEmailAndPassword(String email, String password);
+
+    User findUserByEmailAndPassword(String email, String password);
 
     @Query(value = "select * from users\n"+
                     "where User_id= :userid ", nativeQuery = true)
     Object getUserById(@Param("UserId")UUID userid) ;
 
-=======
-    User findUserByEmailAndPassword(String email, String password);
+
+
+
 
     User findAllByUsernameAndPassword(String username, String password);
->>>>>>> f5d36451659e28c500079a8dbeb2e9354f285ac9
 }

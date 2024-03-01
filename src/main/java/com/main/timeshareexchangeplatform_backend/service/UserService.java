@@ -13,10 +13,7 @@ public interface UserService {
 
     List<UserDTO> findAll();
 
-<<<<<<< HEAD
-    UserDTO getById(UUID userId);
-=======
-//    UserDTO addUser(UserDTO userInfo);
 
->>>>>>> f5d36451659e28c500079a8dbeb2e9354f285ac9
+    UserDTO getById(UUID userId);
+
 }

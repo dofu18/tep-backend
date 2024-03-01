@@ -54,7 +54,7 @@ public class UserServiceImp implements UserService {
 
         return userDTO;
     }
-<<<<<<< HEAD
+
     @Override
     public UserDTO getById(UUID userId){
         Object result = userRepository.getUserById(userId);
@@ -98,14 +98,5 @@ public class UserServiceImp implements UserService {
         userDTO.setStatus(status);
         return userDTO;
     }
-=======
 
-//    @Override
-//    public UserDTO addUser(UserDTO userInfo) {
-//        User user = userConverter.toEntity(userInfo);
-//        userInfo.setPassword(userInfo.getPassword());
-//        userRepository.save(user);
-//        return userInfo;
-//    }
->>>>>>> f5d36451659e28c500079a8dbeb2e9354f285ac9
 }
