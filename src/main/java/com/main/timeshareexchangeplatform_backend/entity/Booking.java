@@ -18,7 +18,7 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID booking_id;
 
-    @Column(unique = true, columnDefinition = "varchar(50)", name = "booking_code", nullable = false)
+    @Column(unique = true, columnDefinition = "nvarchar(50)", name = "booking_code", nullable = false)
     private String bookingCode;
 
     @Column (nullable = false)
@@ -39,28 +39,28 @@ public class Booking {
     @Column
     private int children;
 
-    @Column (columnDefinition = "varchar(15) not null")
+    @Column (columnDefinition = "nvarchar(15) not null")
     private String telephone;
 
-    @Column (columnDefinition = "varchar(50)")
+    @Column (columnDefinition = "nvarchar(50)")
     private String fullname;
 
-    @Column (columnDefinition = "varchar(50) not null")
+    @Column (columnDefinition = "nvarchar(50) not null")
     private String country;
 
-    @Column (columnDefinition = "varchar(50) not null")
+    @Column (columnDefinition = "nvarchar(50) not null")
     private String street;
 
-    @Column (columnDefinition = "varchar(50) not null")
+    @Column (columnDefinition = "nvarchar(50) not null")
     private String city;
 
-    @Column (columnDefinition = "varchar(50) not null")
+    @Column (columnDefinition = "nvarchar(50) not null")
     private String state;
 
-    @Column (columnDefinition = "varchar(20) not null")
+    @Column (columnDefinition = "nvarchar(20) not null")
     private String postal_code;
 
-    @Column (columnDefinition = "varchar(20) not null")
+    @Column (columnDefinition = "nvarchar(20) not null")
     private String payment_method;
 
     @ManyToOne

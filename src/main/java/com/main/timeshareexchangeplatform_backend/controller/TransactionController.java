@@ -1,7 +1,9 @@
 package com.main.timeshareexchangeplatform_backend.controller;
 
 import com.main.timeshareexchangeplatform_backend.dto.BookingModel;
+import com.main.timeshareexchangeplatform_backend.dto.BookingResponse;
 import com.main.timeshareexchangeplatform_backend.dto.TransactionDTO;
+import com.main.timeshareexchangeplatform_backend.dto.TransactionResponse;
 import com.main.timeshareexchangeplatform_backend.repository.BookingRepository;
 import com.main.timeshareexchangeplatform_backend.repository.TransactionRepository;
 import com.main.timeshareexchangeplatform_backend.service.IBookingService;
@@ -9,12 +11,11 @@ import com.main.timeshareexchangeplatform_backend.service.ITransactionSevice;
 import com.main.timeshareexchangeplatform_backend.vnpay.PaymentResponse;
 import com.main.timeshareexchangeplatform_backend.vnpay.VNPayService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api/service-payment")
@@ -41,5 +42,12 @@ public class TransactionController {
             return new PaymentResponse("01", "Fail", null);
         }
     }
+
+    @GetMapping(value = "/getTransactionByUserId/{id}")
+    public List<TransactionResponse> getAllTransactionByUserId(@PathVariable UUID id) {
+        return TransactionSevice.getAllTransactionByUserId(id);
+
+    }
+
 
 }

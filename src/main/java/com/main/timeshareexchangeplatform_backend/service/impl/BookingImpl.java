@@ -3,6 +3,8 @@ package com.main.timeshareexchangeplatform_backend.service.impl;
 import com.main.timeshareexchangeplatform_backend.converter.BookingConverter;
 import com.main.timeshareexchangeplatform_backend.converter.TimeshareConverter;
 import com.main.timeshareexchangeplatform_backend.dto.BookingModel;
+import com.main.timeshareexchangeplatform_backend.dto.BookingResponse;
+import com.main.timeshareexchangeplatform_backend.dto.ResponseTimeshare;
 import com.main.timeshareexchangeplatform_backend.entity.Booking;
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
 import com.main.timeshareexchangeplatform_backend.repository.BookingRepository;
@@ -16,7 +18,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class BookingImpl implements IBookingService {
@@ -78,6 +82,14 @@ public class BookingImpl implements IBookingService {
         }
 
         return null;
+    }
+
+    @Override
+    public List<BookingResponse> getAllBookingByUserId(UUID userid) {
+        List<Booking> bookingsEntity = bookingRepository.findAllBookingByUserId(userid);
+        List<BookingResponse> bookingRespones = bookingsEntity.stream().map(bookingConverter::toRespone).collect(Collectors.toList());
+
+        return bookingRespones;
     }
 
     private String generateUniqueBookingCode() {
