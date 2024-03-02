@@ -12,8 +12,5 @@ public interface UserService {
     User login(LoginDTO userDTO);
 
     List<UserDTO> findAll();
-
-
-    UserDTO getById(UUID userId);
-
+    UserDTO getUserById(UUID userId);
 }
