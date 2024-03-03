@@ -88,6 +88,7 @@ public class TimeshareConverter {
         dto.setImage_url(timeshareEntity.getImage_url());
         dto.setPostBy(userConverter.toDTO(timeshareEntity.getPostBy()));
         dto.setDestinationModel(destinationConverter.toDTO(timeshareEntity.getDestination()));
+        dto.setImage_url(timeshareEntity.getImage_url());
 
         return dto;
     }
@@ -108,7 +109,7 @@ public class TimeshareConverter {
         entity.setImage_url(model.getImage_url());
         entity.setPostBy(userConverter.toEntity(model.getPostBy()));
         entity.setDestination(destinationConverter.toEntity(model.getDestinationModel()));
-
+        entity.setImage_url((model.getImage_url()));
         return entity;
     }
 

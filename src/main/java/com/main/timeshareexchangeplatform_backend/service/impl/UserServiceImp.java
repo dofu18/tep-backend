@@ -33,10 +33,11 @@ public class UserServiceImp implements UserService {
         return "user added to system ";
     }
 
-    @Override
-    public User login(LoginDTO userDTO) {
-        return userRepository.findUserByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword());
-    }
+//    @Override
+//    public User login(LoginDTO userDTO) {
+//        return userRepository.findUserByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword())
+//                .orElseThrow(()-> new ResourceNotFoundException("User not found"));
+//    }
 
     @Override
     public List<UserDTO> findAll() {
@@ -74,6 +75,7 @@ public class UserServiceImp implements UserService {
 //
 //        return userDTO;
 //    }
+
     private UserDTO convertToObject(Object result) {
         if (result == null) {
             return null;
@@ -82,31 +84,35 @@ public class UserServiceImp implements UserService {
         Object[] row = (Object[]) result;
 
         // Extract các giá trị từ mảng row
-        String user_id = (String) row[0];
-        String user_name = (String) row[1];
-        String password= (String) row[2];
-        String fullname=(String) row[3];
-        String email=(String) row[4];
-        String phone=(String) row[5];
-        String dob=(String) row[6];
-        boolean gender = (boolean) row[7];
-        boolean status = (boolean) row[8];
-        String role=(String) row[9];
+        String userId = (String) row[0];
+        Date dob=(Date) row[1];
+        String email = (String) row[2];
+        String fullName = (String) row[3];
+        Boolean gender=(Boolean) row[4];
+        String password = (String) row[5];
+
+        String phone= (String) row[6] ;
+        String role=(String) row[7];
+        String userName=(String) row[9];
+        Boolean status= (Boolean) row[8];
+
+
 
 
         // Tạo đối tượng TimeshareRespone và set giá trị
-        UserDTO userDTO = new UserDTO();
-        userDTO.setUser_id(UUID.fromString(user_id));
-        userDTO.setUser_name(user_name);
-        userDTO.setFullname(fullname);
+        UserDTO userDTO=new UserDTO();
+        userDTO.setUser_id(UUID.fromString(userId));
+        userDTO.setUser_name(userName);
         userDTO.setPassword(password);
+        userDTO.setFullname(fullName);
         userDTO.setEmail(email);
+        userDTO.setDob(String.valueOf(dob));
         userDTO.setPhone(phone);
-        userDTO.setDob(dob);
         userDTO.setRole(role);
-        userDTO.setGender(gender);
         userDTO.setStatus(status);
+        userDTO.setGender(gender);
         return userDTO;
     }
+
 
 }

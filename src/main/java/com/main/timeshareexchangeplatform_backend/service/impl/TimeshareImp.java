@@ -131,20 +131,21 @@ import java.util.stream.Collectors;
 
         // Extract các giá trị từ mảng row
         String timeshare_id = (String) row[0];
-        Date date_end = (Date) row[1];
-        Date date_start = (Date) row[2];
-        String description = (String) row[3];
-        boolean exchance = (boolean) row[4];
-        String image_url= (String) row[5];
-        String name=(String) row[6];
-        int nights = (int) row[7];
-        long price = (long) row[8];
-        boolean status = (boolean) row[9];
-        String city=(String) row[12];
-        String post_by = (String) row[11];
+        String city=(String) row[1];
+        Date date_end = (Date) row[2];
+        Date date_start = (Date) row[3];
+        String description = (String) row[4];
+        boolean exchance = (boolean) row[5];
+        String image_url= (String) row[6];
+        String name=(String) row[7];
+        int nights = (int) row[8];
+        long price = (long) row[9];
+        boolean status = (boolean) row[10];
+
+        String post_by = (String) row[12];
 
         DestinationDTO destinationDTO= new DestinationDTO();
-        destinationDTO.setDestinationId((String) row[10]);
+        destinationDTO.setDestinationId((String) row[11]);
         destinationDTO.setAddress((String) row[13]);
         destinationDTO.setBranch((String) row[14]);
         destinationDTO.setCity((String) row[15]);

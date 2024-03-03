@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public interface UserService {
     String addUser(User userInfo);
-    User login(LoginDTO userDTO);
+//    User login(LoginDTO userDTO);
 
     List<UserDTO> findAll();
 
@@ -18,5 +18,6 @@ public interface UserService {
     String changePassword(User user, String passwordEnter, String newPassword);
     User getReferenceById(UUID id);
 //    UserDTO getById(UUID userId);
+
 
 }
