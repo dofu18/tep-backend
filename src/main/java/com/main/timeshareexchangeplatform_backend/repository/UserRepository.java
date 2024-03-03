@@ -1,5 +1,6 @@
 package com.main.timeshareexchangeplatform_backend.repository;
 
+import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
 import com.main.timeshareexchangeplatform_backend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -31,4 +32,7 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 
 
     User findAllByUsernameAndPassword(String username, String password);
+
+    @Query(value = "SELECT * FROM users u WHERE u.user_id = :user_id", nativeQuery = true)
+    User userDetail(@Param("user_id") UUID user_id);
 }

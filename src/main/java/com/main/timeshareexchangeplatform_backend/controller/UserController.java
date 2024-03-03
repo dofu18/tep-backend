@@ -2,6 +2,7 @@ package com.main.timeshareexchangeplatform_backend.controller;
 
 import com.main.timeshareexchangeplatform_backend.converter.UserConverter;
 import com.main.timeshareexchangeplatform_backend.dto.LoginDTO;
+import com.main.timeshareexchangeplatform_backend.dto.ResponseTimeshare;
 import com.main.timeshareexchangeplatform_backend.dto.UserDTO;
 import com.main.timeshareexchangeplatform_backend.entity.User;
 import com.main.timeshareexchangeplatform_backend.reponse.ReponseObject;
@@ -14,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/user")
@@ -47,5 +49,14 @@ public class UserController {
     public List<UserDTO> findAll() {
 
         return userService.findAll();
+    }
+
+    @GetMapping("/details/{userid}")
+
+    public UserDTO userDetails(@PathVariable UUID userid) {
+        UserDTO userDTO;
+        userDTO = userConverter.toDTO(userService.getReferenceById(userid));
+
+            return userDTO;
     }
 }

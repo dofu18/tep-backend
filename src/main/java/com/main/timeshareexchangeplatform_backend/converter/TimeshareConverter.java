@@ -84,6 +84,8 @@ public class TimeshareConverter {
         dto.setPrice(timeshareEntity.getPrice());
         dto.setStatus(timeshareEntity.isStatus());
         dto.setNights(timeshareEntity.getNights());
+        dto.setCity(timeshareEntity.getCity());
+        dto.setImage_url(timeshareEntity.getImage_url());
         dto.setPostBy(userConverter.toDTO(timeshareEntity.getPostBy()));
         dto.setDestinationModel(destinationConverter.toDTO(timeshareEntity.getDestination()));
 
@@ -102,6 +104,8 @@ public class TimeshareConverter {
         entity.setPrice(model.getPrice());
         entity.setStatus(model.isStatus());
         entity.setNights(model.getNights());
+        entity.setCity(model.getCity());
+        entity.setImage_url(model.getImage_url());
         entity.setPostBy(userConverter.toEntity(model.getPostBy()));
         entity.setDestination(destinationConverter.toEntity(model.getDestinationModel()));
 

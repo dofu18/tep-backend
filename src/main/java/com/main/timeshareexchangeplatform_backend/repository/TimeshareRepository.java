@@ -16,4 +16,7 @@ public interface TimeshareRepository extends JpaRepository<Timeshare, UUID> {
 
     @Query(value = "SELECT * FROM TIMESHARE t WHERE t.owner = :owner", nativeQuery = true)
     List<Timeshare> findAllTimshareByUserId(@Param("owner") UUID owner);
+
+    @Query(value = "SELECT * FROM TIMESHARE t WHERE t.timeshare_id = :timeshare_id", nativeQuery = true)
+    Timeshare findTimshareByTimeshareId(@Param("timeshare_id") UUID timeshare_id);
 }

@@ -22,4 +22,6 @@ public class ResponseTimeshare {
     private LocalDate dateStart;
     private LocalDate dateEnd;
     private boolean exchange;
+    private String city;
+    private String image_url;
 }

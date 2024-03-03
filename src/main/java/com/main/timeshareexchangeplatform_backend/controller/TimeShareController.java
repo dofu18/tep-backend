@@ -3,6 +3,7 @@ package com.main.timeshareexchangeplatform_backend.controller;
 import com.main.timeshareexchangeplatform_backend.dto.ResponseTimeshare;
 import com.main.timeshareexchangeplatform_backend.dto.TimeshareDTO;
 import com.main.timeshareexchangeplatform_backend.dto.TimeshareRespone;
+import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
 import com.main.timeshareexchangeplatform_backend.service.ITimeshareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,8 +31,8 @@ public class TimeShareController {
     @GetMapping("/details/{timeshareId}")
 
     public ResponseEntity<?> getTimeshareDetails(@PathVariable UUID timeshareId) {
-        TimeshareRespone timeshareRespone;
-        timeshareRespone = timeShareService.getTimeshareDetails(timeshareId);
+        ResponseTimeshare timeshareRespone;
+        timeshareRespone = timeShareService.findTimeshareByTimeshareId(timeshareId);
 
         if (timeshareRespone != null) {
             return ResponseEntity.status(HttpStatus.OK).body(timeshareRespone);
