@@ -16,6 +16,7 @@ public class RequestModelResponse {
     private UUID request_id;
     private UserDTO response_by;
     private UserDTO request_by;
-    private ResponseTimeshare timeshare_id;
+    private ResponseTimeshare timeshare_request_id;
+    private ResponseTimeshare timeshare_response_id;
     private String message;
 }

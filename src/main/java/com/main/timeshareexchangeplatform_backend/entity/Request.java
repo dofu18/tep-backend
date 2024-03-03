@@ -40,8 +40,13 @@ public class Request {
     private User resquestby;
 
     @ManyToOne
-    @JoinColumn(name = "timeshare_id", nullable = true)
-    private Timeshare timeshare;
+    @JoinColumn(name = "timeshare_request_id", nullable = true)
+    private Timeshare timeshare_request;
+
+    @ManyToOne
+    @JoinColumn(name = "timeshare_response_id", nullable = true)
+    private Timeshare timeshare_response;
+
 
 //    @OneToOne(mappedBy = "request")
 //    private Request_history requestHistory;

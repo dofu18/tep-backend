@@ -52,8 +52,11 @@ public class Timeshare {
     @OneToOne(mappedBy = "timeshare")
     private Booking booking;
 
-    @OneToMany(mappedBy = "timeshare")
+    @OneToMany(mappedBy = "timeshare_request")
     private Collection<Request> requests;
+
+    @OneToMany(mappedBy = "timeshare_response")
+    private Collection<Request> response;
 
     @OneToOne(mappedBy = "timeshare")
 //    @JoinColumn(name = "")

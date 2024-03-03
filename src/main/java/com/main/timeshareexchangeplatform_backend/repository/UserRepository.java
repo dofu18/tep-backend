@@ -2,6 +2,7 @@ package com.main.timeshareexchangeplatform_backend.repository;
 
 import com.main.timeshareexchangeplatform_backend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -15,6 +16,22 @@ import java.util.UUID;
 public interface UserRepository extends JpaRepository<User, UUID> {
     Optional<User> findUserByEmailAndPassword(String email, String password);
 
-    @Query(value = "select * from users where user_id = :userId", nativeQuery = true)
-    Object getUserById(@Param("userId") UUID userId);
+
+    User findUserByEmailAndPassword(String email, String password);
+
+//    @Query(value = "select * from users\n"+
+//                    "where User_id= :userid ", nativeQuery = true)
+//    Optional<User> getUserById(@Param("UserId")UUID userid) ;
+
+
+
+    User findUserByUsername(String username);
+
+    @Modifying
+    @Query(value = "update users set password =?1 where username=?2 ", nativeQuery = true)
+    void saveNewPassword(String newpassword, String email);
+
+
+    User findAllByUsernameAndPassword(String username, String password);
+
 }

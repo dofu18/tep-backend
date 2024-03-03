@@ -54,8 +54,10 @@ public class RequestImpl implements IRequest {
             request.setMessage(request.getMessage());
             request.setStatus(0);
             request.setCreate_date(LocalDate.now());
-            request.setTimeshare(timeshareService.getReferenceById(requestModel.getTimeshare_id()));
-            request.setResponseby(request.getTimeshare().getPostBy());
+            request.setTimeshare_response(timeshareService.getReferenceById(requestModel.getTimeshare_response_id()));
+            request.setResponseby(request.getTimeshare_response().getPostBy());
+            request.setTimeshare_request(timeshareService.getReferenceById(requestModel.getTimeshare_request_id()));
+            request.setResquestby(request.getTimeshare_request().getPostBy());
             request = requestRepository.save(request);
 //            Request timeshareRequest = new Request();
 //            Timeshare t = timeshareRepository.findById(timeshareId).orElse(null);

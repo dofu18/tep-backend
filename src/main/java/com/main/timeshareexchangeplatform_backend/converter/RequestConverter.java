@@ -29,7 +29,8 @@ public class RequestConverter {
         entity.setStatus(model.getStatus());
         entity.setResponseby(userConverter.toEntity(model.getResponse_by()));
         entity.setResquestby(userConverter.toEntity(model.getRequest_by()));
-        entity.setTimeshare(timeshareConverter.toResEntity(model.getTimeshare_id()));
+        entity.setTimeshare_request(timeshareConverter.toResEntity(model.getTimeshare_request_id()));
+        entity.setTimeshare_response(timeshareConverter.toResEntity(model.getTimeshare_response_id()));
         entity.setMessage(model.getMessage());
 
         return entity;
@@ -42,7 +43,8 @@ public class RequestConverter {
         dto.setCreate_date(entity.getCreate_date());
         dto.setStatus(entity.getStatus());
         dto.setRequest_by(userConverter.toDTO(entity.getResquestby()));
-        dto.setTimeshare_id(timeshareConverter.toRespone(entity.getTimeshare()));
+        dto.setTimeshare_request_id(timeshareConverter.toRespone(entity.getTimeshare_request()));
+        dto.setTimeshare_response_id(timeshareConverter.toRespone((entity.getTimeshare_response())));
         dto.setResponse_by(userConverter.toDTO(entity.getResponseby()));
         dto.setMessage(entity.getMessage());
 
@@ -57,7 +59,8 @@ public class RequestConverter {
         entity.setCreate_date(model.getCreate_date());
         entity.setStatus(model.getStatus());
         entity.setResquestby(userRepository.getReferenceById(model.getRequest_by()));
-        entity.setTimeshare(timeshareRepository.getReferenceById(model.getTimeshare_id()));
+        entity.setTimeshare_request(timeshareRepository.getReferenceById(model.getTimeshare_request_id()));
+        entity.setTimeshare_response(timeshareRepository.getReferenceById(model.getTimeshare_response_id()));
         entity.setResponseby(userRepository.getReferenceById(model.getResponse_by()));
         entity.setMessage(model.getMessage());
         entity.setRequestCode(model.getRequestCode());
@@ -73,7 +76,8 @@ public class RequestConverter {
         dto.setStatus(entity.getStatus());
         dto.setResponse_by(entity.getResponseby().getUser_id());
         dto.setRequest_by(entity.getResquestby().getUser_id());
-        dto.setTimeshare_id(entity.getTimeshare().getTimeshare_id());
+        dto.setTimeshare_request_id(entity.getTimeshare_request().getTimeshare_id());
+        dto.setTimeshare_response_id(entity.getTimeshare_response().getTimeshare_id());
         dto.setMessage(entity.getMessage());
         dto.setRequestCode(entity.getRequestCode());
 

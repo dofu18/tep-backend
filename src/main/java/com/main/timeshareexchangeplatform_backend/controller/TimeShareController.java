@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping({"/api/timeshare"})
+@RequestMapping({"api/timeshare"})
 @RestController
 public class TimeShareController {
     @Autowired
