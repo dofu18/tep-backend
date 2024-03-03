@@ -23,23 +23,14 @@ public class UserServiceImp implements UserService {
     UserRepository userRepository;
     @Autowired
     UserConverter userConverter;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
-    public User addUser(UserDTO userDTO) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate localDate = LocalDate.parse(userDTO.getDob(), formatter);
-
-        return userRepository.save(User.builder()
-                .username(userDTO.getUser_name())
-                .fullname(userDTO.getFullname())
-                .password(userDTO.getPassword())
-                .email(userDTO.getEmail())
-                .dob(localDate)
-                .phone(userDTO.getPhone())
-                .gender(userDTO.getGender())
-                .status(userDTO.isStatus())
-                .role(userDTO.getRole())
-                .build());
+    public String addUser(User userInfo) {
+        userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
+        userRepository.save(userInfo);
+        return "user added to system ";
     }
 
     @Override
@@ -56,14 +47,33 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public UserDTO getById(UUID userId){
-        Object result = userRepository.getUserById(userId);
-
-        // Chuyển đổi Object thành TimeshareRespone, bạn có thể thực hiện phần này theo cách bạn muốn
-        UserDTO userDTO = convertToObject(result);
-
-        return userDTO;
+    public User findUserByUsername(String username) {
+        return userRepository.findUserByUsername(username);
     }
+
+    @Override
+    public String changePassword(User user, String passwordEnter, String newPassword) {
+        if (passwordEncoder.matches(passwordEnter, user.getPassword())) {
+            userRepository.saveNewPassword(passwordEncoder.encode(newPassword), user.getUsername());
+            return "Password has changed!";
+        }
+        return "Password has enter does not match with old password!";
+    }
+
+    @Override
+    public User getReferenceById(UUID id) {
+        return userRepository.getReferenceById(id);
+    }
+
+    //    @Override
+//    public UserDTO getById(UUID userId){
+//        Object result = userRepository.getUserById(userId);
+//
+//        // Chuyển đổi Object thành TimeshareRespone, bạn có thể thực hiện phần này theo cách bạn muốn
+//        UserDTO userDTO = convertToObject(result);
+//
+//        return userDTO;
+//    }
     private UserDTO convertToObject(Object result) {
         if (result == null) {
             return null;

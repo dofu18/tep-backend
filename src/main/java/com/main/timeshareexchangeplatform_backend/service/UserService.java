@@ -8,12 +8,15 @@ import java.util.List;
 import java.util.UUID;
 
 public interface UserService {
-    User addUser(UserDTO userDTO);
+    String addUser(User userInfo);
     User login(LoginDTO userDTO);
 
     List<UserDTO> findAll();
 
+    User findUserByUsername(String username);
 
-    UserDTO getById(UUID userId);
+    String changePassword(User user, String passwordEnter, String newPassword);
+    User getReferenceById(UUID id);
+//    UserDTO getById(UUID userId);
 
 }

@@ -42,7 +42,7 @@ public class User {
     private String email;
 
 
-    @Column(columnDefinition = "varchar(50)", nullable = false)
+    @Column(columnDefinition = "varchar(100)", nullable = false)
     private String password;
 
     @Column(columnDefinition = "nvarchar(50)", nullable = false)
@@ -77,6 +77,9 @@ public class User {
 
     @OneToMany(mappedBy = "responseby")
     private Collection<Request> response;
+
+    @OneToOne(mappedBy = "user")
+    private RefreshToken refreshToken;
 
 //    @OneToMany(mappedBy = "user")
 //    private Collection<Exchange_information> exchangeInformations;

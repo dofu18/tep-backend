@@ -30,7 +30,7 @@ public class RequestController {
         return requestService.createRequest(requestModel);
     }
 
-    @PutMapping("/response/{status}/{request_id}")
+    @PutMapping("/handle-request/{status}/{request_id}")
     public ResponseEntity<String> responseTimeshareExchange(@PathVariable int status,@PathVariable UUID request_id) {
         String result = requestService.reponseTimeshareExchange(status,request_id);
         if (result.equals("Exchange timeshare successfully")) {
