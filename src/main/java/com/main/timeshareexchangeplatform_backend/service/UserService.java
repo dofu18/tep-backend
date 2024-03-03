@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public interface UserService {
     String addUser(User userInfo);
-    User login(LoginDTO userDTO);
+//    User login(LoginDTO userDTO);
 
     List<UserDTO> findAll();
 

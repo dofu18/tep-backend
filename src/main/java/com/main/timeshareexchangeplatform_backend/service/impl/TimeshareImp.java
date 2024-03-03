@@ -38,13 +38,12 @@ import java.util.stream.Collectors;
         }
 
     @Override
-    public TimeshareRespone getTimeshareDetails(UUID timeshareId) {
-        Object result = myTimeShareRepository.findTimeshareDetails(timeshareId);
+    public Timeshare getTimeshareDetails(UUID timeshareId) {
+        Timeshare result = myTimeShareRepository.findTimeshareDetails(timeshareId);
 
         // Chuyển đổi Object thành TimeshareRespone
-        TimeshareRespone timeshareRespone = convertToObject(result);
 
-        return timeshareRespone;
+        return result;
     }
 
     @Override
@@ -78,12 +77,22 @@ import java.util.stream.Collectors;
     }
 
     @Override
+    public ResponseTimeshare findTimeshareByTimeshareId(UUID timeshare_id) {
+
+            ResponseTimeshare timeshare = timeshareConverter.toRespone(timeshareRepository.findTimshareByTimeshareId(timeshare_id));
+
+            return timeshare;
+    }
+
+    @Override
     public List<ResponseTimeshare> getAllTimeshareByUserId(UUID userid) {
         List<Timeshare> timeshareEntity = timeshareRepository.findAllTimshareByUserId(userid);
         List<ResponseTimeshare> timeshareRespones = timeshareEntity.stream().map(timeshareConverter::toRespone).collect(Collectors.toList());
 
         return timeshareRespones;
     }
+
+
 
     @Override
     public TimeshareDTO addTimeshare(TimeshareDTO timeshareDTO){

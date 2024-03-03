@@ -7,6 +7,7 @@ import com.main.timeshareexchangeplatform_backend.exception.ResourceNotFoundExce
 import com.main.timeshareexchangeplatform_backend.repository.UserRepository;
 import com.main.timeshareexchangeplatform_backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -32,11 +33,11 @@ public class UserServiceImp implements UserService {
         return "user added to system ";
     }
 
-    @Override
-    public User login(LoginDTO userDTO) {
-        return userRepository.findUserByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword())
-                .orElseThrow(()-> new ResourceNotFoundException("User not found"));
-    }
+//    @Override
+//    public User login(LoginDTO userDTO) {
+//        return userRepository.findUserByEmailAndPassword(userDTO.getEmail(), userDTO.getPassword())
+//                .orElseThrow(()-> new ResourceNotFoundException("User not found"));
+//    }
 
     @Override
     public List<UserDTO> findAll() {

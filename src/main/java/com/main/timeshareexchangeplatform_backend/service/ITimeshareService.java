@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public interface ITimeshareService {
    public List<TimeshareDTO> showListTimeShare();
-   TimeshareRespone getTimeshareDetails(UUID timeshareId);
+   Timeshare getTimeshareDetails(UUID timeshareId);
    TimeshareRespone getTimeshareByUserId(UUID userId);
 
    TimeshareDTO addTimeshare(TimeshareDTO timeshareDTO);
@@ -20,6 +20,8 @@ public interface ITimeshareService {
     Timeshare getReferenceById(UUID id);
 
    List<ResponseTimeshare> findTimeshareByName(String name);
+
+   ResponseTimeshare findTimeshareByTimeshareId(UUID timeshare_id);
 
    List<ResponseTimeshare> getAllTimeshareByUserId(UUID userid);
 
