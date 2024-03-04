@@ -18,8 +18,8 @@ public class TimeshareRespone {
 
     String timeshare_id;
     String address;
-    LocalDate date_end;
-    LocalDate date_start;
+    Date date_end;
+    Date date_start;
     String description;
     boolean exchance;
     String image_url;
