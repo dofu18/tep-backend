@@ -1,16 +1,14 @@
 package com.main.timeshareexchangeplatform_backend.service.impl;
 
-import com.main.timeshareexchangeplatform_backend.dto.DestinationDTO;
-import com.main.timeshareexchangeplatform_backend.dto.RoomtypeDTO;
-import com.main.timeshareexchangeplatform_backend.dto.TimeshareDTO;
+import com.main.timeshareexchangeplatform_backend.dto.*;
 import com.main.timeshareexchangeplatform_backend.converter.TimeshareConverter;
 import com.main.timeshareexchangeplatform_backend.repository.MyTimeShareRepository;
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
-import com.main.timeshareexchangeplatform_backend.dto.TimeshareRespone;
 import com.main.timeshareexchangeplatform_backend.service.TimeShareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -41,6 +39,31 @@ import java.util.UUID;
     public List<TimeshareDTO> getAllTimeshareUser(UUID userId) {
         List<Timeshare> timeshares = myTimeShareRepository.showAllTimeshareUser(userId);
         return timeshareConverter.convertToAccountPlaylistDTOList(timeshares);
+    }
+
+
+
+    @Override
+    public Boolean createTimeshare(TimeshareDTO timeshareRespone) {
+            Timeshare timeshare= new Timeshare();
+        timeshare.setCity(timeshareRespone.getCity());
+        timeshare.setDate_end(timeshareRespone.getDate_end());
+        timeshare.setDate_start(timeshareRespone.getDate_start());
+        timeshare.setDescription(timeshareRespone.getDescription());
+        timeshare.setExchange(timeshareRespone.isExchange());
+        //
+        // timeshare.setImage_url(timeshareRespone.getImage_url());
+        timeshare.setName(timeshareRespone.getName());
+//        timeshare.setPostBy(timeshareRespone.getOwner());
+//        timeshare.setDestination(timeshareRespone.getDes());
+        // Calculate the number of nights
+        int night= Math.toIntExact(ChronoUnit.DAYS.between(timeshareRespone.getDate_start(), timeshareRespone.getDate_end()));
+        timeshare.setNights(night);
+        timeshare.setPrice(timeshareRespone.getPrice());
+        myTimeShareRepository.save(timeshare);
+        if(myTimeShareRepository.findById(timeshareRespone.getTimeshare_id()) !=null)
+            return true;
+        else return false;
     }
 
     @Override

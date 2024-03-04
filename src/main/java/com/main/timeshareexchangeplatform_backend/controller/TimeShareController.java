@@ -5,6 +5,7 @@ import com.main.timeshareexchangeplatform_backend.dto.TimeshareDTO;
 import com.main.timeshareexchangeplatform_backend.dto.TimeshareRespone;
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
 import com.main.timeshareexchangeplatform_backend.service.ITimeshareService;
+import com.main.timeshareexchangeplatform_backend.service.TimeShareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,8 @@ import java.util.UUID;
 public class TimeShareController {
     @Autowired
     ITimeshareService timeShareService;
+    @Autowired
+    TimeShareService timeShareService1;
     @GetMapping({"/showall"})
     public ResponseEntity<?> showAllTimeShare() {
         List<TimeshareDTO> t = timeShareService.showListTimeShare();
@@ -75,4 +78,9 @@ public class TimeShareController {
         return timeShareService.getAllTimeshareByUserId(owner);
 
     }
+    @PostMapping({"/createTimeshare"})
+    public boolean createTimeshare(@RequestBody TimeshareDTO timeshareDTO){
+        return timeShareService1.createTimeshare(timeshareDTO) ;
+    }
+
 }

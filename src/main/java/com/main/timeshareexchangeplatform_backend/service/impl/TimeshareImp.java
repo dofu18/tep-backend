@@ -94,23 +94,9 @@ import java.util.stream.Collectors;
 
 
 
-    @Override
-    public TimeshareDTO addTimeshare(TimeshareDTO timeshareDTO){
-//            timeshareDTO.setTimeshare_id(UUID.fromString("9d870e8c-0b4f-4e78-a9bf-16a45e7a42e1"));
-//            Timeshare timeshare= timeshareConverter.toEntity(timeshareDTO);
-//            timeshare.setName(timeshare.getName());
-//            timeshare.setDate_end(timeshare.getDate_end());
-//            timeshare.setDate_start(timeshare.getDate_start());
-//            timeshare.setDestination(timeshare.getDestination());
-//            timeshare.setCity(timeshare.getCity());
-//            timeshare.setNights(
-//                    long nights = ChronoUnit.DAYS.between( timeshare.setDate_start(timeshare.getDate_start());, date_end););
-//            timeshare.setPostBy(timeshare.getPostBy());
-//            timeshare.getDescription(timeshare.setDescription());
-            TimeshareDTO result=new TimeshareDTO();
-        return result;
-    }
-    private String generateUniqueRequestCode() {
+
+
+ private String generateUniqueRequestCode() {
         // Get current date and time
         LocalDateTime now = LocalDateTime.now();
 

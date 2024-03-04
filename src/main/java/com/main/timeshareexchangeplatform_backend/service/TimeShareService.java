@@ -8,8 +8,13 @@ import java.util.UUID;
 
 public interface TimeShareService {
    public List<TimeshareDTO> showListTimeShare();
+
+   Boolean createTimeshare(TimeshareDTO timeshareRespone);
+
    TimeshareRespone getTimeshareByUserId(UUID userId);
    TimeshareRespone getTimeshareDetails(UUID timeshareId);
 
    public List<TimeshareDTO> getAllTimeshareUser(UUID userID);
+
+
 }

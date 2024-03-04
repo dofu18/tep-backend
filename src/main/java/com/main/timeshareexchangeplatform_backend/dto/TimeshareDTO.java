@@ -23,4 +23,5 @@ public class TimeshareDTO {
     private String description;
     private String image_url;
     private String city;
+    private boolean exchange;
 }

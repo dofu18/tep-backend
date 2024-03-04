@@ -23,4 +23,5 @@ public class TimeshareModel {
     private String name;
     private UUID destination_id;
     private UUID post_by;
+
 }

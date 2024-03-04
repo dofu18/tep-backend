@@ -13,7 +13,7 @@ public interface ITimeshareService {
    Timeshare getTimeshareDetails(UUID timeshareId);
    TimeshareRespone getTimeshareByUserId(UUID userId);
 
-   TimeshareDTO addTimeshare(TimeshareDTO timeshareDTO);
+
 
     List<TimeshareDTO> getAllTimeshareUser(UUID userId);
 

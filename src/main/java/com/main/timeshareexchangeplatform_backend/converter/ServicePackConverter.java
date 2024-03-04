@@ -1,10 +1,11 @@
 package com.main.timeshareexchangeplatform_backend.converter;
 
 import com.main.timeshareexchangeplatform_backend.dto.ServicePackDTO;
-import com.main.timeshareexchangeplatform_backend.dto.TransactionDTO;
 import com.main.timeshareexchangeplatform_backend.entity.Service_pack;
-import com.main.timeshareexchangeplatform_backend.entity.Transaction_history;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class ServicePackConverter {
@@ -41,5 +42,11 @@ public class ServicePackConverter {
 
         return dto;
     }
-
+    public List<ServicePackDTO> convertToAccountPlaylistDTOList(List<Service_pack> servicePacksList) {
+        List<ServicePackDTO> Service_packDTOList = new ArrayList<>();
+        for (Service_pack accountPlaylist : servicePacksList) {
+            Service_packDTOList.add(toDTO(accountPlaylist));
+        }
+        return Service_packDTOList;
+    }
 }

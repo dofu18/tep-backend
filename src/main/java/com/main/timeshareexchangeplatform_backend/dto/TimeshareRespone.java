@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import java.util.UUID;
@@ -17,8 +18,8 @@ public class TimeshareRespone {
 
     String timeshare_id;
     String address;
-    Date date_end;
-    Date date_start;
+    LocalDate date_end;
+    LocalDate date_start;
     String description;
     boolean exchance;
     String image_url;
