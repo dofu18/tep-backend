@@ -20,7 +20,7 @@ import java.util.UUID;
 @Component
 public class TimeshareConverter {
     @Autowired
-    UserConverter userConverter;
+    static UserConverter userConverter;
     @Autowired
     DestinationConverter destinationConverter;
     @Autowired
@@ -29,6 +29,7 @@ public class TimeshareConverter {
     UserRepository userRepository;
     @Autowired
     DestinationRepository destinationRepository;
+
 
 
     public static TimeshareDTO toDTO(Timeshare timeshare) {
@@ -45,7 +46,7 @@ public class TimeshareConverter {
         dto.setStatus(timeshare.isStatus());
         dto.setName(timeshare.getName());
         dto.setCity(timeshare.getCity());
-        dto.setOwner(UUID.fromString(String.valueOf(timeshare.getPostBy().getUser_id())));  // Assuming there is a User entity in Timeshare
+        dto.setOwner(timeshare.getPostBy().getUser_id());  // Assuming there is a User entity in Timeshare
         dto.setDestination_id(timeshare.getDestination().getDestination_id());  // Assuming there is a Destination entity in Timeshare
         dto.setDescription(timeshare.getDescription());
         dto.setImage_url(timeshare.getImage_url());

@@ -12,9 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.sql.Time;
-import java.time.LocalDate;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -42,7 +39,7 @@ import java.util.stream.Collectors;
         Timeshare result = myTimeShareRepository.findTimeshareDetails(timeshareId);
 
         // Chuyển đổi Object thành TimeshareRespone
-
+        TimeshareRespone timeshareRespone=convertToObject(result);
         return result;
     }
 

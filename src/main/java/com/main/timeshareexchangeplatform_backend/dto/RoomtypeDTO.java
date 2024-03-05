@@ -1,5 +1,6 @@
 package com.main.timeshareexchangeplatform_backend.dto;
 
+import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
 import lombok.*;
 
 import java.util.UUID;
@@ -20,4 +21,5 @@ public class RoomtypeDTO {
     private String name;
     private String policies;
     private String roomview;
+    private Timeshare timeshareId;
 }

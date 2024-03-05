@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 @Component
 public class RoomtypeConverter {
-    public static RoomtypeDTO toDTO(Roomtype roomType) {
+    public  RoomtypeDTO toDTO(Roomtype roomType) {
         if (roomType == null) {
             return null;
         }
@@ -29,7 +29,7 @@ public class RoomtypeConverter {
         return dto;
     }
 
-    public static Roomtype toEntity(RoomtypeDTO dto) {
+    public  Roomtype toEntity(RoomtypeDTO dto) {
         if (dto == null) {
             return null;
         }

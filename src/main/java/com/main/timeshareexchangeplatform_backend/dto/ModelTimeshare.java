@@ -12,7 +12,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TimeshareDTO {
+public class ModelTimeshare {
     private UUID timeshare_id;
     private LocalDate date_start;
     private LocalDate date_end;
@@ -20,8 +20,8 @@ public class TimeshareDTO {
     private long price;
     private boolean status;
     private String name;
-    private UUID  owner;
-    private UUID destination_id;
+    private User owner;
+    private Destination destination_id;
     private String description;
     private String image_url;
     private String city;

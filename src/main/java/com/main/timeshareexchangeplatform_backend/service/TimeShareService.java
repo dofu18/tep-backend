@@ -1,5 +1,6 @@
 package com.main.timeshareexchangeplatform_backend.service;
 
+import com.main.timeshareexchangeplatform_backend.dto.ModelTimeshare;
 import com.main.timeshareexchangeplatform_backend.dto.TimeshareDTO;
 import com.main.timeshareexchangeplatform_backend.dto.TimeshareRespone;
 

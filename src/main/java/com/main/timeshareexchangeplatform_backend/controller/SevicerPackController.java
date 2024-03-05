@@ -23,13 +23,8 @@ public class SevicerPackController {
     IServicePackService iServicePackService;
     @GetMapping({"/viewAll"})
 
-    public ResponseEntity<?> showAllServicePacks() {
-        List<ServicePackDTO> t = iServicePackService.showAll();
-        if (t != null) {
-            return ResponseEntity.status(HttpStatus.OK).body(t);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No timeshares found.");
-        }
+    public List<ServicePackDTO> findAll() {
 
+        return iServicePackService.showAll();
     }
 }

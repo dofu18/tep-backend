@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 @Component
 public class UserConverter {
-    public UserModel toResponse(User entity) {
+    static UserModel toResponse(User entity) {
         UserModel dto = new UserModel();
         dto.setUser_id(entity.getUser_id());
         dto.setUser_name(entity.getUsername());
@@ -17,7 +17,7 @@ public class UserConverter {
         return dto;
     }
 
-    public UserDTO toDTO (User user) {
+    public UserDTO toDTO(User user) {
         UserDTO dto = new UserDTO();
 
         dto.setUser_id(user.getUser_id());

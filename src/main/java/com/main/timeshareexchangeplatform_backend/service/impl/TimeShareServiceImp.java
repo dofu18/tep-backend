@@ -45,17 +45,18 @@ import java.util.UUID;
 
     @Override
     public Boolean createTimeshare(TimeshareDTO timeshareRespone) {
-            Timeshare timeshare= new Timeshare();
+            Timeshare timeshare= timeshareConverter.toEntity(timeshareRespone);
+
         timeshare.setCity(timeshareRespone.getCity());
         timeshare.setDate_end(timeshareRespone.getDate_end());
         timeshare.setDate_start(timeshareRespone.getDate_start());
         timeshare.setDescription(timeshareRespone.getDescription());
         timeshare.setExchange(timeshareRespone.isExchange());
-        //
-        // timeshare.setImage_url(timeshareRespone.getImage_url());
+
+        timeshare.setImage_url(timeshareRespone.getImage_url());
         timeshare.setName(timeshareRespone.getName());
-//        timeshare.setPostBy(timeshareRespone.getOwner());
-//        timeshare.setDestination(timeshareRespone.getDes());
+        timeshare.setPostBy(timeshare.getPostBy());
+        timeshare.setDestination(timeshare.getDestination());
         // Calculate the number of nights
         int night= Math.toIntExact(ChronoUnit.DAYS.between(timeshareRespone.getDate_start(), timeshareRespone.getDate_end()));
         timeshare.setNights(night);
@@ -65,6 +66,9 @@ import java.util.UUID;
             return true;
         else return false;
     }
+//     request.setTimeshare_response(timeshareService.getReferenceById(requestModel.getTimeshare_response_id()));
+//            request.setResponseby(request.getTimeshare_response().getPostBy());
+//            request.setTimeshare_request(timeshareService.getReferenceById(requestModel.getTimeshare_request_id()));
 
     @Override
     public TimeshareRespone getTimeshareByUserId(UUID userId) {
