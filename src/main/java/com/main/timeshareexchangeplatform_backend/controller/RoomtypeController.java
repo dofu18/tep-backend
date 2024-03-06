@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @CrossOrigin
 @RequestMapping({"/api/roomtype"})
@@ -38,5 +39,10 @@ public class RoomtypeController {
     @PostMapping({"/createRoomtype"})
     public boolean createRoomtype(@RequestBody RoomtypeDTO roomtypeDTO){
         return iRoomtypeService.createRoomtype(roomtypeDTO);
+    }
+
+    @GetMapping({"/details/{timeshare_id}"})
+    public RoomtypeDTO getRoomtypeByTimeshareId(UUID timeshare_id){
+        return iRoomtypeService.getRoomtypeByTimeshareId(timeshare_id);
     }
 }

@@ -17,5 +17,6 @@ public interface TimeShareService {
 
    public List<TimeshareDTO> getAllTimeshareUser(UUID userID);
 
+   TimeshareDTO getImageById(UUID timeshare_id);
 
 }

@@ -1,14 +1,19 @@
 package com.main.timeshareexchangeplatform_backend.service.impl;
 
 import com.main.timeshareexchangeplatform_backend.converter.RoomtypeConverter;
+import com.main.timeshareexchangeplatform_backend.dto.ResponseTimeshare;
 import com.main.timeshareexchangeplatform_backend.dto.RoomtypeDTO;
 import com.main.timeshareexchangeplatform_backend.entity.Roomtype;
+import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
 import com.main.timeshareexchangeplatform_backend.repository.RoomtypeRepository;
 import com.main.timeshareexchangeplatform_backend.service.IRoomtypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 @Service
 public class RoomtypeImp implements IRoomtypeService {
     @Autowired
@@ -33,6 +38,12 @@ public class RoomtypeImp implements IRoomtypeService {
         if(roomtypeRepository.findById(roomtype.getRoomtype_id()) !=null)
             return true;
         else return false;
+    }
+
+    @Override
+    public RoomtypeDTO getRoomtypeByTimeshareId(UUID timeshare_id) {
+
+        return roomtypeRepository.getRoomtypeByTimeshareId(timeshare_id);
     }
 }
 

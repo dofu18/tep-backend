@@ -41,6 +41,10 @@ import java.util.UUID;
         return timeshareConverter.convertToAccountPlaylistDTOList(timeshares);
     }
 
+    @Override
+    public TimeshareDTO getImageById(UUID timeshare_id) {
+        return null;
+    }
 
 
     @Override
