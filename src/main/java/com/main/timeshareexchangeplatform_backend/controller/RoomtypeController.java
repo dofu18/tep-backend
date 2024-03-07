@@ -1,5 +1,6 @@
 package com.main.timeshareexchangeplatform_backend.controller;
 
+import com.main.timeshareexchangeplatform_backend.dto.ResponseTimeshare;
 import com.main.timeshareexchangeplatform_backend.dto.RoomtypeDTO;
 import com.main.timeshareexchangeplatform_backend.dto.TimeshareDTO;
 
@@ -42,7 +43,14 @@ public class RoomtypeController {
     }
 
     @GetMapping({"/details/{timeshare_id}"})
-    public RoomtypeDTO getRoomtypeByTimeshareId(UUID timeshare_id){
-        return iRoomtypeService.getRoomtypeByTimeshareId(timeshare_id);
+    public ResponseEntity<?> getRoomtypeByTimeshareId(@PathVariable UUID timeshare_id) {
+        RoomtypeDTO roomtypeDTO;
+        roomtypeDTO = iRoomtypeService.getRoomtypeByTimeshareId(timeshare_id);
+
+        if (roomtypeDTO != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(roomtypeDTO);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No details found for timeshareId: " + timeshare_id);
+        }
     }
 }

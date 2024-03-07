@@ -42,8 +42,9 @@ public class RoomtypeImp implements IRoomtypeService {
 
     @Override
     public RoomtypeDTO getRoomtypeByTimeshareId(UUID timeshare_id) {
+        RoomtypeDTO roomtypeDTO= roomtypeConverter.toDTO(roomtypeRepository.getRoomtypeByTimeshareId(timeshare_id));
 
-        return roomtypeRepository.getRoomtypeByTimeshareId(timeshare_id);
+        return roomtypeDTO ;
     }
 }
 

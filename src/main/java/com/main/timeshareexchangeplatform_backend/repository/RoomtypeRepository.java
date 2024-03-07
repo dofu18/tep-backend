@@ -16,5 +16,5 @@ public interface RoomtypeRepository extends JpaRepository <Roomtype, UUID>{
     List<Timeshare> showListTimeShare();
 
     @Query(value = "select * from roomtype where timeshare_id=  :timeshare_id", nativeQuery = true)
-    RoomtypeDTO getRoomtypeByTimeshareId(@Param("timeshare_id") UUID timeshare_id);
+    Roomtype getRoomtypeByTimeshareId(@Param("timeshare_id") UUID timeshare_id);
 }
