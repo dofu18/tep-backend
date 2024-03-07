@@ -31,7 +31,7 @@ public class Service_pack {
     private int ad_duration;
 
     @Column
-    private int flag;
+    private boolean flag;
 
     @Column
     private boolean priority;

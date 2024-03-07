@@ -2,6 +2,7 @@ package com.main.timeshareexchangeplatform_backend.controller;
 
 import com.main.timeshareexchangeplatform_backend.dto.ResponseTimeshare;
 import com.main.timeshareexchangeplatform_backend.dto.RoomtypeDTO;
+import com.main.timeshareexchangeplatform_backend.dto.RoomtypeModel;
 import com.main.timeshareexchangeplatform_backend.dto.TimeshareDTO;
 
 import com.main.timeshareexchangeplatform_backend.repository.RoomtypeRepository;
@@ -38,7 +39,7 @@ public class RoomtypeController {
     }
 
     @PostMapping({"/createRoomtype"})
-    public boolean createRoomtype(@RequestBody RoomtypeDTO roomtypeDTO){
+    public boolean createRoomtype(@RequestBody RoomtypeModel roomtypeDTO){
         return iRoomtypeService.createRoomtype(roomtypeDTO);
     }
 

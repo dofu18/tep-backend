@@ -66,6 +66,24 @@ public class UserServiceImp implements UserService {
         return userRepository.getReferenceById(id);
     }
 
+
+    @Override
+    public String UpdateRoleToAdmin(UUID id) {
+        User user = userRepository.findUserByID(id);
+
+        if (user != null) {
+            if (user.getRole().equalsIgnoreCase("admin")) {
+                return "The user role is already admin";
+            } else {
+                user.setRole("admin");
+                userRepository.save(user);
+                return "Successfully changed user's role to admin";
+            }
+        }
+
+        return "No user found";
+    }
+
     //    @Override
 //    public UserDTO getById(UUID userId){
 //        Object result = userRepository.getUserById(userId);

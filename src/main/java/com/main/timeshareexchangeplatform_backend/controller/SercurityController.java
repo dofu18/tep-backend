@@ -28,6 +28,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("api/account")
 public class SercurityController {
@@ -80,6 +82,26 @@ public class SercurityController {
         userInfo.setRole("member");// customer roleId = 3
         userInfo.setStatus(true);
         return userService.addUser(converter.toEntity(userInfo));
+    }
+
+    @PostMapping("/signupAdmin")
+    public String addAdmin(@RequestBody UserDTO userInfo) {
+        userInfo.setRole("admin");// customer roleId = 3
+        userInfo.setStatus(true);
+        return userService.addUser(converter.toEntity(userInfo));
+    }
+
+    @PutMapping("/update-role/{id}")
+    public ResponseEntity<String> updateRoleToAdmin(@PathVariable("id") UUID id) {
+        String result = userService.UpdateRoleToAdmin(id);
+        if (result.equals("Successfully changed user's role to admin")) {
+            return ResponseEntity.ok(result);
+        } else if (result.equals("The user role is already admin")) {
+            return ResponseEntity.badRequest().body(result);
+        } else if (result.equals("No user found")) {
+            return ResponseEntity.badRequest().body(result);
+        }
+        return null;
     }
 
     @GetMapping("/hello")

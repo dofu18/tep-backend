@@ -24,7 +24,8 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 //                    "where User_id= :userid ", nativeQuery = true)
 //    Optional<User> getUserById(@Param("UserId")UUID userid) ;
 
-
+    @Query(value = "SELECT * FROM users WHERE user_id = :id", nativeQuery = true)
+    User findUserByID(@Param("id") UUID id);
 
     User findUserByUsername(String username);
 
