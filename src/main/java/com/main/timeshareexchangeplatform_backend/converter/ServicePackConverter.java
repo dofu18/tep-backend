@@ -17,7 +17,7 @@ public class ServicePackConverter {
         entity.setService_id(dto.getService_id());
         entity.setAd_duration(dto.getAd_duration());
         entity.setAllow_post(dto.isAllow_post());
-        entity.setFlag(dto.getFlag());
+        entity.setFlag(dto.isFlag());
         entity.setName(dto.getName());
         entity.setPriority(dto.isPriority());
         entity.setService_code(dto.getService_code());
@@ -33,7 +33,7 @@ public class ServicePackConverter {
         dto.setService_id(entity.getService_id());
         dto.setAd_duration(entity.getAd_duration());
         dto.setAllow_post(entity.isAllow_post());
-        dto.setFlag(entity.getFlag());
+        dto.setFlag(entity.isFlag());
         dto.setName(entity.getName());
         dto.setPriority(entity.isPriority());
         dto.setService_code(entity.getService_code());

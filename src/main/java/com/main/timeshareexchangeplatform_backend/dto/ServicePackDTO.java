@@ -14,7 +14,7 @@ public class ServicePackDTO {
     private UUID service_id;
     private int ad_duration;
     private boolean allow_post;
-    private int flag;
+    private boolean flag;
     private String name;
     private boolean priority;
     private String service_code;

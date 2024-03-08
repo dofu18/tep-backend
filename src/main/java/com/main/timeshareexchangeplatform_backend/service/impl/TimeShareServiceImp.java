@@ -8,6 +8,8 @@ import com.main.timeshareexchangeplatform_backend.service.TimeShareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
@@ -51,12 +53,12 @@ import java.util.UUID;
     public Boolean createTimeshare(TimeshareDTO timeshareRespone) {
             Timeshare timeshare= timeshareConverter.toEntity(timeshareRespone);
 
+        timeshare.setTimeshareCode(generateUniqueTimeshareCode());
         timeshare.setCity(timeshareRespone.getCity());
         timeshare.setDate_end(timeshareRespone.getDate_end());
         timeshare.setDate_start(timeshareRespone.getDate_start());
         timeshare.setDescription(timeshareRespone.getDescription());
         timeshare.setExchange(timeshareRespone.isExchange());
-
         timeshare.setImage_url(timeshareRespone.getImage_url());
         timeshare.setName(timeshareRespone.getName());
         timeshare.setPostBy(timeshare.getPostBy());
@@ -66,9 +68,7 @@ import java.util.UUID;
         timeshare.setNights(night);
         timeshare.setPrice(timeshareRespone.getPrice());
         myTimeShareRepository.save(timeshare);
-        if(myTimeShareRepository.findById(timeshareRespone.getTimeshare_id()) !=null)
-            return true;
-        else return false;
+        return true;
     }
 //     request.setTimeshare_response(timeshareService.getReferenceById(requestModel.getTimeshare_response_id()));
 //            request.setResponseby(request.getTimeshare_response().getPostBy());
@@ -141,6 +141,18 @@ import java.util.UUID;
         timeshareRespone.setDes(destinationDTO);
         timeshareRespone.setRoom(roomtypeDTO);
         return timeshareRespone;
+    }
+
+    private String generateUniqueTimeshareCode() {
+        // Get current date and time
+        LocalDateTime now = LocalDateTime.now();
+
+        // Format the date and time as a string
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+        String formattedDateTime = now.format(formatter);
+
+        // Concatenate the formatted date and time
+        return "TS" + formattedDateTime;
     }
 
 }

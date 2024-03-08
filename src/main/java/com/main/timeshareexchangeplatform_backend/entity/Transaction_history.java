@@ -19,7 +19,7 @@ public class Transaction_history {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID transaction_id;
 
-    @Column(columnDefinition = "nvarchar(50)", name = "transaction_code")
+    @Column(columnDefinition = "nvarchar(50)", name = "transaction_code", unique = true)
     private String transactionCode;
 
     @Column(columnDefinition = "DATETIME", nullable = false)

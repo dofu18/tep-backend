@@ -20,7 +20,7 @@ import java.util.UUID;
 @Component
 public class TimeshareConverter {
     @Autowired
-    static UserConverter userConverter;
+    UserConverter userConverter;
     @Autowired
     DestinationConverter destinationConverter;
     @Autowired
@@ -39,6 +39,7 @@ public class TimeshareConverter {
 
         TimeshareDTO dto = new TimeshareDTO();
         dto.setTimeshare_id(timeshare.getTimeshare_id());
+//        dto.setTimeshareCode(timeshare.getTimeshareCode());
         dto.setDate_start(timeshare.getDate_start());
         dto.setDate_end(timeshare.getDate_end());
         dto.setNights(timeshare.getNights());
@@ -60,6 +61,7 @@ public class TimeshareConverter {
 
         Timeshare timeshare = new Timeshare();
         timeshare.setTimeshare_id(dto.getTimeshare_id());
+//        timeshare.setTimeshareCode(dto.getTimeshareCode());
         timeshare.setDate_start(dto.getDate_start());
         timeshare.setDate_end(dto.getDate_end());
         timeshare.setNights(dto.getNights());
@@ -77,6 +79,7 @@ public class TimeshareConverter {
     public ResponseTimeshare toRespone(Timeshare timeshareEntity) {
         ResponseTimeshare dto = new ResponseTimeshare();
         dto.setTimeshareId(timeshareEntity.getTimeshare_id());
+        dto.setTimeshareCode(timeshareEntity.getTimeshareCode());
         dto.setTimeshareName(timeshareEntity.getName());
         dto.setDescription(timeshareEntity.getDescription());
         dto.setDateStart(timeshareEntity.getDate_start());
@@ -98,6 +101,7 @@ public class TimeshareConverter {
         Timeshare entity = new Timeshare();
 
         entity.setTimeshare_id(model.getTimeshareId());
+        entity.setTimeshareCode(model.getTimeshareCode());
         entity.setName(model.getTimeshareName());
         entity.setDescription(model.getDescription());
         entity.setDate_start(model.getDateStart());
