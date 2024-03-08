@@ -25,4 +25,5 @@ public interface ITimeshareService {
 
    List<ResponseTimeshare> getAllTimeshareByUserId(UUID userid);
 
+    List<ResponseTimeshare> findTimeshareByCity(String city);
 }

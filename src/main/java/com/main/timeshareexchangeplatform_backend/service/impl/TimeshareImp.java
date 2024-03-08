@@ -82,6 +82,14 @@ import java.util.stream.Collectors;
     }
 
     @Override
+    public List<ResponseTimeshare> findTimeshareByCity(String city) {
+
+        List<ResponseTimeshare> timeshare = timeshareRepository.findTimshareByCity(city).stream()
+                .map(timeshareConverter::toRespone).collect(Collectors.toList());
+        return timeshare;
+    }
+
+    @Override
     public List<ResponseTimeshare> getAllTimeshareByUserId(UUID userid) {
         List<Timeshare> timeshareEntity = timeshareRepository.findAllTimshareByUserId(userid);
         List<ResponseTimeshare> timeshareRespones = timeshareEntity.stream().map(timeshareConverter::toRespone).collect(Collectors.toList());

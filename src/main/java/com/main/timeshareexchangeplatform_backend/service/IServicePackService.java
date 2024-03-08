@@ -7,4 +7,6 @@ import java.util.List;
 public interface IServicePackService {
 
     public List<ServicePackDTO> showAll();
+
+    String updateServicePack(ServicePackDTO servicePackDTO);
 }
