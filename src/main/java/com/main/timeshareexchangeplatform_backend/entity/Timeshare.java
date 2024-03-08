@@ -19,6 +19,9 @@ public class Timeshare {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID timeshare_id;
 
+    @Column(columnDefinition = "nvarchar(max)", nullable = true, unique = true)
+    private String timeshareCode;
+
     @Column(columnDefinition = "nvarchar(50)")
     private String name;
 

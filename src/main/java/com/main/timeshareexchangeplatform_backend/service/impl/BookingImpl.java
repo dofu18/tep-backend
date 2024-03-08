@@ -74,6 +74,7 @@ public class BookingImpl implements IBookingService {
             Booking timeshareBooking = new Booking();
             Timeshare timeshare = timeshareRepository.findById(timeshareId).orElse(null);
             if (timeshare != null) {
+                timeshare.setStatus(false);
                 timeshareBooking.setTimeshare(timeshare);
             }
 

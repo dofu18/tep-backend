@@ -18,7 +18,7 @@ public class Request {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID request_id;
 
-    @Column(columnDefinition = "nvarchar(max) not null")
+    @Column(columnDefinition = "nvarchar(max) not null", unique = true)
     private String requestCode;
 
     @Column(columnDefinition = "DATE", nullable = false)
