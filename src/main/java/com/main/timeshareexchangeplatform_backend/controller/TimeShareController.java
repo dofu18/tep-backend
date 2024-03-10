@@ -79,6 +79,13 @@ public class TimeShareController {
         return timeShareService.getAllTimeshareByUserId(owner);
 
     }
+
+    @GetMapping(value = "/getTimeshareByCity/{city}")
+    public List<ResponseTimeshare> getAllTimeshareByCity(@PathVariable String city) {
+        return timeShareService.findTimeshareByCity(city);
+
+    }
+
     @PostMapping({"/createTimeshare"})
     public boolean createTimeshare(@RequestBody TimeshareDTO timeshareDTO){
         return timeShareService1.createTimeshare(timeshareDTO) ;

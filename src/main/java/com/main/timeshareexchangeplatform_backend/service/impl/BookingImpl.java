@@ -76,6 +76,7 @@ public class BookingImpl implements IBookingService {
             if (timeshare != null) {
                 timeshare.setStatus(false);
                 timeshareBooking.setTimeshare(timeshare);
+                timeshare = timeshareRepository.save(timeshare);
             }
 
             BookingModel result = bookingConverter.toDTO(booking);

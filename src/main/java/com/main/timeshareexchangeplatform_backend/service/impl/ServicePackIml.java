@@ -21,4 +21,22 @@ ServicePackRepository servicePackRepository;
         List<Service_pack> servicePacks = servicePackRepository.showAllSevicePack();
         return servicePackConverter.convertToAccountPlaylistDTOList(servicePacks);
     }
+
+    @Override
+    public String updateServicePack(ServicePackDTO servicePackDTO) {
+        Service_pack entity = servicePackRepository.getReferenceById(servicePackDTO.getService_id());
+        if (entity.getService_id() == servicePackDTO.getService_id()) {
+            entity.setService_price(servicePackDTO.getService_price());
+            entity.setService_code(servicePackDTO.getService_code());
+            entity.setName(servicePackDTO.getName());
+            entity.setPriority(servicePackDTO.isPriority());
+            entity.setAd_duration(servicePackDTO.getAd_duration());
+            entity.setAllow_post(servicePackDTO.isAllow_post());
+            entity.setFlag(servicePackDTO.isFlag());
+
+            servicePackRepository.save(entity);
+            return "Update Successfully";
+        }
+        return "Fail to update";
+    }
 }

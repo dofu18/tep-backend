@@ -22,4 +22,10 @@ public class SevicePackController {
 
         return iServicePackService.showAll();
     }
+
+    @PutMapping("/edit")
+    public String updateServicePack(@RequestBody ServicePackDTO servicePackDTO) {
+
+        return iServicePackService.updateServicePack(servicePackDTO);
+    }
 }

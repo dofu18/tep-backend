@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -28,11 +29,26 @@ import java.util.stream.Collectors;
         TimeshareConverter timeshareConverter;
         @Autowired
         TimeshareRepository timeshareRepository;
+
+
         public List<TimeshareDTO> showListTimeShare(){
+            updateTimeshareStatus();
              List<Timeshare> timeshares = myTimeShareRepository.showListTimeShare();
+//             updateTimeshareStatus();
             return timeshareConverter.convertToAccountPlaylistDTOList(timeshares);
 
         }
+
+    public void updateTimeshareStatus() {
+        // Get timeshares with date_end before current date
+        List<Timeshare> expiredTimeshares = timeshareRepository.findByDateEndBefore(LocalDate.now());
+
+        // Update status to false for each expired timeshare
+        for (Timeshare timeshare : expiredTimeshares) {
+            timeshare.setStatus(false);
+            timeshareRepository.save(timeshare);
+        }
+    }
 
     @Override
     public Timeshare getTimeshareDetails(UUID timeshareId) {
@@ -79,6 +95,14 @@ import java.util.stream.Collectors;
             ResponseTimeshare timeshare = timeshareConverter.toRespone(timeshareRepository.findTimshareByTimeshareId(timeshare_id));
 
             return timeshare;
+    }
+
+    @Override
+    public List<ResponseTimeshare> findTimeshareByCity(String city) {
+
+        List<ResponseTimeshare> timeshare = timeshareRepository.findTimshareByCity(city).stream()
+                .map(timeshareConverter::toRespone).collect(Collectors.toList());
+        return timeshare;
     }
 
     @Override
