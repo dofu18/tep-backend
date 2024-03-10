@@ -55,7 +55,7 @@ import java.util.UUID;
 
         timeshare.setTimeshareCode(generateUniqueTimeshareCode());
         timeshare.setCity(timeshareRespone.getCity());
-        timeshare.setDate_end(timeshareRespone.getDate_end());
+        timeshare.setDateEnd(timeshareRespone.getDate_end());
         timeshare.setDate_start(timeshareRespone.getDate_start());
         timeshare.setDescription(timeshareRespone.getDescription());
         timeshare.setExchange(timeshareRespone.isExchange());

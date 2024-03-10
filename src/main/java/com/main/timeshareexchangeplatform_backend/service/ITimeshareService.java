@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ITimeshareService {
-   public List<TimeshareDTO> showListTimeShare();
+   List<TimeshareDTO> showListTimeShare();
    Timeshare getTimeshareDetails(UUID timeshareId);
    TimeshareRespone getTimeshareByUserId(UUID userId);
 

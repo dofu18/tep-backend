@@ -41,7 +41,7 @@ public class TimeshareConverter {
         dto.setTimeshare_id(timeshare.getTimeshare_id());
 //        dto.setTimeshareCode(timeshare.getTimeshareCode());
         dto.setDate_start(timeshare.getDate_start());
-        dto.setDate_end(timeshare.getDate_end());
+        dto.setDate_end(timeshare.getDateEnd());
         dto.setNights(timeshare.getNights());
         dto.setPrice(timeshare.getPrice());
         dto.setStatus(timeshare.isStatus());
@@ -63,7 +63,7 @@ public class TimeshareConverter {
         timeshare.setTimeshare_id(dto.getTimeshare_id());
 //        timeshare.setTimeshareCode(dto.getTimeshareCode());
         timeshare.setDate_start(dto.getDate_start());
-        timeshare.setDate_end(dto.getDate_end());
+        timeshare.setDateEnd(dto.getDate_end());
         timeshare.setNights(dto.getNights());
         timeshare.setPrice(dto.getPrice());
         timeshare.setStatus(dto.isStatus());
@@ -83,7 +83,7 @@ public class TimeshareConverter {
         dto.setTimeshareName(timeshareEntity.getName());
         dto.setDescription(timeshareEntity.getDescription());
         dto.setDateStart(timeshareEntity.getDate_start());
-        dto.setDateEnd(timeshareEntity.getDate_end());
+        dto.setDateEnd(timeshareEntity.getDateEnd());
         dto.setExchange(timeshareEntity.getExchange());
         dto.setPrice(timeshareEntity.getPrice());
         dto.setStatus(timeshareEntity.isStatus());
@@ -105,7 +105,7 @@ public class TimeshareConverter {
         entity.setName(model.getTimeshareName());
         entity.setDescription(model.getDescription());
         entity.setDate_start(model.getDateStart());
-        entity.setDate_end(model.getDateEnd());
+        entity.setDateEnd(model.getDateEnd());
         entity.setExchange(model.isExchange());
         entity.setPrice(model.getPrice());
         entity.setStatus(model.isStatus());

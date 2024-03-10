@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Repository
 public interface MyTimeShareRepository extends JpaRepository<Timeshare, UUID> {
-    @Query(value = " select * from timeshare", nativeQuery = true )
+    @Query(value = " select * from timeshare where status = 1", nativeQuery = true )
     List<Timeshare> showListTimeShare();
 
     @Query(value = " select * from timeshare \n"+

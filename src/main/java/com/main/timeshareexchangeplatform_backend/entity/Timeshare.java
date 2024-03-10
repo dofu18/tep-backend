@@ -28,8 +28,8 @@ public class Timeshare {
     @Column(columnDefinition = "DATE")
     private LocalDate date_start;
 
-    @Column(columnDefinition = "DATE")
-    private LocalDate date_end;
+    @Column(columnDefinition = "DATE", name = "date_end")
+    private LocalDate dateEnd;
 
     @Column
     private int nights;
