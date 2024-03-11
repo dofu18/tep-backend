@@ -1,5 +1,6 @@
 package com.main.timeshareexchangeplatform_backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,6 +32,9 @@ public class Timeshare {
     @Column(columnDefinition = "DATE", name = "date_end")
     private LocalDate dateEnd;
 
+    @Column(columnDefinition = "DATE", name = "create_date")
+    private LocalDate createDate;
+
     @Column
     private int nights;
 
@@ -52,15 +56,19 @@ public class Timeshare {
     @Column(columnDefinition = "nvarchar(max) not null")
     private String image_url;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "timeshare")
     private Booking booking;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "timeshare_request")
     private Collection<Request> requests;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "timeshare_response")
     private Collection<Request> response;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "timeshare")
 //    @JoinColumn(name = "")
     private Roomtype roomtype;

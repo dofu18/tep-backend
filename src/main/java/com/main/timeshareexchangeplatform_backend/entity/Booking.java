@@ -1,5 +1,6 @@
 package com.main.timeshareexchangeplatform_backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -67,6 +68,7 @@ public class Booking {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "timeshare_id")
     private Timeshare timeshare;

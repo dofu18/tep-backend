@@ -13,6 +13,7 @@ public interface ITimeshareService {
    Timeshare getTimeshareDetails(UUID timeshareId);
    TimeshareRespone getTimeshareByUserId(UUID userId);
 
+    List<TimeshareDTO> getTimesharesCreatedWithinLast30Days();
 
 
     List<TimeshareDTO> getAllTimeshareUser(UUID userId);

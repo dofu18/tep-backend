@@ -1,11 +1,14 @@
 package com.main.timeshareexchangeplatform_backend.repository;
 
+import com.main.timeshareexchangeplatform_backend.dto.TimeshareDTO;
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
+import org.hibernate.validator.cfg.defs.UUIDDef;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Time;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -25,4 +28,9 @@ public interface TimeshareRepository extends JpaRepository<Timeshare, UUID> {
     List<Timeshare> findTimshareByCity(@Param("city") String city);
 
     List<Timeshare> findByDateEndBefore(LocalDate currentDate);
+
+//    @Query(value = "SELECT * FROM Timeshare WHERE timeshare_id = :id", nativeQuery = true)
+//    Timeshare findTimeshareByTimeshareId(@Param("id") UUID id);
+    @Query("SELECT t FROM Timeshare t WHERE t.createDate >= :startDate AND t.createDate <= :endDate")
+    List<Timeshare> findTimesharesCreatedWithinLast30Days(LocalDate startDate, LocalDate endDate);
 }

@@ -25,4 +25,5 @@ public class ResponseTimeshare {
     private boolean exchange;
     private String city;
     private String image_url;
+    private LocalDate create_date;
 }

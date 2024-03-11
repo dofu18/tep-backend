@@ -2,12 +2,18 @@ package com.main.timeshareexchangeplatform_backend.service.impl;
 
 import com.main.timeshareexchangeplatform_backend.dto.*;
 import com.main.timeshareexchangeplatform_backend.converter.TimeshareConverter;
+import com.main.timeshareexchangeplatform_backend.entity.Roomtype;
+import com.main.timeshareexchangeplatform_backend.repository.DestinationRepository;
 import com.main.timeshareexchangeplatform_backend.repository.MyTimeShareRepository;
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
+import com.main.timeshareexchangeplatform_backend.repository.TimeshareRepository;
+import com.main.timeshareexchangeplatform_backend.repository.UserRepository;
 import com.main.timeshareexchangeplatform_backend.service.TimeShareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -20,7 +26,14 @@ import java.util.UUID;
         @Autowired
         private MyTimeShareRepository myTimeShareRepository;
         @Autowired
-    TimeshareConverter timeshareConverter;
+        TimeshareConverter timeshareConverter;
+        @Autowired
+        DestinationRepository destinationRepository;
+        @Autowired
+        UserRepository userRepository;
+        @Autowired
+        TimeshareRepository timeshareRepository;
+
         public List<TimeshareDTO> showListTimeShare(){
              List<Timeshare> timeshares = myTimeShareRepository.showListTimeShare();
             return timeshareConverter.convertToAccountPlaylistDTOList(timeshares);
@@ -47,6 +60,79 @@ import java.util.UUID;
     public TimeshareDTO getImageById(UUID timeshare_id) {
         return null;
     }
+
+    @Override
+    public String deactiveTimeshare(UUID timeshareId) {
+        Timeshare timeshare = timeshareRepository.findTimshareByTimeshareId(timeshareId);
+
+        if (timeshare != null) {
+            if (timeshare.isStatus()) {
+                timeshare.setStatus(false);
+                timeshareRepository.save(timeshare);
+                return "Successfully deactive timeshare";
+            } else {
+                return "Timeshare was deactive already";
+            }
+        }
+
+        return "No timeshare found";
+    }
+
+    @Override
+    public String updateTimeshare(TimeshareDTO timeshareDTO) {
+        Timeshare entity = timeshareRepository.getReferenceById(timeshareDTO.getTimeshare_id());
+        if (entity.getTimeshare_id() == timeshareDTO.getTimeshare_id()) {
+
+            entity.setCity(timeshareDTO.getCity());
+            entity.setDateEnd(timeshareDTO.getDate_end());
+            entity.setDate_start(timeshareDTO.getDate_start());
+            entity.setDescription(timeshareDTO.getDescription());
+            entity.setExchange(timeshareDTO.isExchange());
+            entity.setImage_url(timeshareDTO.getImage_url());
+            entity.setName(timeshareDTO.getName());
+            entity.setNights(timeshareDTO.getNights());
+            entity.setPrice(timeshareDTO.getPrice());
+            entity.setStatus(timeshareDTO.isStatus());
+            entity.setTimeshareCode(timeshareDTO.getTimeshare_code());
+            entity.setDestination(destinationRepository.getReferenceById(timeshareDTO.getDestination_id()));
+            entity.setPostBy(userRepository.getReferenceById(timeshareDTO.getOwner()));
+
+            timeshareRepository.save(entity);
+            return "Update Successfully";
+        }
+        return "Fail to update";
+    }
+
+//    @Override
+//    public List<Timeshare> getTimesharesCreatedWithinLast30Days() {
+//        LocalDate startDate = LocalDate.now().minusDays(30);
+//        return timeshareRepository.findTimesharesCreatedWithinLast30Days(startDate);
+//    }
+
+//    @Override
+//    public String updateTimeshare(TimeshareDTO timeshareDTO) {
+//        Timeshare entity = myTimeShareRepository.getReferenceById(timeshareDTO.getTimeshare_id());
+//        if (entity.getTimeshare_id() == timeshareDTO.getTimeshare_id()) {
+//
+//            entity.setCity(timeshareDTO.getCity());
+//            entity.setDateEnd(timeshareDTO.getDate_end());
+//            entity.setDate_start(timeshareDTO.getDate_start());
+//            entity.setDescription(timeshareDTO.getDescription());
+//            entity.setExchange(timeshareDTO.isExchange());
+//            entity.setImage_url(timeshareDTO.getImage_url());
+//            entity.setName(timeshareDTO.getName());
+//            entity.setNights(timeshareDTO.getNights());
+//            entity.setPrice(timeshareDTO.getPrice());
+//            entity.setStatus(timeshareDTO.isStatus());
+//            entity.setTimeshareCode(timeshareDTO.getTimeshare_code());
+//            entity.setDestination(destinationRepository.getReferenceById(timeshareDTO.getDestination_id()));
+//            entity.setPostBy(userRepository.getReferenceById(timeshareDTO.getOwner()));
+//
+//            myTimeShareRepository.save(entity);
+//            return "Update Successfully";
+//        }
+//        return "Fail to update";
+//    }
 
 
     @Override

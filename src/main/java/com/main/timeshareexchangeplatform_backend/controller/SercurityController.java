@@ -28,6 +28,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @RestController
@@ -72,6 +73,7 @@ public class SercurityController {
         data.setGender(userData.getGender());
         data.setEmail(userData.getEmail());
 
+
         String jwt = jwtUtility.generateToken(data);
         RefreshToken refreshToken = refreshTokenService.createRefreshToken(loginRequest.getUsername());
         return ResponseEntity.ok(new JwtResponse(jwt, refreshToken.getToken(), data));
@@ -81,6 +83,7 @@ public class SercurityController {
     public String addCustomer(@RequestBody UserDTO userInfo) {
         userInfo.setRole("member");// customer roleId = 3
         userInfo.setStatus(true);
+        userInfo.setCreateDate(LocalDate.now());
         return userService.addUser(converter.toEntity(userInfo));
     }
 

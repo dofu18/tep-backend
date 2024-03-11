@@ -2,6 +2,7 @@ package com.main.timeshareexchangeplatform_backend.service.impl;
 
 import com.main.timeshareexchangeplatform_backend.converter.UserConverter;
 import com.main.timeshareexchangeplatform_backend.dto.*;
+import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
 import com.main.timeshareexchangeplatform_backend.entity.User;
 import com.main.timeshareexchangeplatform_backend.exception.ResourceNotFoundException;
 import com.main.timeshareexchangeplatform_backend.repository.UserRepository;
@@ -82,6 +83,14 @@ public class UserServiceImp implements UserService {
         }
 
         return "No user found";
+    }
+
+    @Override
+    public List<UserDTO> getUsersCreatedWithinLast30Days() {
+        LocalDate endDate = LocalDate.now();
+        LocalDate startDate = endDate.minusDays(30);
+        List<User> timeshares = userRepository.findUsersCreatedWithinLast30Days(startDate, endDate);
+        return userConverter.convertToUserDTOList(timeshares);
     }
 
     //    @Override

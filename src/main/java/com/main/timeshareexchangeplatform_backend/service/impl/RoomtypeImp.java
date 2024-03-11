@@ -4,6 +4,7 @@ import com.main.timeshareexchangeplatform_backend.converter.RoomtypeConverter;
 import com.main.timeshareexchangeplatform_backend.dto.ResponseTimeshare;
 import com.main.timeshareexchangeplatform_backend.dto.RoomtypeDTO;
 import com.main.timeshareexchangeplatform_backend.dto.RoomtypeModel;
+import com.main.timeshareexchangeplatform_backend.entity.Destination;
 import com.main.timeshareexchangeplatform_backend.entity.Roomtype;
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
 import com.main.timeshareexchangeplatform_backend.repository.RoomtypeRepository;
@@ -49,6 +50,28 @@ public class RoomtypeImp implements IRoomtypeService {
         RoomtypeDTO roomtypeDTO= roomtypeConverter.toDTO(roomtypeRepository.getRoomtypeByTimeshareId(timeshare_id));
 
         return roomtypeDTO ;
+    }
+
+    @Override
+    public String updateRoomtype(RoomtypeModel roomtypeModel) {
+        Roomtype entity = roomtypeRepository.getReferenceById(roomtypeModel.getRoomtypeId());
+        if (entity.getRoomtype_id() == roomtypeModel.getRoomtypeId()) {
+
+            entity.setBath(roomtypeModel.getBath());
+            entity.setBed(roomtypeModel.getBed());
+            entity.setEntertainment(roomtypeModel.getEntertaiment());
+            entity.setFeatures(roomtypeModel.getFeatures());
+            entity.setKitchen(roomtypeModel.getKitchen());
+            entity.setName(roomtypeModel.getName());
+            entity.setPolicies(roomtypeModel.getPolicies());
+            entity.setRoom_view(roomtypeModel.getRoom_view());
+            entity.setSleeps(roomtypeModel.getSleeps());
+            entity.setTimeshare(timeshareRepository.getReferenceById(roomtypeModel.getTimeshareId()));
+
+            roomtypeRepository.save(entity);
+            return "Update Successfully";
+        }
+        return "Fail to update";
     }
 }
 

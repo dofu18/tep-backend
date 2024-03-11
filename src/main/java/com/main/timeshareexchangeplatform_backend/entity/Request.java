@@ -1,5 +1,6 @@
 package com.main.timeshareexchangeplatform_backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,10 +40,12 @@ public class Request {
     @JoinColumn(name = "resquest_by", unique = false)
     private User resquestby;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "timeshare_request_id", nullable = true)
     private Timeshare timeshare_request;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "timeshare_response_id", nullable = true)
     private Timeshare timeshare_response;
