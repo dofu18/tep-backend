@@ -3,6 +3,7 @@ package com.main.timeshareexchangeplatform_backend.service.impl;
 import com.main.timeshareexchangeplatform_backend.converter.DestinationConverter;
 import com.main.timeshareexchangeplatform_backend.dto.DestinationModel;
 import com.main.timeshareexchangeplatform_backend.entity.Destination;
+import com.main.timeshareexchangeplatform_backend.entity.Service_pack;
 import com.main.timeshareexchangeplatform_backend.repository.DestinationRepository;
 import com.main.timeshareexchangeplatform_backend.service.IDestinationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,22 @@ public class DestinationImpl implements IDestinationService {
         if (destinationRepository.getById(destination.getDestination_id()) != null)
         return true;
         else return false;
+    }
+
+    @Override
+    public String updateDestination(DestinationModel destinationModel) {
+        Destination entity = destinationRepository.getReferenceById(destinationModel.getDestinationId());
+        if (entity.getDestination_id() == destinationModel.getDestinationId()) {
+            entity.setAddress(destinationModel.getAddress());
+            entity.setBranch(destinationModel.getBranch());
+            entity.setCity(destinationModel.getCity());
+            entity.setCountry(destinationModel.getCountry());
+            entity.setDescription(destinationModel.getDescription());
+            entity.setName(destinationModel.getDesName());
+
+            destinationRepository.save(entity);
+            return "Update Successfully";
+        }
+        return "Fail to update";
     }
 }

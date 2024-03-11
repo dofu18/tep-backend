@@ -5,6 +5,7 @@ import com.main.timeshareexchangeplatform_backend.dto.LoginDTO;
 
 import com.main.timeshareexchangeplatform_backend.dto.ResponseTimeshare;
 
+import com.main.timeshareexchangeplatform_backend.dto.TimeshareDTO;
 import com.main.timeshareexchangeplatform_backend.dto.UserDTO;
 import com.main.timeshareexchangeplatform_backend.entity.User;
 import com.main.timeshareexchangeplatform_backend.reponse.ReponseObject;
@@ -49,6 +50,10 @@ public class UserController {
         return userService.findAll();
     }
 
+    @GetMapping("/last30days")
+    public List<UserDTO> getTimesharesCreatedWithinLast30Days() {
+        return userService.getUsersCreatedWithinLast30Days();
+    }
 
     @GetMapping("/details/{userid}")
 

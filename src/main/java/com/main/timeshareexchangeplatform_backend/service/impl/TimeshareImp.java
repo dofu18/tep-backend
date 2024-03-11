@@ -39,6 +39,14 @@ import java.util.stream.Collectors;
 
         }
 
+    @Override
+    public List<TimeshareDTO> getTimesharesCreatedWithinLast30Days() {
+        LocalDate endDate = LocalDate.now();
+        LocalDate startDate = endDate.minusDays(30);
+        List<Timeshare> timeshares = timeshareRepository.findTimesharesCreatedWithinLast30Days(startDate, endDate);
+        return timeshareConverter.convertToAccountPlaylistDTOList(timeshares);
+    }
+
     public void updateTimeshareStatus() {
         // Get timeshares with date_end before current date
         List<Timeshare> expiredTimeshares = timeshareRepository.findByDateEndBefore(LocalDate.now());

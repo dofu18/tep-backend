@@ -51,6 +51,7 @@ public class TimeshareConverter {
         dto.setDestination_id(timeshare.getDestination().getDestination_id());  // Assuming there is a Destination entity in Timeshare
         dto.setDescription(timeshare.getDescription());
         dto.setImage_url(timeshare.getImage_url());
+        dto.setCreate_date(timeshare.getCreateDate());
         return dto;
     }
 
@@ -73,6 +74,7 @@ public class TimeshareConverter {
         timeshare.setDestination(destinationRepository.getReferenceById(dto.getDestination_id()));
         timeshare.setDescription(dto.getDescription());
         timeshare.setImage_url(dto.getImage_url());
+        timeshare.setCreateDate(dto.getCreate_date());
         return timeshare;
     }
 
@@ -93,6 +95,7 @@ public class TimeshareConverter {
         dto.setPostBy(userConverter.toDTO(timeshareEntity.getPostBy()));
         dto.setDestinationModel(destinationConverter.toDTO(timeshareEntity.getDestination()));
         dto.setImage_url(timeshareEntity.getImage_url());
+        dto.setCreate_date(timeshareEntity.getCreateDate());
 
         return dto;
     }
@@ -115,6 +118,7 @@ public class TimeshareConverter {
         entity.setPostBy(userConverter.toEntity(model.getPostBy()));
         entity.setDestination(destinationConverter.toEntity(model.getDestinationModel()));
         entity.setImage_url((model.getImage_url()));
+        entity.setCreateDate(model.getCreate_date());
         return entity;
     }
 

@@ -10,7 +10,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RoomtypeModel {
-    private String RoomtypeId;
+    private UUID roomtypeId;
     private int bath;
     private int bed;
     private String entertaiment;

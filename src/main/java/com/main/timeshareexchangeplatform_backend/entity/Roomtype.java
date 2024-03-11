@@ -1,5 +1,6 @@
 package com.main.timeshareexchangeplatform_backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -45,6 +46,7 @@ public class Roomtype {
     @Column(columnDefinition = "nvarchar(max)")
     private String policies;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "timeshare_id")
     private Timeshare timeshare;

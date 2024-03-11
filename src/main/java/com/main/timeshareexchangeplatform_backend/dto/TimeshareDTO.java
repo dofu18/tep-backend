@@ -19,6 +19,7 @@ public class TimeshareDTO {
     private int nights;
     private long price;
     private boolean status;
+    private String timeshare_code;
     private String name;
     private UUID  owner;
     private UUID destination_id;
@@ -26,4 +27,5 @@ public class TimeshareDTO {
     private String image_url;
     private String city;
     private boolean exchange;
+    private LocalDate create_date;
 }

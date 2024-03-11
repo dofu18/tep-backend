@@ -63,6 +63,9 @@ public class User {
     @Column (columnDefinition = "nvarchar(10)", nullable = false)
     private String role;
 
+    @Column(columnDefinition = "DATE", name = "create_date")
+    private LocalDate createDate;
+
     @OneToMany(mappedBy = "user")
     private Collection<Booking> bookings;
 

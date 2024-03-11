@@ -1,11 +1,15 @@
 package com.main.timeshareexchangeplatform_backend.converter;
 
+import com.main.timeshareexchangeplatform_backend.dto.TimeshareDTO;
 import com.main.timeshareexchangeplatform_backend.dto.UserDTO;
 import com.main.timeshareexchangeplatform_backend.dto.UserModel;
+import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
 import com.main.timeshareexchangeplatform_backend.entity.User;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class UserConverter {
@@ -30,6 +34,7 @@ public class UserConverter {
         dto.setPhone(user.getPhone());
         dto.setRole(user.getRole());
         dto.setUser_name(user.getUsername());
+        dto.setCreateDate(user.getCreateDate());
 
         return dto;
     }
@@ -47,7 +52,16 @@ public class UserConverter {
         entity.setPhone(userDTO.getPhone());
         entity.setRole(userDTO.getRole());
         entity.setUsername(userDTO.getUser_name());
+        entity.setCreateDate(userDTO.getCreateDate());
 
         return entity;
+    }
+
+    public List<UserDTO> convertToUserDTOList(List<User> UserList) {
+        List<UserDTO> UserDTOList = new ArrayList<>();
+        for (User accountPlaylist : UserList) {
+            UserDTOList.add(toDTO(accountPlaylist));
+        }
+        return UserDTOList;
     }
 }

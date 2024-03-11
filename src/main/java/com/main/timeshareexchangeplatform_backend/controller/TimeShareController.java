@@ -1,9 +1,6 @@
 package com.main.timeshareexchangeplatform_backend.controller;
 
-import com.main.timeshareexchangeplatform_backend.dto.ModelTimeshare;
-import com.main.timeshareexchangeplatform_backend.dto.ResponseTimeshare;
-import com.main.timeshareexchangeplatform_backend.dto.TimeshareDTO;
-import com.main.timeshareexchangeplatform_backend.dto.TimeshareRespone;
+import com.main.timeshareexchangeplatform_backend.dto.*;
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
 import com.main.timeshareexchangeplatform_backend.service.ITimeshareService;
 import com.main.timeshareexchangeplatform_backend.service.TimeShareService;
@@ -12,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Time;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -88,7 +87,32 @@ public class TimeShareController {
 
     @PostMapping({"/createTimeshare"})
     public boolean createTimeshare(@RequestBody TimeshareDTO timeshareDTO){
+        timeshareDTO.setCreate_date(LocalDate.now());
         return timeShareService1.createTimeshare(timeshareDTO) ;
+    }
+
+    @PutMapping("/deactive/{id}")
+    public ResponseEntity<String> deactiveTimeshare(@PathVariable("id") UUID id) {
+        String result = timeShareService1.deactiveTimeshare(id);
+        if (result.equals("Successfully deactive timeshare")) {
+            return ResponseEntity.ok(result);
+        } else if (result.equals("Timeshare was deactive already")) {
+            return ResponseEntity.badRequest().body(result);
+        } else if (result.equals("No timeshare found")) {
+            return ResponseEntity.badRequest().body(result);
+        }
+        return null;
+    }
+
+    @PutMapping("/edit")
+    public String updateRoomtype(@RequestBody TimeshareDTO timeshareDTO) {
+
+        return timeShareService1.updateTimeshare(timeshareDTO);
+    }
+
+    @GetMapping("/last30days")
+    public List<TimeshareDTO> getTimesharesCreatedWithinLast30Days() {
+        return timeShareService.getTimesharesCreatedWithinLast30Days();
     }
 
 }

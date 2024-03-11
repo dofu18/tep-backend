@@ -9,6 +9,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -40,4 +42,6 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     @Query(value = "SELECT * FROM users u WHERE u.user_id = :user_id", nativeQuery = true)
     User userDetail(@Param("user_id") UUID user_id);
 
+    @Query("SELECT u FROM User u WHERE u.createDate >= :startDate AND u.createDate <= :endDate")
+    List<User> findUsersCreatedWithinLast30Days(LocalDate startDate, LocalDate endDate);
 }

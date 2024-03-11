@@ -1,9 +1,6 @@
 package com.main.timeshareexchangeplatform_backend.controller;
 
-import com.main.timeshareexchangeplatform_backend.dto.ResponseTimeshare;
-import com.main.timeshareexchangeplatform_backend.dto.RoomtypeDTO;
-import com.main.timeshareexchangeplatform_backend.dto.RoomtypeModel;
-import com.main.timeshareexchangeplatform_backend.dto.TimeshareDTO;
+import com.main.timeshareexchangeplatform_backend.dto.*;
 
 import com.main.timeshareexchangeplatform_backend.repository.RoomtypeRepository;
 import com.main.timeshareexchangeplatform_backend.service.IRoomtypeService;
@@ -53,5 +50,11 @@ public class RoomtypeController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No details found for timeshareId: " + timeshare_id);
         }
+    }
+
+    @PutMapping("/edit")
+    public String updateRoomtype(@RequestBody RoomtypeModel roomtypeModel) {
+
+        return iRoomtypeService.updateRoomtype(roomtypeModel);
     }
 }

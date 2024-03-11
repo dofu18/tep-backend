@@ -2,6 +2,7 @@ package com.main.timeshareexchangeplatform_backend.controller;
 
 import com.main.timeshareexchangeplatform_backend.dto.DestinationDTO;
 import com.main.timeshareexchangeplatform_backend.dto.DestinationModel;
+import com.main.timeshareexchangeplatform_backend.dto.ServicePackDTO;
 import com.main.timeshareexchangeplatform_backend.service.IDestinationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,5 +27,10 @@ public class DestinationController {
 
         return DestinationService.creatDestination(destinationDTO);
     }
-    
+
+    @PutMapping("/edit")
+    public String updateDedstination(@RequestBody DestinationModel destinationModel) {
+
+        return DestinationService.updateDestination(destinationModel);
+    }
 }
