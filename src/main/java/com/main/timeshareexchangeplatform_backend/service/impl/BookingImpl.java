@@ -4,6 +4,7 @@ import com.main.timeshareexchangeplatform_backend.converter.BookingConverter;
 import com.main.timeshareexchangeplatform_backend.converter.TimeshareConverter;
 import com.main.timeshareexchangeplatform_backend.dto.BookingModel;
 import com.main.timeshareexchangeplatform_backend.dto.BookingResponse;
+import com.main.timeshareexchangeplatform_backend.dto.DestinationModel;
 import com.main.timeshareexchangeplatform_backend.dto.ResponseTimeshare;
 import com.main.timeshareexchangeplatform_backend.entity.Booking;
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
@@ -76,7 +77,7 @@ public class BookingImpl implements IBookingService {
             if (timeshare != null) {
                 timeshare.setStatus(false);
                 timeshareBooking.setTimeshare(timeshare);
-                timeshare = timeshareRepository.save(timeshare);
+                timeshareRepository.save(timeshare);
             }
 
             BookingModel result = bookingConverter.toDTO(booking);
@@ -92,6 +93,14 @@ public class BookingImpl implements IBookingService {
         List<BookingResponse> bookingRespones = bookingsEntity.stream().map(bookingConverter::toRespone).collect(Collectors.toList());
 
         return bookingRespones;
+    }
+
+    @Override
+    public List<BookingResponse> findAll() {
+        List<BookingResponse> bookingModel = bookingRepository.findAll().stream().map(bookingConverter::toRespone)
+                .collect(Collectors.toList());
+
+        return bookingModel;
     }
 
     private String generateUniqueBookingCode() {

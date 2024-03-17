@@ -23,7 +23,7 @@ public class TimeShareController {
     TimeShareService timeShareService1;
     @GetMapping({"/showall"})
     public ResponseEntity<?> showAllTimeShare() {
-        List<TimeshareDTO> t = timeShareService.showListTimeShare();
+        List<ResponseTimeshare> t = timeShareService.showListTimeShare();
         if (t != null) {
             return ResponseEntity.status(HttpStatus.OK).body(t);
         } else {
@@ -31,6 +31,36 @@ public class TimeShareController {
         }
 
     }
+
+    @GetMapping({"/showAllTimeshareInactive"})
+    public ResponseEntity<?> showAllTimeShareInactive() {
+        List<ResponseTimeshare> t = timeShareService.showListTimeShareInactive();
+        if (t != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(t);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No timeshares found.");
+        }
+
+    }
+
+    @PostMapping({"homePage/{owner}"})
+    public ResponseEntity<?> showAllTimeshareTrueExceptOwner(@PathVariable("owner") UUID id) {
+        List<ResponseTimeshare> t = timeShareService.getAllTimeshareTrueExceptOwner(id);
+        if (t != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(t);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No timeshares found.");
+        }
+
+    }
+
+    @GetMapping("/viewAll")
+    public List<ResponseTimeshare> findAll() {
+
+        return timeShareService.findAll();
+    }
+
+
     @GetMapping("/details/{timeshareId}")
 
     public ResponseEntity<?> getTimeshareDetails(@PathVariable UUID timeshareId) {

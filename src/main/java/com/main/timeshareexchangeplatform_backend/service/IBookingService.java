@@ -11,4 +11,6 @@ public interface IBookingService {
     BookingModel addBooking(BookingModel bookingModel);
 
     List<BookingResponse> getAllBookingByUserId(UUID userid);
+
+    List<BookingResponse> findAll();
 }

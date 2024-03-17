@@ -2,6 +2,7 @@ package com.main.timeshareexchangeplatform_backend.controller;
 
 import com.main.timeshareexchangeplatform_backend.dto.BookingModel;
 import com.main.timeshareexchangeplatform_backend.dto.BookingResponse;
+import com.main.timeshareexchangeplatform_backend.dto.DestinationModel;
 import com.main.timeshareexchangeplatform_backend.dto.ResponseTimeshare;
 import com.main.timeshareexchangeplatform_backend.repository.BookingRepository;
 import com.main.timeshareexchangeplatform_backend.service.IBookingService;
@@ -45,4 +46,9 @@ public class BookingController {
 
     }
 
+    @GetMapping("/viewAll")
+    public List<BookingResponse> findAll() {
+
+        return bookingService.findAll();
+    }
 }

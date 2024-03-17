@@ -29,6 +29,13 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     @Query(value = "SELECT * FROM users WHERE user_id = :id", nativeQuery = true)
     User findUserByID(@Param("id") UUID id);
 
+    @Query(value = "SELECT * FROM users u WHERE u.status = 0", nativeQuery = true)
+    List<User> getAccountBanned();
+
+    @Query(value = "SELECT * FROM users u WHERE u.status = 1", nativeQuery = true)
+    List<User> getAccountActive();
+
+
     User findUserByUsername(String username);
 
     @Modifying

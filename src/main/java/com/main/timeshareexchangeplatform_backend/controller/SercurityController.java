@@ -91,6 +91,7 @@ public class SercurityController {
     public String addAdmin(@RequestBody UserDTO userInfo) {
         userInfo.setRole("admin");// customer roleId = 3
         userInfo.setStatus(true);
+        userInfo.setCreateDate(LocalDate.now());
         return userService.addUser(converter.toEntity(userInfo));
     }
 

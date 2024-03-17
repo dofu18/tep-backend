@@ -49,6 +49,18 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    public List<UserDTO> getAccountBanned() {
+        List<User> user = userRepository.getAccountBanned();
+        return userConverter.convertToUserDTOList(user);
+    }
+
+    @Override
+    public List<UserDTO> getAccountActive() {
+        List<User> user = userRepository.getAccountActive();
+        return userConverter.convertToUserDTOList(user);
+    }
+
+    @Override
     public User findUserByUsername(String username) {
         return userRepository.findUserByUsername(username);
     }
@@ -130,7 +142,6 @@ public class UserServiceImp implements UserService {
         UserDTO userDTO=new UserDTO();
         userDTO.setUser_id(UUID.fromString(userId));
         userDTO.setUser_name(userName);
-        userDTO.setPassword(password);
         userDTO.setFullname(fullName);
         userDTO.setEmail(email);
         userDTO.setDob(String.valueOf(dob));
