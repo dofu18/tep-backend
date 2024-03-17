@@ -30,7 +30,6 @@ public class UserConverter {
         dto.setStatus(user.isStatus());
         dto.setEmail(user.getEmail());
         dto.setFullname(user.getFullname());
-        dto.setPassword(user.getPassword());
         dto.setPhone(user.getPhone());
         dto.setRole(user.getRole());
         dto.setUser_name(user.getUsername());
@@ -48,7 +47,6 @@ public class UserConverter {
         entity.setStatus(userDTO.isStatus());
         entity.setEmail(userDTO.getEmail());
         entity.setFullname(userDTO.getFullname());
-        entity.setPassword(userDTO.getPassword());
         entity.setPhone(userDTO.getPhone());
         entity.setRole(userDTO.getRole());
         entity.setUsername(userDTO.getUser_name());

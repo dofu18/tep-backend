@@ -64,6 +64,28 @@ public class UserController {
         return userDTO;
     }
 
+    @GetMapping({"/showAllUserBanned"})
+    public ResponseEntity<?> showAllUserBanned() {
+        List<UserDTO> t = userService.getAccountBanned();
+        if (t != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(t);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No users found.");
+        }
+
+    }
+
+    @GetMapping({"/showAllUserActive"})
+    public ResponseEntity<?> showAllUserActive() {
+        List<UserDTO> t = userService.getAccountActive();
+        if (t != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(t);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No users found.");
+        }
+
+    }
+
 //    @GetMapping("/getUserById/{userId}")
 //    public ResponseEntity<?> getUserById (@PathVariable UUID userId){
 //        UserDTO userDTO= userService.getUserById(userId);

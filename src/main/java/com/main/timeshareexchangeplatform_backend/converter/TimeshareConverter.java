@@ -132,5 +132,12 @@ public class TimeshareConverter {
         return StudentDTOList;
     }
 
+    public List<ResponseTimeshare> convertListToResponse(List<Timeshare> timeshares) {
+        List<ResponseTimeshare> timesharesDto = new ArrayList<>();
+        for (Timeshare timesharelist : timeshares) {
+            timesharesDto.add(toRespone(timesharelist));
+        }
+        return timesharesDto;
+    }
 
 }

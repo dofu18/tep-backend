@@ -32,6 +32,7 @@ public class RequestConverter {
         entity.setTimeshare_request(timeshareConverter.toResEntity(model.getTimeshare_request_id()));
         entity.setTimeshare_response(timeshareConverter.toResEntity(model.getTimeshare_response_id()));
         entity.setMessage(model.getMessage());
+        entity.setRequestCode(model.getRequest_code());
 
         return entity;
     }
@@ -47,6 +48,7 @@ public class RequestConverter {
         dto.setTimeshare_response_id(timeshareConverter.toRespone((entity.getTimeshare_response())));
         dto.setResponse_by(userConverter.toDTO(entity.getResponseby()));
         dto.setMessage(entity.getMessage());
+        dto.setRequest_code(entity.getRequestCode());
 
         return dto;
     }

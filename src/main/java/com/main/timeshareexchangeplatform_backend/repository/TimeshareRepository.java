@@ -27,10 +27,16 @@ public interface TimeshareRepository extends JpaRepository<Timeshare, UUID> {
     @Query(value = "SELECT * FROM Timeshare t WHERE t.status = 1 AND t.city = :city", nativeQuery = true)
     List<Timeshare> findTimshareByCity(@Param("city") String city);
 
+    @Query(value = "SELECT * FROM Timeshare t WHERE t.status = 1 AND t.owner <> :owner", nativeQuery = true)
+    List<Timeshare> getAllTimeshareTrueAndExceptOwner(@Param("owner") UUID owner);
+
     List<Timeshare> findByDateEndBefore(LocalDate currentDate);
 
 //    @Query(value = "SELECT * FROM Timeshare WHERE timeshare_id = :id", nativeQuery = true)
 //    Timeshare findTimeshareByTimeshareId(@Param("id") UUID id);
     @Query("SELECT t FROM Timeshare t WHERE t.createDate >= :startDate AND t.createDate <= :endDate")
     List<Timeshare> findTimesharesCreatedWithinLast30Days(LocalDate startDate, LocalDate endDate);
+
+    @Query(value = " select * from timeshare where status = 0", nativeQuery = true )
+    List<Timeshare> showListTimeShareInactive();
 }

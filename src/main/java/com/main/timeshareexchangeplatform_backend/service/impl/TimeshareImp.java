@@ -31,11 +31,11 @@ import java.util.stream.Collectors;
         TimeshareRepository timeshareRepository;
 
 
-        public List<TimeshareDTO> showListTimeShare(){
+        public List<ResponseTimeshare> showListTimeShare(){
             updateTimeshareStatus();
              List<Timeshare> timeshares = myTimeShareRepository.showListTimeShare();
 //             updateTimeshareStatus();
-            return timeshareConverter.convertToAccountPlaylistDTOList(timeshares);
+            return timeshareConverter.convertListToResponse(timeshares);
 
         }
 
@@ -111,6 +111,28 @@ import java.util.stream.Collectors;
         List<ResponseTimeshare> timeshare = timeshareRepository.findTimshareByCity(city).stream()
                 .map(timeshareConverter::toRespone).collect(Collectors.toList());
         return timeshare;
+    }
+
+    @Override
+    public List<ResponseTimeshare> getAllTimeshareTrueExceptOwner(UUID owner) {
+        updateTimeshareStatus();
+        List<Timeshare> timeshares = timeshareRepository.getAllTimeshareTrueAndExceptOwner(owner);
+//             updateTimeshareStatus();
+        return timeshareConverter.convertListToResponse(timeshares);
+    }
+
+    @Override
+    public List<ResponseTimeshare> findAll() {
+        List<ResponseTimeshare> timeshareModel = timeshareRepository.findAll().stream().map(timeshareConverter::toRespone)
+                .collect(Collectors.toList());
+
+        return timeshareModel;
+    }
+
+    @Override
+    public List<ResponseTimeshare> showListTimeShareInactive() {
+        List<Timeshare> timeshares = timeshareRepository.showListTimeShareInactive();
+        return timeshareConverter.convertListToResponse(timeshares);
     }
 
     @Override

@@ -26,7 +26,7 @@ public class RoomtypeController {
     IRoomtypeService iRoomtypeService;
     @GetMapping({"/home"})
     public ResponseEntity<?> showAllTimeShare() {
-        List<TimeshareDTO> t = timeShareService.showListTimeShare();
+        List<ResponseTimeshare> t = timeShareService.showListTimeShare();
         if (t != null) {
             return ResponseEntity.status(HttpStatus.OK).body(t);
         } else {

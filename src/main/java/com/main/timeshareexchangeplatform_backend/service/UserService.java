@@ -14,6 +14,10 @@ public interface UserService {
 
     List<UserDTO> findAll();
 
+    List<UserDTO> getAccountBanned();
+
+    List<UserDTO> getAccountActive();
+
     User findUserByUsername(String username);
 
     String changePassword(User user, String passwordEnter, String newPassword);
