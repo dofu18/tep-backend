@@ -136,7 +136,7 @@ import java.util.UUID;
 
 
     @Override
-    public Boolean createTimeshare(TimeshareDTO timeshareRespone) {
+    public ResponseTimeshare createTimeshare(TimeshareDTO timeshareRespone) {
             Timeshare timeshare= timeshareConverter.toEntity(timeshareRespone);
 
         timeshare.setTimeshareCode(generateUniqueTimeshareCode());
@@ -154,7 +154,8 @@ import java.util.UUID;
         timeshare.setNights(night);
         timeshare.setPrice(timeshareRespone.getPrice());
         myTimeShareRepository.save(timeshare);
-        return true;
+        ResponseTimeshare timeshareDTO= timeshareConverter.toRespone(timeshare);
+        return timeshareDTO;
     }
 //     request.setTimeshare_response(timeshareService.getReferenceById(requestModel.getTimeshare_response_id()));
 //            request.setResponseby(request.getTimeshare_response().getPostBy());

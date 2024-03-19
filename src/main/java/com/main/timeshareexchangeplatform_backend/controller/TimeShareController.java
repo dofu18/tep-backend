@@ -116,7 +116,7 @@ public class TimeShareController {
     }
 
     @PostMapping({"/createTimeshare"})
-    public boolean createTimeshare(@RequestBody TimeshareDTO timeshareDTO){
+    public ResponseTimeshare createTimeshare(@RequestBody TimeshareDTO timeshareDTO){
         timeshareDTO.setCreate_date(LocalDate.now());
         return timeShareService1.createTimeshare(timeshareDTO) ;
     }
