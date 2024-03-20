@@ -19,4 +19,5 @@ public interface TransactionRepository extends JpaRepository<Transaction_history
 
     @Query(value = "SELECT * FROM TRANSACTION_HISTORY t WHERE t.user_id = :user_id", nativeQuery = true)
     List<Transaction_history> findAllTransactionByUserId(@Param("user_id") UUID user_id);
+
 }

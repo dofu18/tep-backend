@@ -47,6 +47,9 @@ public class Timeshare {
     @Column
     private Boolean exchange;
 
+    @Column
+    private UUID temporary_owner;
+
     @Column (columnDefinition = "nvarchar(max)")
     private String description;
 
