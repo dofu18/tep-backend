@@ -74,11 +74,20 @@ public class RequestImpl implements IRequest {
     @Override
     public String reponseTimeshareExchange(int status, UUID request_id) {
         Request request = requestRepository.getReferenceById(request_id);
-
+//        UUID temporary_owner_1 = request.getResquestby().getUser_id();
+//        UUID temporary_owner_2 = request.getResponseby().getUser_id();
+        UUID timeshare_id_1 = request.getTimeshare_request().getTimeshare_id();
+        UUID timeshare_id_2 = request.getTimeshare_response().getTimeshare_id();
+        Timeshare timeshare_1 = timeshareRepository.findById(timeshare_id_1).orElse(null);
+        Timeshare timeshare_2 = timeshareRepository.findById(timeshare_id_2).orElse(null);
         if (request != null) {
             request.setStatus(status);
             requestRepository.save(request);
             if (request.getStatus() == 1) {
+                timeshare_1.setTemporary_owner(request.getResponseby().getUser_id());
+                timeshare_2.setTemporary_owner(request.getResquestby().getUser_id());
+                timeshareRepository.save(timeshare_1);
+                timeshareRepository.save(timeshare_2);
                 return "Exchange timeshare successfully";
             } else if (request.getStatus() == 2){
                 return "You have rejected to exchange timeshare";

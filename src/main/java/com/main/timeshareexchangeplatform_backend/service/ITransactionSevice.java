@@ -12,4 +12,6 @@ public interface ITransactionSevice {
     TransactionDTO addTransaction(TransactionDTO transactionDTO);
 
     List<TransactionResponse> getAllTransactionByUserId(UUID userid);
+
+    List<TransactionResponse> getServicePackByUserId(UUID userid);
 }

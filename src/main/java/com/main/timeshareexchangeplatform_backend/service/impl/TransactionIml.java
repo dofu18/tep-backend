@@ -85,6 +85,14 @@ public class TransactionIml implements ITransactionSevice {
         return bookingRespones;
     }
 
+    @Override
+    public List<TransactionResponse> getServicePackByUserId(UUID userid) {
+        List<Transaction_history> transactionHistories = transactionRepository.findAllTransactionByUserId(userid);
+        List<TransactionResponse> transactionResponses = transactionHistories.stream().map(transactionConverter::toRespone).collect(Collectors.toList());
+
+        return transactionResponses;
+    }
+
     private String generateUniqueTransactionCode() {
         // Get current date and time
         LocalDateTime now = LocalDateTime.now();

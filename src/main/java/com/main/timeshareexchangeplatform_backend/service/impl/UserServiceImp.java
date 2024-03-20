@@ -25,7 +25,7 @@ public class UserServiceImp implements UserService {
     @Autowired
     UserConverter userConverter;
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    PasswordEncoder passwordEncoder;
 
     @Override
     public String addUser(User userInfo) {

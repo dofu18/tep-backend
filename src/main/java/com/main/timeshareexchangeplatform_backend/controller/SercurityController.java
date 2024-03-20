@@ -1,7 +1,9 @@
 package com.main.timeshareexchangeplatform_backend.controller;
 
 import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
+import com.main.timeshareexchangeplatform_backend.converter.SignUpConverter;
 import com.main.timeshareexchangeplatform_backend.converter.UserConverter;
+import com.main.timeshareexchangeplatform_backend.dto.SignUpDTO;
 import com.main.timeshareexchangeplatform_backend.dto.UserDTO;
 import com.main.timeshareexchangeplatform_backend.entity.RefreshToken;
 import com.main.timeshareexchangeplatform_backend.entity.User;
@@ -52,6 +54,9 @@ public class SercurityController {
     @Autowired
     private RefreshTokenRepository refreshTokenRepository;
 
+    @Autowired
+    SignUpConverter signUpConverter;
+
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticationUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -80,19 +85,19 @@ public class SercurityController {
     }
 
     @PostMapping("/signup")
-    public String addCustomer(@RequestBody UserDTO userInfo) {
+    public String addCustomer(@RequestBody SignUpDTO userInfo) {
         userInfo.setRole("member");// customer roleId = 3
         userInfo.setStatus(true);
         userInfo.setCreateDate(LocalDate.now());
-        return userService.addUser(converter.toEntity(userInfo));
+        return userService.addUser(signUpConverter.toEntity(userInfo));
     }
 
     @PostMapping("/signupAdmin")
-    public String addAdmin(@RequestBody UserDTO userInfo) {
+    public String addAdmin(@RequestBody SignUpDTO userInfo) {
         userInfo.setRole("admin");// customer roleId = 3
         userInfo.setStatus(true);
         userInfo.setCreateDate(LocalDate.now());
-        return userService.addUser(converter.toEntity(userInfo));
+        return userService.addUser(signUpConverter.toEntity(userInfo));
     }
 
     @PutMapping("/update-role/{id}")

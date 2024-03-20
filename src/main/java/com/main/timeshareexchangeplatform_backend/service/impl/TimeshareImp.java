@@ -54,6 +54,7 @@ import java.util.stream.Collectors;
         // Update status to false for each expired timeshare
         for (Timeshare timeshare : expiredTimeshares) {
             timeshare.setStatus(false);
+            timeshare.setTemporary_owner(null);
             timeshareRepository.save(timeshare);
         }
     }
