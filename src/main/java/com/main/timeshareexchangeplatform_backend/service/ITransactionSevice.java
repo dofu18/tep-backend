@@ -14,4 +14,8 @@ public interface ITransactionSevice {
     List<TransactionResponse> getAllTransactionByUserId(UUID userid);
 
     List<TransactionResponse> getServicePackByUserId(UUID userid);
+
+    long getTotalSum();
+
+    long getTotalSumByUserId(UUID userId);
 }
