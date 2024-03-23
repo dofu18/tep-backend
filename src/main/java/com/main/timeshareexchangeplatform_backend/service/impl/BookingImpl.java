@@ -103,6 +103,18 @@ public class BookingImpl implements IBookingService {
         return bookingModel;
     }
 
+    @Override
+    public long getTotalSum() {
+        List<Booking> bookings = bookingRepository.findAll();
+        return bookings.stream().mapToLong(Booking::getTotal).sum();
+    }
+
+    @Override
+    public long getTotalSumByUserId(UUID userId) {
+        List<Booking> bookings = bookingRepository.findAllBookingByUserId(userId);
+        return bookings.stream().mapToLong(Booking::getTotal).sum();
+    }
+
     private String generateUniqueBookingCode() {
         // Get current date and time
         LocalDateTime now = LocalDateTime.now();

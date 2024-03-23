@@ -51,4 +51,14 @@ public class BookingController {
 
         return bookingService.findAll();
     }
+
+    @GetMapping("/total-booking-timeshare")
+    public long getTotalSum() {
+        return bookingService.getTotalSum();
+    }
+
+    @GetMapping("/total-booking-even-user/{userId}")
+    public long getTotalSumByUserId(@PathVariable UUID userId) {
+        return bookingService.getTotalSumByUserId(userId);
+    }
 }

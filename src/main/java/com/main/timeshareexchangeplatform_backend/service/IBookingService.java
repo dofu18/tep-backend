@@ -13,4 +13,8 @@ public interface IBookingService {
     List<BookingResponse> getAllBookingByUserId(UUID userid);
 
     List<BookingResponse> findAll();
+
+    long getTotalSum();
+
+    long getTotalSumByUserId(UUID userId);
 }

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -22,11 +23,14 @@ public class Transaction_history {
     @Column(columnDefinition = "nvarchar(50)", name = "transaction_code", unique = true)
     private String transactionCode;
 
-    @Column(columnDefinition = "DATETIME", nullable = false)
+    @Column(columnDefinition = "DATETIME")
     private LocalDateTime transaction_time;
 
     @Column(nullable = false)
     private long transaction_fee;
+
+    @Column(columnDefinition = "DATETIME", name = "expired_date")
+    private LocalDateTime expireDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
