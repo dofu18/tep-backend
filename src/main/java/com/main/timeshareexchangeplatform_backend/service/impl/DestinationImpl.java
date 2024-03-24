@@ -30,7 +30,7 @@ public class DestinationImpl implements IDestinationService {
     }
 
     @Override
-    public boolean creatDestination(DestinationModel destinationModel) {
+    public DestinationModel creatDestination(DestinationModel destinationModel) {
         Destination destination = new Destination();
 
         destination.setName(destinationModel.getDesName());
@@ -41,9 +41,8 @@ public class DestinationImpl implements IDestinationService {
         destination.setAddress(destinationModel.getAddress());
 
         destinationRepository.save(destination);
-        if (destinationRepository.getById(destination.getDestination_id()) != null)
-        return true;
-        else return false;
+        DestinationModel result= destinationConverter.toDTO(destination);
+        return result;
     }
 
     @Override

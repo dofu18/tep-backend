@@ -36,7 +36,7 @@ public class RoomtypeController {
     }
 
     @PostMapping({"/createRoomtype"})
-    public boolean createRoomtype(@RequestBody RoomtypeModel roomtypeDTO){
+    public RoomtypeDTO createRoomtype(@RequestBody RoomtypeModel roomtypeDTO){
         return iRoomtypeService.createRoomtype(roomtypeDTO);
     }
 

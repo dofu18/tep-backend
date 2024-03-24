@@ -8,7 +8,7 @@ import java.util.List;
 public interface IDestinationService {
     List<DestinationModel> findAll();
 
-    boolean creatDestination(DestinationModel destinationModel);
+    DestinationModel creatDestination(DestinationModel destinationModel);
 
     String updateDestination(DestinationModel destinationModel);
 }

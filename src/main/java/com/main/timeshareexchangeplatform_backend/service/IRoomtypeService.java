@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface IRoomtypeService {
 
-    boolean createRoomtype(RoomtypeModel roomtypeDTO);
+    RoomtypeDTO createRoomtype(RoomtypeModel roomtypeDTO);
 
     RoomtypeDTO getRoomtypeByTimeshareId(UUID roomtype_id);
 

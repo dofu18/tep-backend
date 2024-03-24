@@ -23,7 +23,7 @@ public class DestinationController {
     }
 
     @PostMapping("/createDestination")
-    public boolean createDestination(@RequestBody DestinationModel destinationDTO){
+    public DestinationModel createDestination(@RequestBody DestinationModel destinationDTO){
 
         return DestinationService.creatDestination(destinationDTO);
     }

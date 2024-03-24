@@ -21,5 +21,5 @@ public class RoomtypeDTO {
     private String name;
     private String policies;
     private String roomview;
-    private Timeshare timeshareId;
+    private TimeshareDTO timeshareId;
 }

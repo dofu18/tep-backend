@@ -26,23 +26,23 @@ public class RoomtypeImp implements IRoomtypeService {
     @Autowired
     TimeshareRepository timeshareRepository;
     @Override
-    public boolean createRoomtype(RoomtypeModel roomtypeDTO) {
+    public RoomtypeDTO createRoomtype(RoomtypeModel roomtypemodel) {
         Roomtype roomtype= new Roomtype();
 
-        roomtype.setRoom_view(roomtypeDTO.getRoom_view());
-        roomtype.setBath(roomtypeDTO.getBath());
-        roomtype.setBed(roomtypeDTO.getBed());
-        roomtype.setName(roomtypeDTO.getName());
-        roomtype.setFeatures(roomtypeDTO.getFeatures());
-        roomtype.setKitchen(roomtypeDTO.getKitchen());
-        roomtype.setEntertainment(roomtypeDTO.getEntertaiment());
-        roomtype.setPolicies(roomtypeDTO.getPolicies());
-        roomtype.setSleeps(roomtypeDTO.getSleeps());
-        roomtype.setTimeshare(timeshareRepository.getReferenceById(roomtypeDTO.getTimeshareId()));
+
+        roomtype.setRoom_view(roomtypemodel.getRoom_view());
+        roomtype.setBath(roomtypemodel.getBath());
+        roomtype.setBed(roomtypemodel.getBed());
+        roomtype.setName(roomtypemodel.getName());
+        roomtype.setFeatures(roomtypemodel.getFeatures());
+        roomtype.setKitchen(roomtypemodel.getKitchen());
+        roomtype.setEntertainment(roomtypemodel.getEntertaiment());
+        roomtype.setPolicies(roomtypemodel.getPolicies());
+        roomtype.setSleeps(roomtypemodel.getSleeps());
+        roomtype.setTimeshare(timeshareRepository.getReferenceById(roomtypemodel.getTimeshareId()));
         roomtypeRepository.save(roomtype);
-        if(roomtypeRepository.findById(roomtype.getRoomtype_id()) !=null)
-            return true;
-        else return false;
+        RoomtypeDTO result= roomtypeConverter.toDTO(roomtype);
+        return result;
     }
 
     @Override
