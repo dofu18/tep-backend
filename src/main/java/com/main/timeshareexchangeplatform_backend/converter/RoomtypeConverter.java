@@ -32,7 +32,7 @@ public class RoomtypeConverter {
         dto.setName(roomType.getName());
         dto.setPolicies(roomType.getPolicies());
         dto.setRoomview(roomType.getRoom_view());
-
+        dto.setTimeshareId(timeshareConverter.toDTO(roomType.getTimeshare()));
         return dto;
     }
 
