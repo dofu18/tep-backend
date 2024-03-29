@@ -19,5 +19,7 @@ public class TransactionDTO {
     private UUID service_id;
     private UUID user_id;
     private String transaction_code;
+    private LocalDateTime expireDate;
+
 
 }

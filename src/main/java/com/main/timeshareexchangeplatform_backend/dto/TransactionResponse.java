@@ -17,4 +17,5 @@ public class TransactionResponse {
     private ServicePackDTO service_id;
     private UserDTO user_id;
     private String transaction_code;
+    private LocalDateTime expireDate;
 }

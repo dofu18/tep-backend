@@ -33,6 +33,7 @@ public class TransactionConverter {
         entity.setServicePack(servicePackRepository.getReferenceById(dto.getService_id()));
         entity.setUser(userRepository.getReferenceById(dto.getUser_id()));
         entity.setTransactionCode(dto.getTransaction_code());
+        entity.setExpireDate(dto.getExpireDate());
 
         return entity;
     }
@@ -47,6 +48,7 @@ public class TransactionConverter {
         dto.setService_id(entity.getServicePack().getService_id());
         dto.setUser_id(entity.getUser().getUser_id());
         dto.setTransaction_code(entity.getTransactionCode());
+        dto.setExpireDate(entity.getExpireDate());
 
         return dto;
     }
@@ -60,6 +62,7 @@ public class TransactionConverter {
         dto.setService_id(servicePackConverter.toDTO(entity.getServicePack()));
         dto.setUser_id(userConverter.toDTO(entity.getUser()));
         dto.setTransaction_code(entity.getTransactionCode());
+        dto.setExpireDate(entity.getExpireDate());
 
         return dto;
     }
@@ -73,6 +76,7 @@ public class TransactionConverter {
         entity.setServicePack(servicePackConverter.toEntity(dto.getService_id()));
         entity.setUser(userConverter.toEntity(dto.getUser_id()));
         entity.setTransactionCode(dto.getTransaction_code());
+        entity.setExpireDate(dto.getExpireDate());
 
         return entity;
     }
