@@ -12,7 +12,7 @@ import java.util.UUID;
 public interface ITimeshareService {
    List<ResponseTimeshare> showListTimeShare();
    Timeshare getTimeshareDetails(UUID timeshareId);
-   TimeshareRespone getTimeshareByUserId(UUID userId);
+   ResponseTimeshare getTimeshareByUserId(UUID userId);
 
     List<TimeshareDTO> getTimesharesCreatedWithinLast30Days();
 

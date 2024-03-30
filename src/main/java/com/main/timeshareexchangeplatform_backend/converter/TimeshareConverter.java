@@ -52,6 +52,7 @@ public class TimeshareConverter {
         dto.setDescription(timeshare.getDescription());
         dto.setImage_url(timeshare.getImage_url());
         dto.setCreate_date(timeshare.getCreateDate());
+        dto.setTempOwner(timeshare.getTemporary_owner());
         return dto;
     }
 
@@ -96,7 +97,7 @@ public class TimeshareConverter {
         dto.setDestinationModel(destinationConverter.toDTO(timeshareEntity.getDestination()));
         dto.setImage_url(timeshareEntity.getImage_url());
         dto.setCreate_date(timeshareEntity.getCreateDate());
-
+        dto.setTempOwner(timeshareEntity.getTemporary_owner());
         return dto;
     }
 

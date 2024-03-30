@@ -26,4 +26,5 @@ public class ResponseTimeshare {
     private String city;
     private String image_url;
     private LocalDate create_date;
+    private UUID tempOwner;
 }

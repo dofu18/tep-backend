@@ -28,4 +28,5 @@ public class TimeshareDTO {
     private String city;
     private boolean exchange;
     private LocalDate create_date;
+    private UUID tempOwner;
 }

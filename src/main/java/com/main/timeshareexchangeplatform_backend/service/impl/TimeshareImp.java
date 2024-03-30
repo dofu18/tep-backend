@@ -69,11 +69,11 @@ import java.util.stream.Collectors;
     }
 
     @Override
-    public TimeshareRespone getTimeshareByUserId(UUID userId) {
-        Object result = myTimeShareRepository.findTimeshareDetailbyUserId(userId);
+    public ResponseTimeshare getTimeshareByUserId(UUID userId) {
+
 
         // Chuyển đổi Object thành TimeshareRespone, bạn có thể thực hiện phần này theo cách bạn muốn
-        TimeshareRespone timeshareRespone = convertToObject(result);
+        ResponseTimeshare timeshareRespone = timeshareConverter.toRespone(myTimeShareRepository.findTimeshareDetailbyUserId(userId));
 
         return timeshareRespone;
     }

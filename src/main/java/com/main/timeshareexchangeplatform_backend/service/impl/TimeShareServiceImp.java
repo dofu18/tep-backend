@@ -2,7 +2,6 @@ package com.main.timeshareexchangeplatform_backend.service.impl;
 
 import com.main.timeshareexchangeplatform_backend.dto.*;
 import com.main.timeshareexchangeplatform_backend.converter.TimeshareConverter;
-import com.main.timeshareexchangeplatform_backend.entity.Roomtype;
 import com.main.timeshareexchangeplatform_backend.repository.DestinationRepository;
 import com.main.timeshareexchangeplatform_backend.repository.MyTimeShareRepository;
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
@@ -12,8 +11,6 @@ import com.main.timeshareexchangeplatform_backend.service.TimeShareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Time;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -162,11 +159,11 @@ import java.util.UUID;
 //            request.setTimeshare_request(timeshareService.getReferenceById(requestModel.getTimeshare_request_id()));
 
     @Override
-    public TimeshareRespone getTimeshareByUserId(UUID userId) {
+    public ResponseTimeshare getTimeshareByUserId(UUID userId) {
         Object result = myTimeShareRepository.findTimeshareDetailbyUserId(userId);
 
         // Chuyển đổi Object thành TimeshareRespone, bạn có thể thực hiện phần này theo cách bạn muốn
-        TimeshareRespone timeshareRespone = convertToObject(result);
+        ResponseTimeshare timeshareRespone = timeshareConverter.toRespone(myTimeShareRepository.findTimeshareDetailbyUserId(userId));
 
         return timeshareRespone;
     }

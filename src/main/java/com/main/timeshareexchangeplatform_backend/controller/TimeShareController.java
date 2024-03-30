@@ -77,8 +77,8 @@ public class TimeShareController {
     @GetMapping("/details/user/{userId}")
 
     public ResponseEntity<?> getTimeshareByUserId(@PathVariable UUID userId) {
-        TimeshareRespone timeshareRespone;
-        timeshareRespone = timeShareService.getTimeshareByUserId(userId);
+        ResponseTimeshare timeshareRespone;
+        timeshareRespone =  timeShareService.getTimeshareByUserId(userId);
 
         if (timeshareRespone != null) {
             return ResponseEntity.status(HttpStatus.OK).body(timeshareRespone);
