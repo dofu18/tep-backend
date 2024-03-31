@@ -20,7 +20,7 @@ public class BookingModel {
     private int adults;
     private int children;
     private String telephone;
-    private String fullname;
+    private String full_name;
     private String country;
     private String street;
     private String city;

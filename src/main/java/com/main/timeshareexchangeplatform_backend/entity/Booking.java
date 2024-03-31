@@ -43,8 +43,8 @@ public class Booking {
     @Column (columnDefinition = "nvarchar(15) not null")
     private String telephone;
 
-    @Column (columnDefinition = "nvarchar(50)")
-    private String fullname;
+    @Column (columnDefinition = "nvarchar(50)", name = "fullname")
+    private String full_name;
 
     @Column (columnDefinition = "nvarchar(50) not null")
     private String country;
