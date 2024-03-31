@@ -57,7 +57,7 @@ public class BookingImpl implements IBookingService {
             booking.setBookingCode(generateUniqueBookingCode());
             booking.setTotal(booking.getTotal());
             booking.setSuccess_date(LocalDate.now());
-            booking.setFullname(booking.getFullname());
+            booking.setFull_name(booking.getFull_name());
             booking.setAdults(booking.getAdults());
             booking.setChildren(booking.getChildren());
             booking.setCity(booking.getCity());

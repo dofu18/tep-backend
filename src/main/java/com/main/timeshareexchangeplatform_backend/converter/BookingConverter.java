@@ -32,6 +32,7 @@ public class BookingConverter {
         entity.setPayment_method(bookingModel.getPayment_method());
         entity.setAdults(bookingModel.getAdults());
         entity.setChildren(bookingModel.getChildren());
+        entity.setFull_name(bookingModel.getFull_name());
         entity.setTelephone(bookingModel.getTelephone());
         entity.setCountry(bookingModel.getCountry());
         entity.setStreet(bookingModel.getStreet());
@@ -58,7 +59,7 @@ public class BookingConverter {
         dto.setAdults(bookingEntity.getAdults());
         dto.setChildren(bookingEntity.getChildren());
         dto.setTelephone(bookingEntity.getTelephone());
-        dto.setFullname(bookingEntity.getFullname());
+        dto.setFull_name(bookingEntity.getFull_name());
         dto.setCountry(bookingEntity.getCountry());
         dto.setStreet(bookingEntity.getStreet());
         dto.setCity(bookingEntity.getCity());
@@ -83,7 +84,7 @@ public class BookingConverter {
         dto.setAdults(entity.getAdults());
         dto.setChildren(entity.getChildren());
         dto.setTelephone(entity.getTelephone());
-        dto.setFullname(entity.getFullname());
+        dto.setFull_name(entity.getFull_name());
         dto.setCountry(entity.getCountry());
         dto.setStreet(entity.getStreet());
         dto.setCity(entity.getCity());
@@ -106,6 +107,7 @@ public class BookingConverter {
         entity.setPayment_method(dto.getPayment_method());
         entity.setAdults(dto.getAdults());
         entity.setChildren(dto.getChildren());
+        entity.setFull_name(dto.getFull_name());
         entity.setTelephone(dto.getTelephone());
         entity.setCountry(dto.getCountry());
         entity.setStreet(dto.getStreet());
