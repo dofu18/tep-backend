@@ -16,7 +16,8 @@ public class RequestModel {
     private UUID request_id;
     private UUID response_by;
     private UUID request_by;
-    private UUID timeshare_id;
+    private UUID timeshare_request_id;
+    private UUID timeshare_response_id;
     private String message;
     private String requestCode;
 }

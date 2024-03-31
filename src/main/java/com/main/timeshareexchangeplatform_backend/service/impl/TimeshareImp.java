@@ -4,7 +4,6 @@ package com.main.timeshareexchangeplatform_backend.service.impl;
 import com.main.timeshareexchangeplatform_backend.dto.*;
 
 import com.main.timeshareexchangeplatform_backend.converter.TimeshareConverter;
-import com.main.timeshareexchangeplatform_backend.entity.Request;
 import com.main.timeshareexchangeplatform_backend.repository.MyTimeShareRepository;
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
 import com.main.timeshareexchangeplatform_backend.repository.TimeshareRepository;
@@ -12,11 +11,10 @@ import com.main.timeshareexchangeplatform_backend.service.ITimeshareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Time;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -31,31 +29,61 @@ import java.util.stream.Collectors;
         TimeshareConverter timeshareConverter;
         @Autowired
         TimeshareRepository timeshareRepository;
-        public List<TimeshareDTO> showListTimeShare(){
+
+
+        public List<ResponseTimeshare> showListTimeShare(){
+            updateTimeshareStatus();
              List<Timeshare> timeshares = myTimeShareRepository.showListTimeShare();
-            return timeshareConverter.convertToAccountPlaylistDTOList(timeshares);
+//             updateTimeshareStatus();
+            return timeshareConverter.convertListToResponse(timeshares);
 
         }
 
     @Override
-    public TimeshareRespone getTimeshareDetails(UUID timeshareId) {
-        Object result = myTimeShareRepository.findTimeshareDetails(timeshareId);
+    public List<TimeshareDTO> getTimesharesCreatedWithinLast30Days() {
+        LocalDate endDate = LocalDate.now();
+        LocalDate startDate = endDate.minusDays(30);
+        List<Timeshare> timeshares = timeshareRepository.findTimesharesCreatedWithinLast30Days(startDate, endDate);
+        return timeshareConverter.convertToAccountPlaylistDTOList(timeshares);
+    }
 
-        // Chuyển đổi Object thành TimeshareRespone
-        TimeshareRespone timeshareRespone = convertToObject(result);
+    public void updateTimeshareStatus() {
+        // Get timeshares with date_end before current date
+        List<Timeshare> expiredTimeshares = timeshareRepository.findByDateEndBefore(LocalDate.now());
 
-        return timeshareRespone;
+        // Update status to false for each expired timeshare
+        for (Timeshare timeshare : expiredTimeshares) {
+            timeshare.setStatus(false);
+            timeshare.setTemporary_owner(null);
+            timeshareRepository.save(timeshare);
+        }
     }
 
     @Override
-    public TimeshareRespone getTimeshareByUserId(UUID userId) {
-        Object result = myTimeShareRepository.findTimeshareDetailbyUserId(userId);
+    public Timeshare getTimeshareDetails(UUID timeshareId) {
+        Timeshare result = myTimeShareRepository.findTimeshareDetails(timeshareId);
+
+        // Chuyển đổi Object thành TimeshareRespone
+        TimeshareRespone timeshareRespone=convertToObject(result);
+        return result;
+    }
+
+    @Override
+    public ResponseTimeshare getTimeshareByUserId(UUID userId) {
+
 
         // Chuyển đổi Object thành TimeshareRespone, bạn có thể thực hiện phần này theo cách bạn muốn
-        TimeshareRespone timeshareRespone = convertToObject(result);
+        ResponseTimeshare timeshareRespone = timeshareConverter.toRespone(myTimeShareRepository.findTimeshareDetailbyUserId(userId));
 
         return timeshareRespone;
     }
+    @Override
+    public List<TimeshareDTO> getAllTimeshareUser(UUID userId) {
+        List<Timeshare> timeshares = myTimeShareRepository.showAllTimeshareUser(userId);
+        return timeshareConverter.convertToAccountPlaylistDTOList(timeshares);
+
+    }
+
 
     @Override
     public Timeshare getReferenceById(UUID id) {
@@ -71,6 +99,44 @@ import java.util.stream.Collectors;
     }
 
     @Override
+    public ResponseTimeshare findTimeshareByTimeshareId(UUID timeshare_id) {
+
+            ResponseTimeshare timeshare = timeshareConverter.toRespone(timeshareRepository.findTimshareByTimeshareId(timeshare_id));
+
+            return timeshare;
+    }
+
+    @Override
+    public List<ResponseTimeshare> findTimeshareByCity(String city) {
+
+        List<ResponseTimeshare> timeshare = timeshareRepository.findTimshareByCity(city).stream()
+                .map(timeshareConverter::toRespone).collect(Collectors.toList());
+        return timeshare;
+    }
+
+    @Override
+    public List<ResponseTimeshare> getAllTimeshareTrueExceptOwner(UUID owner) {
+        updateTimeshareStatus();
+        List<Timeshare> timeshares = timeshareRepository.getAllTimeshareTrueAndExceptOwner(owner);
+//             updateTimeshareStatus();
+        return timeshareConverter.convertListToResponse(timeshares);
+    }
+
+    @Override
+    public List<ResponseTimeshare> findAll() {
+        List<ResponseTimeshare> timeshareModel = timeshareRepository.findAll().stream().map(timeshareConverter::toRespone)
+                .collect(Collectors.toList());
+
+        return timeshareModel;
+    }
+
+    @Override
+    public List<ResponseTimeshare> showListTimeShareInactive() {
+        List<Timeshare> timeshares = timeshareRepository.showListTimeShareInactive();
+        return timeshareConverter.convertListToResponse(timeshares);
+    }
+
+    @Override
     public List<ResponseTimeshare> getAllTimeshareByUserId(UUID userid) {
         List<Timeshare> timeshareEntity = timeshareRepository.findAllTimshareByUserId(userid);
         List<ResponseTimeshare> timeshareRespones = timeshareEntity.stream().map(timeshareConverter::toRespone).collect(Collectors.toList());
@@ -78,23 +144,11 @@ import java.util.stream.Collectors;
         return timeshareRespones;
     }
 
-    @Override
-    public TimeshareDTO addTimeshare(TimeshareDTO timeshareDTO){
-//            timeshareDTO.setTimeshare_id(UUID.fromString("9d870e8c-0b4f-4e78-a9bf-16a45e7a42e1"));
-//            Timeshare timeshare= timeshareConverter.toEntity(timeshareDTO);
-//            timeshare.setName(timeshare.getName());
-//            timeshare.setDate_end(timeshare.getDate_end());
-//            timeshare.setDate_start(timeshare.getDate_start());
-//            timeshare.setDestination(timeshare.getDestination());
-//            timeshare.setCity(timeshare.getCity());
-//            timeshare.setNights(
-//                    long nights = ChronoUnit.DAYS.between( timeshare.setDate_start(timeshare.getDate_start());, date_end););
-//            timeshare.setPostBy(timeshare.getPostBy());
-//            timeshare.getDescription(timeshare.setDescription());
-            TimeshareDTO result=new TimeshareDTO();
-        return result;
-    }
-    private String generateUniqueRequestCode() {
+
+
+
+
+ private String generateUniqueRequestCode() {
         // Get current date and time
         LocalDateTime now = LocalDateTime.now();
 
@@ -115,20 +169,21 @@ import java.util.stream.Collectors;
 
         // Extract các giá trị từ mảng row
         String timeshare_id = (String) row[0];
-        Date date_end = (Date) row[1];
-        Date date_start = (Date) row[2];
-        String description = (String) row[3];
-        boolean exchance = (boolean) row[4];
-        String image_url= (String) row[5];
-        String name=(String) row[6];
-        int nights = (int) row[7];
-        long price = (long) row[8];
-        boolean status = (boolean) row[9];
-        String city=(String) row[12];
-        String post_by = (String) row[11];
+        String city=(String) row[1];
+        Date date_end = (Date) row[2];
+        Date date_start = (Date) row[3];
+        String description = (String) row[4];
+        boolean exchance = (boolean) row[5];
+        String image_url= (String) row[6];
+        String name=(String) row[7];
+        int nights = (int) row[8];
+        long price = (long) row[9];
+        boolean status = (boolean) row[10];
+
+        String post_by = (String) row[12];
 
         DestinationDTO destinationDTO= new DestinationDTO();
-        destinationDTO.setDestinationId((String) row[10]);
+        destinationDTO.setDestinationId((String) row[11]);
         destinationDTO.setAddress((String) row[13]);
         destinationDTO.setBranch((String) row[14]);
         destinationDTO.setCity((String) row[15]);

@@ -12,6 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class ResponseTimeshare {
     private UUID timeshareId;
+    private String timeshareCode;
     private String timeshareName;
     private String description;
     private boolean status;
@@ -22,4 +23,8 @@ public class ResponseTimeshare {
     private LocalDate dateStart;
     private LocalDate dateEnd;
     private boolean exchange;
+    private String city;
+    private String image_url;
+    private LocalDate create_date;
+    private UUID tempOwner;
 }

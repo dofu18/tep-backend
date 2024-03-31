@@ -3,6 +3,9 @@ package com.main.timeshareexchangeplatform_backend.service.impl;
 import com.main.timeshareexchangeplatform_backend.converter.BookingConverter;
 import com.main.timeshareexchangeplatform_backend.converter.TimeshareConverter;
 import com.main.timeshareexchangeplatform_backend.dto.BookingModel;
+import com.main.timeshareexchangeplatform_backend.dto.BookingResponse;
+import com.main.timeshareexchangeplatform_backend.dto.DestinationModel;
+import com.main.timeshareexchangeplatform_backend.dto.ResponseTimeshare;
 import com.main.timeshareexchangeplatform_backend.entity.Booking;
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
 import com.main.timeshareexchangeplatform_backend.repository.BookingRepository;
@@ -16,7 +19,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class BookingImpl implements IBookingService {
@@ -52,7 +57,7 @@ public class BookingImpl implements IBookingService {
             booking.setBookingCode(generateUniqueBookingCode());
             booking.setTotal(booking.getTotal());
             booking.setSuccess_date(LocalDate.now());
-            booking.setFullname(booking.getFullname());
+            booking.setFull_name(booking.getFull_name());
             booking.setAdults(booking.getAdults());
             booking.setChildren(booking.getChildren());
             booking.setCity(booking.getCity());
@@ -70,7 +75,9 @@ public class BookingImpl implements IBookingService {
             Booking timeshareBooking = new Booking();
             Timeshare timeshare = timeshareRepository.findById(timeshareId).orElse(null);
             if (timeshare != null) {
+                timeshare.setStatus(false);
                 timeshareBooking.setTimeshare(timeshare);
+                timeshareRepository.save(timeshare);
             }
 
             BookingModel result = bookingConverter.toDTO(booking);
@@ -78,6 +85,34 @@ public class BookingImpl implements IBookingService {
         }
 
         return null;
+    }
+
+    @Override
+    public List<BookingResponse> getAllBookingByUserId(UUID userid) {
+        List<Booking> bookingsEntity = bookingRepository.findAllBookingByUserId(userid);
+        List<BookingResponse> bookingRespones = bookingsEntity.stream().map(bookingConverter::toRespone).collect(Collectors.toList());
+
+        return bookingRespones;
+    }
+
+    @Override
+    public List<BookingResponse> findAll() {
+        List<BookingResponse> bookingModel = bookingRepository.findAll().stream().map(bookingConverter::toRespone)
+                .collect(Collectors.toList());
+
+        return bookingModel;
+    }
+
+    @Override
+    public long getTotalSum() {
+        List<Booking> bookings = bookingRepository.findAll();
+        return bookings.stream().mapToLong(Booking::getTotal).sum();
+    }
+
+    @Override
+    public long getTotalSumByUserId(UUID userId) {
+        List<Booking> bookings = bookingRepository.findAllBookingByUserId(userId);
+        return bookings.stream().mapToLong(Booking::getTotal).sum();
     }
 
     private String generateUniqueBookingCode() {

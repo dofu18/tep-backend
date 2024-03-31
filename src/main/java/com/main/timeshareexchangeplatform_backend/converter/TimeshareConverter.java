@@ -31,6 +31,7 @@ public class TimeshareConverter {
     DestinationRepository destinationRepository;
 
 
+
     public static TimeshareDTO toDTO(Timeshare timeshare) {
         if (timeshare == null) {
             return null;
@@ -38,17 +39,20 @@ public class TimeshareConverter {
 
         TimeshareDTO dto = new TimeshareDTO();
         dto.setTimeshare_id(timeshare.getTimeshare_id());
+//        dto.setTimeshareCode(timeshare.getTimeshareCode());
         dto.setDate_start(timeshare.getDate_start());
-        dto.setDate_end(timeshare.getDate_end());
+        dto.setDate_end(timeshare.getDateEnd());
         dto.setNights(timeshare.getNights());
         dto.setPrice(timeshare.getPrice());
         dto.setStatus(timeshare.isStatus());
         dto.setName(timeshare.getName());
         dto.setCity(timeshare.getCity());
-        dto.setOwner(UUID.fromString(String.valueOf(timeshare.getPostBy().getUser_id())));  // Assuming there is a User entity in Timeshare
+        dto.setOwner(timeshare.getPostBy().getUser_id());  // Assuming there is a User entity in Timeshare
         dto.setDestination_id(timeshare.getDestination().getDestination_id());  // Assuming there is a Destination entity in Timeshare
         dto.setDescription(timeshare.getDescription());
         dto.setImage_url(timeshare.getImage_url());
+        dto.setCreate_date(timeshare.getCreateDate());
+        dto.setTempOwner(timeshare.getTemporary_owner());
         return dto;
     }
 
@@ -59,8 +63,9 @@ public class TimeshareConverter {
 
         Timeshare timeshare = new Timeshare();
         timeshare.setTimeshare_id(dto.getTimeshare_id());
+//        timeshare.setTimeshareCode(dto.getTimeshareCode());
         timeshare.setDate_start(dto.getDate_start());
-        timeshare.setDate_end(dto.getDate_end());
+        timeshare.setDateEnd(dto.getDate_end());
         timeshare.setNights(dto.getNights());
         timeshare.setPrice(dto.getPrice());
         timeshare.setStatus(dto.isStatus());
@@ -70,23 +75,29 @@ public class TimeshareConverter {
         timeshare.setDestination(destinationRepository.getReferenceById(dto.getDestination_id()));
         timeshare.setDescription(dto.getDescription());
         timeshare.setImage_url(dto.getImage_url());
+        timeshare.setCreateDate(dto.getCreate_date());
         return timeshare;
     }
 
     public ResponseTimeshare toRespone(Timeshare timeshareEntity) {
         ResponseTimeshare dto = new ResponseTimeshare();
         dto.setTimeshareId(timeshareEntity.getTimeshare_id());
+        dto.setTimeshareCode(timeshareEntity.getTimeshareCode());
         dto.setTimeshareName(timeshareEntity.getName());
         dto.setDescription(timeshareEntity.getDescription());
         dto.setDateStart(timeshareEntity.getDate_start());
-        dto.setDateEnd(timeshareEntity.getDate_end());
+        dto.setDateEnd(timeshareEntity.getDateEnd());
         dto.setExchange(timeshareEntity.getExchange());
         dto.setPrice(timeshareEntity.getPrice());
         dto.setStatus(timeshareEntity.isStatus());
         dto.setNights(timeshareEntity.getNights());
+        dto.setCity(timeshareEntity.getCity());
+        dto.setImage_url(timeshareEntity.getImage_url());
         dto.setPostBy(userConverter.toDTO(timeshareEntity.getPostBy()));
         dto.setDestinationModel(destinationConverter.toDTO(timeshareEntity.getDestination()));
-
+        dto.setImage_url(timeshareEntity.getImage_url());
+        dto.setCreate_date(timeshareEntity.getCreateDate());
+        dto.setTempOwner(timeshareEntity.getTemporary_owner());
         return dto;
     }
 
@@ -94,17 +105,21 @@ public class TimeshareConverter {
         Timeshare entity = new Timeshare();
 
         entity.setTimeshare_id(model.getTimeshareId());
+        entity.setTimeshareCode(model.getTimeshareCode());
         entity.setName(model.getTimeshareName());
         entity.setDescription(model.getDescription());
         entity.setDate_start(model.getDateStart());
-        entity.setDate_end(model.getDateEnd());
+        entity.setDateEnd(model.getDateEnd());
         entity.setExchange(model.isExchange());
         entity.setPrice(model.getPrice());
         entity.setStatus(model.isStatus());
         entity.setNights(model.getNights());
+        entity.setCity(model.getCity());
+        entity.setImage_url(model.getImage_url());
         entity.setPostBy(userConverter.toEntity(model.getPostBy()));
         entity.setDestination(destinationConverter.toEntity(model.getDestinationModel()));
-
+        entity.setImage_url((model.getImage_url()));
+        entity.setCreateDate(model.getCreate_date());
         return entity;
     }
 
@@ -118,5 +133,12 @@ public class TimeshareConverter {
         return StudentDTOList;
     }
 
+    public List<ResponseTimeshare> convertListToResponse(List<Timeshare> timeshares) {
+        List<ResponseTimeshare> timesharesDto = new ArrayList<>();
+        for (Timeshare timesharelist : timeshares) {
+            timesharesDto.add(toRespone(timesharelist));
+        }
+        return timesharesDto;
+    }
 
 }

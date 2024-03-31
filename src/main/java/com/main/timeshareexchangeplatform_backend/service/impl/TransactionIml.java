@@ -5,7 +5,9 @@ import com.main.timeshareexchangeplatform_backend.converter.ServicePackConverter
 import com.main.timeshareexchangeplatform_backend.converter.TimeshareConverter;
 import com.main.timeshareexchangeplatform_backend.converter.TransactionConverter;
 import com.main.timeshareexchangeplatform_backend.dto.BookingModel;
+import com.main.timeshareexchangeplatform_backend.dto.BookingResponse;
 import com.main.timeshareexchangeplatform_backend.dto.TransactionDTO;
+import com.main.timeshareexchangeplatform_backend.dto.TransactionResponse;
 import com.main.timeshareexchangeplatform_backend.entity.Booking;
 import com.main.timeshareexchangeplatform_backend.entity.Service_pack;
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
@@ -25,7 +27,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class TransactionIml implements ITransactionSevice {
@@ -57,20 +61,64 @@ public class TransactionIml implements ITransactionSevice {
             transaction.setTransaction_fee(transaction.getTransaction_fee());
             transaction.setTransaction_time(LocalDateTime.now());
 
+            LocalDateTime start_date = transaction.getTransaction_time();
 
-            transaction = transactionRepository.save(transaction);
+//            transaction = transactionRepository.save(transaction);
 
-            Transaction_history transactionservice = new Transaction_history();
+//            Transaction_history transactionservice = new Transaction_history();
             Service_pack servicePack = servicePackRepository.findById(serviceid).orElse(null);
             if (servicePack != null) {
-                transactionservice.setServicePack(servicePack);
+                transaction.setServicePack(servicePack);
+                if(servicePack.getService_code().equals("00")){
+                    transaction.setExpireDate(transaction.getTransaction_time().plusDays(60));
+                } else if (servicePack.getService_code().equals("01")) {
+                    transaction.setExpireDate(transaction.getTransaction_time().plusDays(180));
+                }
             }
-
+            transaction = transactionRepository.save(transaction);
             TransactionDTO result = transactionConverter.toDTO(transaction);
             return result;
         }
 
         return null;
+    }
+
+    public static LocalDateTime ExpirationDateofNormalPack(LocalDateTime createDate) {
+        // Add 60 days to the create date
+        return createDate.plusDays(60);
+    }
+
+    public static LocalDateTime ExpirationDateofPremiumPack(LocalDateTime createDate) {
+        // Add 60 days to the create date
+        return createDate.plusDays(180);
+    }
+
+    @Override
+    public List<TransactionResponse> getAllTransactionByUserId(UUID userid) {
+        List<Transaction_history> transactionsEntity = transactionRepository.findAllTransactionByUserId(userid);
+        List<TransactionResponse> bookingRespones = transactionsEntity.stream().map(transactionConverter::toRespone).collect(Collectors.toList());
+
+        return bookingRespones;
+    }
+
+    @Override
+    public List<TransactionResponse> getServicePackByUserId(UUID userid) {
+        List<Transaction_history> transactionHistories = transactionRepository.findAllTransactionByUserId(userid);
+        List<TransactionResponse> transactionResponses = transactionHistories.stream().map(transactionConverter::toRespone).collect(Collectors.toList());
+
+        return transactionResponses;
+    }
+
+    @Override
+    public long getTotalSum() {
+        List<Transaction_history> transactionHistories = transactionRepository.findAll();
+        return transactionHistories.stream().mapToLong(Transaction_history::getTransaction_fee).sum();
+    }
+
+    @Override
+    public long getTotalSumByUserId(UUID userId) {
+        List<Transaction_history> transactionHistories = transactionRepository.findAllTransactionByUserId(userId);
+        return transactionHistories.stream().mapToLong(Transaction_history::getTransaction_fee).sum();
     }
 
     private String generateUniqueTransactionCode() {

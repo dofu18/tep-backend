@@ -1,7 +1,10 @@
 package com.main.timeshareexchangeplatform_backend.converter;
 
 import com.main.timeshareexchangeplatform_backend.dto.RoomtypeDTO;
+import com.main.timeshareexchangeplatform_backend.dto.RoomtypeModel;
 import com.main.timeshareexchangeplatform_backend.entity.Roomtype;
+import com.main.timeshareexchangeplatform_backend.repository.TimeshareRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -9,7 +12,11 @@ import java.util.List;
 import java.util.UUID;
 @Component
 public class RoomtypeConverter {
-    public static RoomtypeDTO toDTO(Roomtype roomType) {
+    @Autowired
+    TimeshareConverter timeshareConverter;
+    @Autowired
+    TimeshareRepository timeshareRepository;
+    public  RoomtypeDTO toDTO(Roomtype roomType) {
         if (roomType == null) {
             return null;
         }
@@ -25,11 +32,11 @@ public class RoomtypeConverter {
         dto.setName(roomType.getName());
         dto.setPolicies(roomType.getPolicies());
         dto.setRoomview(roomType.getRoom_view());
-
+        dto.setTimeshareId(timeshareConverter.toDTO(roomType.getTimeshare()));
         return dto;
     }
 
-    public static Roomtype toEntity(RoomtypeDTO dto) {
+    public  Roomtype toEntity(RoomtypeDTO dto) {
         if (dto == null) {
             return null;
         }
@@ -48,6 +55,26 @@ public class RoomtypeConverter {
 
         return roomType;
     }
+//    public RoomtypeModel toModel   (RoomtypeDTO roomtypedto) {
+//        if (roomtypedto == null) {
+//            return null;
+//        }
+//
+//        RoomtypeModel dto = new RoomtypeModel();
+//        dto.setRoomtypeId(UUID.fromString(roomtypedto.getRoomtypeId()));
+//        dto.setBath(roomtypedto.getBath());
+//        dto.setBed(roomtypedto.getBed());
+//        dto.setSleeps(roomtypedto.getSleeps());
+//        dto.setEntertaiment(roomtypedto.getEntertaiment());
+//        dto.setFeatures(roomtypedto.getFeature());
+//        dto.setKitchen(roomtypedto.getKitchen());
+//        dto.setName(roomtypedto.getName());
+//        dto.setPolicies(roomtypedto.getPolicies());
+//        dto.setRoom_view(roomtypedto.getRoomview());
+//        dto.setTimeshareId(roomtypedto.getTimeshareId());
+//        return dto;
+//    }
+
     public List<RoomtypeDTO> convertToAccountPlaylistDTOList(List<Roomtype> StudentList) {
         List<RoomtypeDTO> RoomtypeDTOList = new ArrayList<>();
         for (Roomtype accountPlaylist : StudentList) {

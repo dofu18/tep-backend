@@ -1,16 +1,19 @@
 package com.main.timeshareexchangeplatform_backend.service.impl;
 
-import com.main.timeshareexchangeplatform_backend.dto.DestinationDTO;
-import com.main.timeshareexchangeplatform_backend.dto.RoomtypeDTO;
-import com.main.timeshareexchangeplatform_backend.dto.TimeshareDTO;
+import com.main.timeshareexchangeplatform_backend.dto.*;
 import com.main.timeshareexchangeplatform_backend.converter.TimeshareConverter;
+import com.main.timeshareexchangeplatform_backend.repository.DestinationRepository;
 import com.main.timeshareexchangeplatform_backend.repository.MyTimeShareRepository;
 import com.main.timeshareexchangeplatform_backend.entity.Timeshare;
-import com.main.timeshareexchangeplatform_backend.dto.TimeshareRespone;
+import com.main.timeshareexchangeplatform_backend.repository.TimeshareRepository;
+import com.main.timeshareexchangeplatform_backend.repository.UserRepository;
 import com.main.timeshareexchangeplatform_backend.service.TimeShareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -20,7 +23,14 @@ import java.util.UUID;
         @Autowired
         private MyTimeShareRepository myTimeShareRepository;
         @Autowired
-    TimeshareConverter timeshareConverter;
+        TimeshareConverter timeshareConverter;
+        @Autowired
+        DestinationRepository destinationRepository;
+        @Autowired
+        UserRepository userRepository;
+        @Autowired
+        TimeshareRepository timeshareRepository;
+
         public List<TimeshareDTO> showListTimeShare(){
              List<Timeshare> timeshares = myTimeShareRepository.showListTimeShare();
             return timeshareConverter.convertToAccountPlaylistDTOList(timeshares);
@@ -36,12 +46,124 @@ import java.util.UUID;
 
         return timeshareRespone;
     }
+
     @Override
-    public TimeshareRespone getTimeshareByUserId(UUID userId) {
+    public List<TimeshareDTO> getAllTimeshareUser(UUID userId) {
+        List<Timeshare> timeshares = myTimeShareRepository.showAllTimeshareUser(userId);
+        return timeshareConverter.convertToAccountPlaylistDTOList(timeshares);
+    }
+
+    @Override
+    public TimeshareDTO getImageById(UUID timeshare_id) {
+        return null;
+    }
+
+    @Override
+    public String deactiveTimeshare(UUID timeshareId) {
+        Timeshare timeshare = timeshareRepository.findTimshareByTimeshareId(timeshareId);
+
+        if (timeshare != null) {
+            if (timeshare.isStatus()) {
+                timeshare.setStatus(false);
+                timeshareRepository.save(timeshare);
+                return "Successfully deactive timeshare";
+            } else {
+                return "Timeshare was deactive already";
+            }
+        }
+
+        return "No timeshare found";
+    }
+
+    @Override
+    public String updateTimeshare(TimeshareDTO timeshareDTO) {
+        Timeshare entity = timeshareRepository.getReferenceById(timeshareDTO.getTimeshare_id());
+        if (entity.getTimeshare_id() == timeshareDTO.getTimeshare_id()) {
+
+            entity.setCity(timeshareDTO.getCity());
+            entity.setDateEnd(timeshareDTO.getDate_end());
+            entity.setDate_start(timeshareDTO.getDate_start());
+            entity.setDescription(timeshareDTO.getDescription());
+            entity.setExchange(timeshareDTO.isExchange());
+            entity.setImage_url(timeshareDTO.getImage_url());
+            entity.setName(timeshareDTO.getName());
+            entity.setNights(timeshareDTO.getNights());
+            entity.setPrice(timeshareDTO.getPrice());
+            entity.setStatus(timeshareDTO.isStatus());
+            entity.setTimeshareCode(timeshareDTO.getTimeshare_code());
+            entity.setDestination(destinationRepository.getReferenceById(timeshareDTO.getDestination_id()));
+            entity.setPostBy(userRepository.getReferenceById(timeshareDTO.getOwner()));
+
+            timeshareRepository.save(entity);
+            return "Update Successfully";
+        }
+        return "Fail to update";
+    }
+
+//    @Override
+//    public List<Timeshare> getTimesharesCreatedWithinLast30Days() {
+//        LocalDate startDate = LocalDate.now().minusDays(30);
+//        return timeshareRepository.findTimesharesCreatedWithinLast30Days(startDate);
+//    }
+
+//    @Override
+//    public String updateTimeshare(TimeshareDTO timeshareDTO) {
+//        Timeshare entity = myTimeShareRepository.getReferenceById(timeshareDTO.getTimeshare_id());
+//        if (entity.getTimeshare_id() == timeshareDTO.getTimeshare_id()) {
+//
+//            entity.setCity(timeshareDTO.getCity());
+//            entity.setDateEnd(timeshareDTO.getDate_end());
+//            entity.setDate_start(timeshareDTO.getDate_start());
+//            entity.setDescription(timeshareDTO.getDescription());
+//            entity.setExchange(timeshareDTO.isExchange());
+//            entity.setImage_url(timeshareDTO.getImage_url());
+//            entity.setName(timeshareDTO.getName());
+//            entity.setNights(timeshareDTO.getNights());
+//            entity.setPrice(timeshareDTO.getPrice());
+//            entity.setStatus(timeshareDTO.isStatus());
+//            entity.setTimeshareCode(timeshareDTO.getTimeshare_code());
+//            entity.setDestination(destinationRepository.getReferenceById(timeshareDTO.getDestination_id()));
+//            entity.setPostBy(userRepository.getReferenceById(timeshareDTO.getOwner()));
+//
+//            myTimeShareRepository.save(entity);
+//            return "Update Successfully";
+//        }
+//        return "Fail to update";
+//    }
+
+
+    @Override
+    public ResponseTimeshare createTimeshare(TimeshareDTO timeshareRespone) {
+            Timeshare timeshare= timeshareConverter.toEntity(timeshareRespone);
+
+        timeshare.setTimeshareCode(generateUniqueTimeshareCode());
+        timeshare.setCity(timeshareRespone.getCity());
+        timeshare.setDateEnd(timeshareRespone.getDate_end());
+        timeshare.setDate_start(timeshareRespone.getDate_start());
+        timeshare.setDescription(timeshareRespone.getDescription());
+        timeshare.setExchange(timeshareRespone.isExchange());
+        timeshare.setImage_url(timeshareRespone.getImage_url());
+        timeshare.setName(timeshareRespone.getName());
+        timeshare.setPostBy(timeshare.getPostBy());
+        timeshare.setDestination(timeshare.getDestination());
+        // Calculate the number of nights
+        int night= Math.toIntExact(ChronoUnit.DAYS.between(timeshareRespone.getDate_start(), timeshareRespone.getDate_end()));
+        timeshare.setNights(night);
+        timeshare.setPrice(timeshareRespone.getPrice());
+        myTimeShareRepository.save(timeshare);
+        ResponseTimeshare timeshareDTO= timeshareConverter.toRespone(timeshare);
+        return timeshareDTO;
+    }
+//     request.setTimeshare_response(timeshareService.getReferenceById(requestModel.getTimeshare_response_id()));
+//            request.setResponseby(request.getTimeshare_response().getPostBy());
+//            request.setTimeshare_request(timeshareService.getReferenceById(requestModel.getTimeshare_request_id()));
+
+    @Override
+    public ResponseTimeshare getTimeshareByUserId(UUID userId) {
         Object result = myTimeShareRepository.findTimeshareDetailbyUserId(userId);
 
         // Chuyển đổi Object thành TimeshareRespone, bạn có thể thực hiện phần này theo cách bạn muốn
-        TimeshareRespone timeshareRespone = convertToObject(result);
+        ResponseTimeshare timeshareRespone = timeshareConverter.toRespone(myTimeShareRepository.findTimeshareDetailbyUserId(userId));
 
         return timeshareRespone;
     }
@@ -103,6 +225,18 @@ import java.util.UUID;
         timeshareRespone.setDes(destinationDTO);
         timeshareRespone.setRoom(roomtypeDTO);
         return timeshareRespone;
+    }
+
+    private String generateUniqueTimeshareCode() {
+        // Get current date and time
+        LocalDateTime now = LocalDateTime.now();
+
+        // Format the date and time as a string
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+        String formattedDateTime = now.format(formatter);
+
+        // Concatenate the formatted date and time
+        return "TS" + formattedDateTime;
     }
 
 }

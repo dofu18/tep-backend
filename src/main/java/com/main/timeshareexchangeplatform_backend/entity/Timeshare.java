@@ -1,5 +1,6 @@
 package com.main.timeshareexchangeplatform_backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,14 +20,20 @@ public class Timeshare {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID timeshare_id;
 
-    @Column(columnDefinition = "varchar(50)")
+    @Column(columnDefinition = "nvarchar(max)", nullable = true, unique = true)
+    private String timeshareCode;
+
+    @Column(columnDefinition = "nvarchar(50)")
     private String name;
 
     @Column(columnDefinition = "DATE")
     private LocalDate date_start;
 
-    @Column(columnDefinition = "DATE")
-    private LocalDate date_end;
+    @Column(columnDefinition = "DATE", name = "date_end")
+    private LocalDate dateEnd;
+
+    @Column(columnDefinition = "DATE", name = "create_date")
+    private LocalDate createDate;
 
     @Column
     private int nights;
@@ -40,21 +47,31 @@ public class Timeshare {
     @Column
     private Boolean exchange;
 
-    @Column (columnDefinition = "varchar(max)")
+    @Column
+    private UUID temporary_owner;
+
+    @Column (columnDefinition = "nvarchar(max)")
     private String description;
 
-    @Column (columnDefinition = "varchar(max)")
+    @Column (columnDefinition = "nvarchar(max)")
     private String city;
 
-    @Column(columnDefinition = "varchar(max) not null")
+    @Column(columnDefinition = "nvarchar(max) not null")
     private String image_url;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "timeshare")
     private Booking booking;
 
-    @OneToMany(mappedBy = "timeshare")
+    @JsonIgnore
+    @OneToMany(mappedBy = "timeshare_request")
     private Collection<Request> requests;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "timeshare_response")
+    private Collection<Request> response;
+
+    @JsonIgnore
     @OneToOne(mappedBy = "timeshare")
 //    @JoinColumn(name = "")
     private Roomtype roomtype;
