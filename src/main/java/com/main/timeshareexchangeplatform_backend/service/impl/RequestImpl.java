@@ -47,6 +47,8 @@ public class RequestImpl implements IRequest {
     @Override
     public RequestModel createRequest(RequestModel requestModel) {
 //        UUID timeshareId = requestModel.getTimeshare_id();
+        UUID timeshareRequestId = requestModel.getTimeshare_request_id();
+        UUID timeshareResponseId = requestModel.getTimeshare_response_id();
         requestModel.setResponse_by(UUID.fromString("9d870e8c-0b4f-4e78-a9bf-16a45e7a42e1"));
         Request request = requestConverter.toEntity(requestModel);
 //        Request existingRequest = requestRepository.findByRequestCode(requestModel.getRequestCode());
@@ -65,7 +67,17 @@ public class RequestImpl implements IRequest {
 //                timeshareRequest.setTimeshare(t);
 //                timeshareRequest.setResponseby(t.getPostBy());
 //            }
-
+            Request timeshareRequestEntity = new Request();
+            Timeshare timeshareRequest = timeshareRepository.findById(timeshareRequestId).orElse(null);
+            Timeshare timeshareResponse = timeshareRepository.findById(timeshareResponseId).orElse(null);
+            if (timeshareRequest != null && timeshareResponse != null) {
+            timeshareRequest.setStatus(false);
+            timeshareResponse.setStatus(false);
+            timeshareRequestEntity.setTimeshare_request(timeshareRequest);
+            timeshareRequestEntity.setTimeshare_response(timeshareResponse);
+            timeshareRepository.save(timeshareRequest);
+            timeshareRepository.save(timeshareResponse);
+        }
             RequestModel result = requestConverter.toDTO(request);
             return result;
 
@@ -90,6 +102,10 @@ public class RequestImpl implements IRequest {
                 timeshareRepository.save(timeshare_2);
                 return "Exchange timeshare successfully";
             } else if (request.getStatus() == 2){
+                timeshare_1.setStatus(true);
+                timeshare_2.setStatus(true);
+                timeshareRepository.save(timeshare_1);
+                timeshareRepository.save(timeshare_2);
                 return "You have rejected to exchange timeshare";
             } else {
                 return "This exchange is waiting to response";
