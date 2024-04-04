@@ -49,7 +49,7 @@ public class RequestConverter {
         dto.setResponse_by(userConverter.toDTO(entity.getResponseby()));
         dto.setMessage(entity.getMessage());
         dto.setRequest_code(entity.getRequestCode());
-
+        dto.setRequest_code(entity.getRequestCode());
         return dto;
     }
 
